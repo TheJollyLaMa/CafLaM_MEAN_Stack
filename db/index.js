@@ -200,6 +200,8 @@ db.delete_test_merchandise_inventory = () => {
       });
    });
 };
+
+
 //register beans as roasted and packaged
 // dB.insert_packaged_inventory = (_origin, _weight, _packaged_date, _roast_type) => {
 //     return new Promise((resolve, reject) => {
