@@ -109,6 +109,19 @@ db.get_promocodes = () => {
         });
     });
 };
+db.add_employee = (_username, _password) => {
+    return new Promise((resolve, reject) => {
+      let values = [[_username, _password]];
+      // console.log('add to inventory ...');
+      userPool.query(`INSERT INTO Auth (username, password) VALUES ?`, [values], (err, results) => {
+          if(err) {
+            return reject(err);
+          }
+          // console.log(results);
+          return resolve(results);
+      });
+   });
+};
 //insert incoming green beans
 db.insert_green_inventory = (_origin, _reception_date, _weight) => {
     return new Promise((resolve, reject) => {
@@ -166,6 +179,20 @@ db.insert_merchandise_inventory = (_sku,_name,_description,_price,_quantity,_cos
       });
    });
 };
+// add new PromoCode
+db.add_promocode = (_promo_code, _discount_rate, _uses, _total_amount_discounted, _limit_on_uses) => {
+    return new Promise((resolve, reject) => {
+      let values = [[_promo_code, _discount_rate, _uses, _total_amount_discounted, _limit_on_uses]];
+      // console.log('add to inventory ...');
+      promocodePool.query(`INSERT INTO PromoCodeTally (promo_code, discount_rate, Uses, total_amount_discounted, limit_on_uses) VALUES ?`, [values], (err, results) => {
+          if(err) {
+            return reject(err);
+          }
+          // console.log(results);
+          return resolve(results);
+      });
+   });
+};
 // delete test inventory from jest tests
 db.delete_test_green_inventory = () => {
     return new Promise((resolve, reject) => {
@@ -180,7 +207,7 @@ db.delete_test_green_inventory = () => {
 };
 db.delete_test_packaged_inventory = () => {
     return new Promise((resolve, reject) => {
-      console.log('delete test from inventory ...');
+      // console.log('delete test from inventory ...');
       inventoryPool.query(`DELETE FROM Packaged_Inventory WHERE origin = 'jest test'`, (err, results) => {
           if(err) {
             return reject(err);
@@ -193,6 +220,28 @@ db.delete_test_merchandise_inventory = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       inventoryPool.query(`DELETE FROM Merchandise_Inventory WHERE sku = 'M0test'`, (err, results) => {
+          if(err) {
+            return reject(err);
+          }
+          return resolve(results);
+      });
+   });
+};
+db.delete_test_employee = () => {
+    return new Promise((resolve, reject) => {
+      // console.log('delete test from inventory ...');
+      userPool.query(`DELETE FROM Auth WHERE username = 'JoeCool'`, (err, results) => {
+          if(err) {
+            return reject(err);
+          }
+          return resolve(results);
+      });
+   });
+};
+db.delete_test_promocode = () => {
+    return new Promise((resolve, reject) => {
+      // console.log('delete test from inventory ...');
+      promocodePool.query(`DELETE FROM PromoCodeTally WHERE promo_code = 'JestTestPromo'`, (err, results) => {
           if(err) {
             return reject(err);
           }

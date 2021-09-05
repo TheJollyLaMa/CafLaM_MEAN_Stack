@@ -42,7 +42,7 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
     return request(app).get('/public/#!/index.html')
                        .expect(200) //http success
                        .then((response) => {
-                           console.log(response.body);
+                           // console.log(response.body);
                        });
   })
 
@@ -199,11 +199,11 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
                              // console.log(response.body);
                          });
     })
-    it('should be exclusive to Authorized members', () => {
-        //Authorization call to database
-        //check against improper access
-        expect.hasAssertions();
-    });
+    // it('should be exclusive to Authorized members', () => {
+    //     //Authorization call to database
+    //     //check against improper access
+    //     expect.hasAssertions();
+    // });
     describe('Authorization', () => {
         it('GET Users route should be connected', () => {
             return request(app).get('/users') //service request to backend inventory database
@@ -222,9 +222,15 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
                                    expect(response.body.Employees[0].username).toEqual(employee_username);
                                });
         });
-        it('should allow new members to register', () => {
-            //POST service to Authorization database
-            expect.hasAssertions();
+        it('should be able to add an employee', () => {
+            //POST service to add incoming green bean inventory
+            const username = 'JoeCool', password = "BullshitPassword";
+            return request(app).post('/users/' + username + '/' + password) //service request to backend inventory database
+                               .expect(200) //http success
+                               .expect('Content-Type', /json/) // check Content-Type is json
+                               .then((response) => {
+                                   // console.log(response.body);
+                               });
         });
     });
 
@@ -255,9 +261,16 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
 
       });
       it('should allow an Employee to register a new promotional', () => {
-        expect.hasAssertions();
-
+          //POST service to add incoming green bean inventory
+          const promo_code = 'JestTestPromo', discount_rate = 0.1, uses = 0, total_amount_discounted = 0, limit_on_uses = 0;
+          return request(app).post('/promocode/' + promo_code + '/' + discount_rate + '/' + uses + '/' + total_amount_discounted + '/' + limit_on_uses) //service request to backend inventory database
+                             .expect(200) //http success
+                             .expect('Content-Type', /json/) // check Content-Type is json
+                             .then((response) => {
+                                 // console.log(response.body);
+                             });
       });
+
     })
 
     describe('Inventory', () => {
@@ -329,40 +342,58 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
                                      // console.log(response.body);
                                  });          });
         });
-        describe('jeleting Jest test data ...', () => {
-          it('should delete Green Inventory test POST', () => {
-            return request(app).post('/inventory/Green/Delete')
-                               .expect(200) //http success
-                               .expect('Content-Type', /json/) // check Content-Type is json
-                               .then((response) => {
-                                   // console.log(response.body);
-                               });
-          })
-          it('should delete Package Inventory test POST', () => {
-            return request(app).post('/inventory/Packaged/Delete')
-                               .expect(200) //http success
-                               .expect('Content-Type', /json/) // check Content-Type is json
-                               .then((response) => {
-                                   // console.log(response.body);
-                               });
-          })
-          it('should delete Merchandise Inventory test POST', () => {
-            return request(app).post('/inventory/Merchandise/Delete')
-                               .expect(200) //http success
-                               .expect('Content-Type', /json/) // check Content-Type is json
-                               .then((response) => {
-                                   // console.log(response.body);
-                               });
-          })
-
-        })
-
 
     });
+
+    describe('Deleting Jest test data ...', () => {
+      it('should delete Green Inventory test POST', () => {
+        return request(app).post('/inventory/Green/Delete')
+                           .expect(200) //http success
+                           .expect('Content-Type', /json/) // check Content-Type is json
+                           .then((response) => {
+                               // console.log(response.body);
+                           });
+      })
+      it('should delete Package Inventory test POST', () => {
+        return request(app).post('/inventory/Packaged/Delete')
+                           .expect(200) //http success
+                           .expect('Content-Type', /json/) // check Content-Type is json
+                           .then((response) => {
+                               // console.log(response.body);
+                           });
+      })
+      it('should delete Merchandise Inventory test POST', () => {
+        return request(app).post('/inventory/Merchandise/Delete')
+                           .expect(200) //http success
+                           .expect('Content-Type', /json/) // check Content-Type is json
+                           .then((response) => {
+                               // console.log(response.body);
+                           });
+      })
+      it('should delete New Employee test POST', () => {
+        return request(app).post('/users/Delete')
+                           .expect(200) //http success
+                           .expect('Content-Type', /json/) // check Content-Type is json
+                           .then((response) => {
+                               // console.log(response.body);
+                           });
+      })
+      it('should delete New Promocode test POST', () => {
+        return request(app).post('/promocode/Delete')
+                           .expect(200) //http success
+                           .expect('Content-Type', /json/) // check Content-Type is json
+                           .then((response) => {
+                               // console.log(response.body);
+                           });
+      })
+
+    })
 
   });
   userPool.end();
   inventoryPool.end();
+  promocodePool.end();
+
 });
 // routes for front end access to arduino smarthome garden and solar controllers
 // describe('SmartHome E2E tests', () => {
