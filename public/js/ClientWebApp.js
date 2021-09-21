@@ -16,6 +16,10 @@ app.config([
       controller: "BehindTheCounterController",
       templateUrl: "BehindTheCounter/behind_the_counter.html"
     })
+    .when("/SmartHome", {
+      controller: "SmartHomeController",
+      templateUrl: "SmartHome/smart_home.html"
+    })
     .otherwise({redirectTo: "/"})
   }
 ]);

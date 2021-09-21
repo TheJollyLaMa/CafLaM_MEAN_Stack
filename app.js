@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const cors = require('cors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
@@ -11,6 +12,8 @@ var usersRouter = require('./routes/users');
 var inventoryRouter = require('./routes/inventory');
 var promocodeRouter = require('./routes/promocode');
 // var ordersRouter = require('./routes/orders');
+var greenhouseRouter = require('./routes/greenhouse');
+var smarthomeRouter = require('./routes/smarthome');
 var publicRouter = require('./routes/public');
 
 
@@ -23,29 +26,27 @@ var publicRouter = require('./routes/public');
 // var SmartHomeRouter = require('./SmartHome');
 
 var app = express();
-
 app.use(logger('dev'));
-// view engine setup
-app.set('views', path.join(__dirname, 'BackendViews'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// view engine setup
+app.set('views', path.join(__dirname, 'BackendViews'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 /* Backend Routes*/
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/inventory', inventoryRouter);
 app.use('/promocode', promocodeRouter);
 // app.use('/orders', ordersRouter);
-// app.use('/SmartHome', SmartHomeRouter);
+app.use('/greenhouse', greenhouseRouter);
+app.use('/smarthome', smarthomeRouter);
 
 /* Frontend Routes*/
 app.use('/public', publicRouter);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,7 +63,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(process.env.PORT || '3000', () => {
-    console.log(`Server is running on port: ${process.env.PORT || '3000'}`);
-})
+
 module.exports = app;

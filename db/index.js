@@ -47,9 +47,6 @@ let db = {};
 db.get_employee_list = () => {
     return new Promise((resolve, reject) => {
         userPool.query(`SELECT * FROM Auth`, (err, results) => {
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -58,9 +55,6 @@ db.get_employee_list = () => {
 db.get_green_inventory = () => {
     return new Promise((resolve, reject) => {
         inventoryPool.query(`SELECT * FROM Green_Inventory`, (err, results) => {
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -69,9 +63,6 @@ db.get_green_inventory = () => {
 db.get_packaged_inventory = () => {
     return new Promise((resolve, reject) => {
         inventoryPool.query(`SELECT * FROM Packaged_Inventory`, (err, results) => { //WHERE weight > 0
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -80,9 +71,6 @@ db.get_packaged_inventory = () => {
 db.get_discounted_inventory = () => {
     return new Promise((resolve, reject) => {
         inventoryPool.query(`SELECT * FROM Packaged_Inventory WHERE packaged_date <= ?`, [discountdate], (err, results) => {
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -91,9 +79,6 @@ db.get_discounted_inventory = () => {
 db.get_merchandise_inventory = () => {
     return new Promise((resolve, reject) => {
         inventoryPool.query(`SELECT * FROM Merchandise_Inventory`, (err, results) => { //WHERE weight > 0
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -102,9 +87,6 @@ db.get_merchandise_inventory = () => {
 db.get_promocodes = () => {
     return new Promise((resolve, reject) => {
         promocodePool.query(`SELECT * FROM PromoCodeTally`, (err, results) => { //WHERE weight > 0
-            if(err) {
-              return reject(err);
-            }
             return resolve(results);
         });
     });
@@ -112,12 +94,7 @@ db.get_promocodes = () => {
 db.add_employee = (_username, _password) => {
     return new Promise((resolve, reject) => {
       let values = [[_username, _password]];
-      // console.log('add to inventory ...');
       userPool.query(`INSERT INTO Auth (username, password) VALUES ?`, [values], (err, results) => {
-          if(err) {
-            return reject(err);
-          }
-          // console.log(results);
           return resolve(results);
       });
    });
@@ -128,18 +105,11 @@ db.insert_green_inventory = (_origin, _reception_date, _weight) => {
       let values = [[_origin, _reception_date, _weight]];
       // console.log('add to inventory ...');
       inventoryPool.query(`INSERT INTO Green_Inventory (origin, reception_date, weight) VALUES ?`, [values], (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           // console.log(results);
           return resolve(results);
       });
       // console.log('generate sku ...');
       inventoryPool.query(`UPDATE Green_Inventory SET sku = CONCAT(id,batch) WHERE sku = 'G0'`, (err, results) => {
-        if(err) {
-
-          return reject(err);
-        }
         return resolve(results);
       });
    });
@@ -150,17 +120,10 @@ db.insert_packaged_inventory = (_origin,_weight,_packaged_date,_timestamp,_roast
       let values = [[_origin,_weight,_packaged_date,_timestamp,_roast_type]];
       // console.log('add to inventory ...');
       inventoryPool.query(`INSERT INTO Packaged_Inventory (origin, weight, packaged_date, timestamp, roast_type) VALUES ?`, [values], (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           // console.log(results);
           return resolve(results);
       });
       inventoryPool.query(`UPDATE Packaged_Inventory SET sku = CONCAT(id,batch) WHERE sku = 'P0'`, (err, results) => {
-        if(err) {
-
-          return reject(err);
-        }
         return resolve(results);
       });
    });
@@ -171,9 +134,6 @@ db.insert_merchandise_inventory = (_sku,_name,_description,_price,_quantity,_cos
       let values = [[_sku,_name,_description,_price,_quantity,_cost]];
       // console.log('add to inventory ...');
       inventoryPool.query(`INSERT INTO Merchandise_Inventory (sku, name, description, price, quantity, cost) VALUES ?`, [values], (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           // console.log(results);
           return resolve(results);
       });
@@ -185,9 +145,6 @@ db.add_promocode = (_promo_code, _discount_rate, _uses, _total_amount_discounted
       let values = [[_promo_code, _discount_rate, _uses, _total_amount_discounted, _limit_on_uses]];
       // console.log('add to inventory ...');
       promocodePool.query(`INSERT INTO PromoCodeTally (promo_code, discount_rate, Uses, total_amount_discounted, limit_on_uses) VALUES ?`, [values], (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           // console.log(results);
           return resolve(results);
       });
@@ -198,9 +155,6 @@ db.delete_test_green_inventory = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       inventoryPool.query(`DELETE FROM Green_Inventory WHERE origin = 'jest test'`, (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           return resolve(results);
       });
    });
@@ -209,9 +163,6 @@ db.delete_test_packaged_inventory = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       inventoryPool.query(`DELETE FROM Packaged_Inventory WHERE origin = 'jest test'`, (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           return resolve(results);
       });
    });
@@ -220,9 +171,6 @@ db.delete_test_merchandise_inventory = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       inventoryPool.query(`DELETE FROM Merchandise_Inventory WHERE sku = 'M0test'`, (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           return resolve(results);
       });
    });
@@ -231,9 +179,6 @@ db.delete_test_employee = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       userPool.query(`DELETE FROM Auth WHERE username = 'JoeCool'`, (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           return resolve(results);
       });
    });
@@ -242,59 +187,11 @@ db.delete_test_promocode = () => {
     return new Promise((resolve, reject) => {
       // console.log('delete test from inventory ...');
       promocodePool.query(`DELETE FROM PromoCodeTally WHERE promo_code = 'JestTestPromo'`, (err, results) => {
-          if(err) {
-            return reject(err);
-          }
           return resolve(results);
       });
    });
 };
 
-
-//register beans as roasted and packaged
-// dB.insert_packaged_inventory = (_origin, _weight, _packaged_date, _roast_type) => {
-//     return new Promise((resolve, reject) => {
-//       let values = [[_origin, _weight, _packaged_date, _roast_type]];
-//       console.log(values);
-//       inventoryPool.query(`INSERT INTO Packaged_Inventory (origin, weight, packaged_date, roast_type) VALUES ?`, [values], (err, results) => {
-//           if(err) {
-//             return reject(err);
-//           }
-//           console.log(results);
-//           return resolve(results);
-//       });
-//       let updvalues = [_weight, [_origin], _reception_date];
-//       inventoryPool.query(`UPDATE Green_Inventory SET weight = weight-?, timestamp = ? WHERE origin = ? AND weight > 0 ORDER BY reception_date ASC LIMIT 1`, updvalues, (err, results) => {
-//         if(err) {
-//
-//           return reject(err);
-//         }
-//         return resolve(results);
-//       });
-//     })
-// };
-// //insert merchandise into inventory
-// dB.insert_merhcandise_inventory = (_sku, _name, _description, _price, _quantity, _cost) => {
-//     return new Promise((resolve, reject) => {
-//       let values = [[_sku, _name, _description, _price, _quantity, _cost]];
-//       console.log(values);
-//       inventoryPool.query(`INSERT INTO Merchandise_Inventory (sku, name, description, price, quantity, cost) VALUES ?`, [values], (err, results) => {
-//           if(err) {
-//             return reject(err);
-//           }
-//           console.log(results);
-//           return resolve(results);
-//       });
-//       let updvalues = [_weight, [_origin], _reception_date];
-//       inventoryPool.query(`UPDATE Green_Inventory SET weight = weight-?, timestamp = ? WHERE origin = ? AND weight > 0 ORDER BY reception_date ASC LIMIT 1`, updvalues, (err, results) => {
-//         if(err) {
-//
-//           return reject(err);
-//         }
-//         return resolve(results);
-//       });
-//     })
-// };
 //Update after purchase
 // dB.update_inventory_after_purchase = (data) => {
 //     return new Promise((resolve, reject) => {
