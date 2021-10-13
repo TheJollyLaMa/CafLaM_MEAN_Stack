@@ -1,3 +1,34 @@
-<div ng-controller="StoreFrontController">
-  {{title}}
+<div class="angelsroom" ng-controller="StoreFrontController">
+  <atnavbarstorefront></atnavbarstorefront>
+  <h1>{{title}}</h1>
+  <br>
+  <div class="scroller">
+    <div>
+        <h2>
+        <a class="sales_category_buttons btn btn-default shimmer" ng-repeat = "category in sales_category" href="#!/StoreFront/{{category.name}}">
+          <strong><i class="{{category.icon}}"/> {{category.name}} <i class="{{category.icon}}"/><strong>
+        </a>
+      </h2>
+    </div>
+  </div>
+
+  <div id="newtokesbtndiv" align="center" ><a id="newtokesbutton" class='sales_category_buttons btn btn-block btn-primary' href="#!/AngelsRoom" value='Angels'></a></div>
+
+  <a class="back_button btn btn-default"  href="#!/BehindTheCounter">Behind The Counter</a>
+
+  <br>
+  <shoppingcart></shoppingcart>
+
+  <div class="container">
+    <div ng-show="checkoutFlowProgress.showAddressFlow">
+      <addressformflow></addressformflow>
+    </div>
+    <div ng-show="checkoutFlowProgress.showPromoCodeFlow">
+      <promocodeflow></promocodeflow>
+    </div>
+    <div ng-show="checkoutFlowProgress.showCheckoutFlow">
+      <checkoutflow ng-init="config_checkout();"></checkoutflow>
+    </div>
+  </div>
+
 </div>

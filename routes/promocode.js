@@ -7,6 +7,11 @@ var router = express.Router();
 router.get('/', async (req, res, next) => {
     res.json({Promocodes: await db.get_promocodes()});
 });
+/* check promocode */
+router.get('/check/:promocode', async (req, res, next) => {
+  console.log(req.params.promocode);
+    res.json({promocode: await db.check_promocode(req.params.promocode)});
+});
 /* POST new PromoCodes */
 router.post('/:promo_code/:discount_rate/:uses/:total_amount_discounted/:limit_on_uses', async (req, res, next) => {
     res.json({msg: 'Posted New Promocode',

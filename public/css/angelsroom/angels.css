@@ -1,0 +1,130 @@
+input {
+  text-align: center;
+}
+.treasure_chest {
+  margin: 0% 5% 0% 5%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.manifesttokens {
+  margin: 0% 5% 0% 5%;
+  width: 100%;
+  height: 100%;
+}
+.angelsroom {
+  margin: 0% 5% 0% 5%;
+  height: 100%;
+  width: 100%;
+}
+.progress-wrapper {
+  align: center;
+  display: inline-block;
+  width: 70%;
+  position: absolute;
+  top: 2%;
+  left: 15%;
+}
+.buy_counter {
+  background-color: #1BB3B6;
+  color: #FAFAC8;
+  width: 10%;
+  border: none;
+}
+.buy_counter::placeholder {
+  color: #FAFAC8;
+}
+.the_story {
+  background-color: #FAFAC8;
+  color: #1BB3B6;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.token_pouch {
+  margin: 2px;
+  padding: 2px;
+}
+.eth_bal {
+  margin: 10px;
+  padding: 10px;
+  top: 1400px;
+  left: 45px;
+  bottom: auto;
+  position: absolute;
+  display: inline-block;
+}
+.ship {
+  margin: 10px;
+  padding: 10px;
+  top: 1700px;
+  left: 45px;
+  position: absolute;
+  display: inline-block;
+}
+.fox_gate {
+  display: inline;
+}
+.foxie {
+  height: 35px;
+  width: 35px;
+  background-image: url('../BehindTheCounter/Foxie.png');
+  background-color: transparent;
+  background-position: center;
+  background-size: 35px;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+.foxie_mov {
+  background: #202123;
+  text-align: center;
+  color: white;
+  font-family: roboto;
+  height: 140px;
+  overflow: visible;
+}
+.description {
+  margin: 5% 5% 0% 5%;
+}
+.next_rnd {
+  width: 20%;
+  margin-right: 40%: ;
+  text-align: center;
+}
+.last_rnd {
+  width: 20%;
+  margin-left: 20%: ;
+  text-align: center;
+}
+.whats_it {
+  width: 20%;
+  margin: auto;
+  text-align: center;
+}
+.navacc {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.form_table {
+  margin: 5px;
+  padding: 5px;
+}
+#newtokesbtndiv {
+  margin: 10px;
+}
+#newtokesbutton {
+  height: 150px;
+  width: 300px;
+  margin: 0px;
+  padding: 0;
+  background: url("../../img/angels/AT_ETH_ENS_Logo.gif");
+  background-position: center;
+  background-size: 75% 130px;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  color: #1BB3B6;
+  cursor: pointer;
+}
+.img_spacer {
+  margin: 10px;
+}

@@ -1,0 +1,33 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+
+  <div ng-init = "fetchWeatherData()">
+    <div class="view2">
+      <h1>3hr Forecast</h1>
+      <div class="currentForecastImg">
+        <img src="" alt="WeatherImageToday">
+      </div>
+      <div class="currentForecastBody">
+        <p>3 hour Forecast is: {{forecast_main}} with {{forecast_description}}.</p>
+        <p>High: {{forecast_temp_max}}</p>
+        <p>Low: {{forecast_temp_min}}</p>
+        <p>Feels Like: {{forecast_feels_like}}</p>
+        <p>Temp: {{forecast_temp}}</p>
+        <p>Humidity: {{forecast_humidity}}</p>
+        <p>Pressure: {{forecast_pressure}}</p>
+        <p>today: {{today}}</p>
+        <p>tomorrow: {{tomorrow}}</p>
+      </div>
+    </div>
+    <hr style="height:2px; width: 90%;">
+    <br/>
+    <div ng-repeat="x in weatherArray track by $index" class="weatherCard">
+      <!-- <div class="">{{x.dt_txt}}</div>
+      <div class="">{{x.main}}</div>
+      <div class="">{{x.weather}}</div> -->
+      <div class="">
+        {{x}}
+      </div>
+    </div>
+  </div>
+</div>

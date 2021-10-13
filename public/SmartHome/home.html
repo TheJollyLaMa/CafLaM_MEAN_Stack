@@ -1,0 +1,35 @@
+<div id="main" ng-init="fetchusername();">
+  <smarthome-Navbar></smarthome-Navbar>
+  <div class="container">
+    <div class="view2">
+      <div><p>Hi <strong>{{username}}</strong>! You are in the <strong>{{title}}</strong>!
+      <h1>Central SmartHome Console</h1>
+      <p>   This is the Central Console.  It is a user interface for displaying system vitals and the way all micro controllers on premises interrelate.</p>
+      <p>   The coop, the greenhouse, the house, the shed - each have microcontrolled ecosystems with data feed back.</p>
+      <p>   - need creative ways to show interconnected web of household systems.</p>
+      <p>   - should also display interconnections with macro environments such as daily
+              and seasonal weather patterns.
+      </p>
+    </div>
+    <div class="view2">
+      <div class="datadisplay col-lg">
+        <h1>Greenhouse</h1>
+        <a href="http://192.168.0.204/cgi-bin/luci/webpanel/homepage" ><img class="btn btn-primary navbtn" ng-src="img/smarthome/dragino.png" alt="DraginoHome"></a>
+        <a href="http://192.168.0.244" ><img class="btn btn-primary navbtn" ng-src="img/smarthome/morningstar.png" alt="MorningStarHome"></a>
+        <button class="btn btn-primary navbtn glyphicon glyphicon-folder-close" alt="SmartHome"><a href="http://192.168.0.204/sd" ></a></button>
+      </div>
+      <div class="datadisplay col-lg">
+        <h1>Smarthome</h1>
+        <a href="http://192.168.0.208/cgi-bin/luci/webpanel/homepage" ><img class="btn btn-primary navbtn" ng-src="img/smarthome/dragino.png" alt="DraginoHome"></a>
+        <button class="btn btn-primary navbtn glyphicon glyphicon-folder-close" alt="SmartHome"><a href="http://192.168.0.208/sd" ></a></button>
+      </div>
+      <div class="datadisplay col-lg">
+        <h1>Garden</h1>
+        <a href="http://192.168.0.212/cgi-bin/luci/webpanel/homepage" ><img class="btn btn-primary navbtn" ng-src="img/smarthome/dragino.png" alt="DraginoHome"></a>
+        <button class="btn btn-primary navbtn glyphicon glyphicon-folder-close" alt="SmartHome"><a href="http://192.168.0.212/sd" ></a></button>
+
+      </div>
+
+    </div>
+  </div>
+</div>

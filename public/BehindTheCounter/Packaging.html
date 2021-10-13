@@ -1,0 +1,154 @@
+<style>
+  .view {
+    border: 5px double white;
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+<div data-ng-controller='BehindTheCounterController' ng-init="showGreenInventory(); showPackagedInventory(); showDiscountedInventory();">
+  <div class='row view'>
+    <h1>Log Roasts as they are Packaged!</h1>
+    <div class="col-md-4 col-md-offset-4">
+        <form name="newPackagedForm" ng-submit="addPackagedInventory()" data-ng-model="newPackagedForm" class="form-inline">
+
+            <div class="form-group">
+              <p>
+                <label for="origin">Bean Origin: </label>
+                <p class="input-group">
+                    <select name="origin" type="text" class="form-control centered" data-ng-options="item.origin for item in green_inventory" ng-init="origin = green_inventory[0].origin;" data-ng-model="origin" data-ng-change="fillWeight()" ng-required></select>
+                    {{origin.origin}}
+                </p>
+              </p>
+            </div>
+
+            <div class="form-group">
+              <p>
+                <label>Packaged On: </label>
+                <p class="input-group">
+                  <input type="text" class="form-control centered" uib-datepicker-popup="{{format}}" data-ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+              </p>
+            </div>
+
+            <div class="form-group">
+              <p>
+                <label for="weight">Weight:</label>
+                <p class="input-group">
+                  <select ng-name="weight" type="number" class="form-control centered" data-ng-options="weight for weight in Range(1, inventory_weight)" data-ng-model="weight" placeholder="lbs" ng-required></select>
+                </p>
+              </p>
+            </div>
+            <div class="form-group">
+              <p>
+                <label for="roast_type">Roast Type:</label>
+                <p class="input-group">
+                  <select name="roast_type" type="text" class="form-control centered" data-ng-options="type for type in roast_type_cats" data-ng-model="roast_type" placeholder="roast type" ng-required></select>
+                </p>
+              </p>
+            </div>
+            <div class="form-actions">
+              <input type="submit" class="backend_category_buttons btn btn-default">
+            </div>
+        </form>
+    </div>
+  </div>
+
+  <a href=#!/Behind_The_Counter>
+    <div class="back_button btn btn-default">Back to Dashboard</div>
+  </a>
+  <div class='view'>
+    <table class="table table-bordered table-hover">
+      <label><h1>Packaged Beans</h1></label>
+      <thead><tr><th>Origin</th><th>Weight</th><th>Packaged Date</th><th>Entry Timestamp</th><th>Price per Lb</th><th>Roast Type</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="item in packaged_inventory">
+          <td>{{item.origin}}</td>
+          <td>{{item.weight}} lbs.</td>
+          <td>{{item.packaged_date}}</td>
+          <td>{{item.timestamp}}</td>
+          <td>{{item.price_per_lb | currency}}</td>
+          <td>{{item.roast_type}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>{{ packagedInventoryTotalWeight }} lbs. </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>${{ packagedInventoryTotalCost }}</td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+<div class='view'>
+  <table class="table table-bordered table-hover">
+    <label><h1>Discounted Beans</h1></label>
+    <thead><tr><th>Origin</th><th>Weight</th><th>Packaged Date</th><th>Entry Timestamp</th><th>Price per Lb</th><th>Roast Type</th></tr></thead>
+    <tbody>
+      <tr ng-repeat="item in discounted_inventory">
+        <td>{{item.origin}}</td>
+        <td>{{item.weight}} lbs.</td>
+        <td>{{item.packaged_date}}</td>
+        <td>{{item.timestamp}}</td>
+        <td>{{item.price_per_lb | currency}}</td>
+        <td>{{item.roast_type}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>{{ discountedInventoryTotalWeight }} lbs. </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>${{ discountedInventoryTotalCost }}</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="view">
+    <table class="table table-bordered table-hover">
+      <label><h1>Green Beans</h1></label>
+      <thead><tr><th>Origin</th><th>Reception Date</th><th>Weight</th><th>Entry Timestamp</th><th>Cost/lb</th><th>Cost Value of Inventory</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="item in green_inventory">
+          <td>{{item.origin}}</td>
+          <td>{{item.reception_date}}</td>
+          <td>{{item.weight}} lbs.</td>
+          <td>{{item.timestamp}}</td>
+          <td>{{item.cost_per_lb | currency}}</td>
+          <td>{{item.cost_per_lb * item.weight | currency}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td>{{ greenInventoryTotalWeight }} lbs. </td>
+          <td></td>
+          <td></td>
+          <td>${{ greenInventoryTotalCost }}</td>
+        </tr>
+      </tfoot>
+    </table>
+</div>
+
+</div>

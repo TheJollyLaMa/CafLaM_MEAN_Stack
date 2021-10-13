@@ -1,0 +1,30 @@
+<div class="angelsroom" ng-init="loadTheBlock(); fetchSpecificAlm();">
+  <div class="scroller">
+    <div class="flip-container">
+      {{file}}
+      <div class="flipper">
+        <div class="token_front">
+          <table>
+            <tfoot><h1 class="token-text">{{specific_alm.mint_date}}</h1></tfoot>
+          </table>
+        </div>
+        <div class="token_back shimmer">
+            <table>
+                <thead class="tokenhead">{{specific_alm.status}}<hr class="tokebreak"/></thead>
+                <tbody>
+                    <h1 class="token-text">{{specific_alm.name}}</h1>
+                    <h1 class="token-text"><a ng-href="/public/#!/TreasureChest/{{specific_alm.uri}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{specific_alm.uri}}</a></h1>
+                    <h1 class="token-text">{{specific_alm.id}} </h1>
+                    <h1 class="token-text">{{specific_alm.product}}</h1>
+                    <h1 class="token-text">{{specific_alm.cost}}</h1>
+                    <h1 class="token-text">0.000{{specific_alm.angel_coefficient}}</h1>
+                    <h1 class="token-text">{{specific_alm.owner_display}}</h1>
+                </tbody>
+                <tfoot><h1 class="token-text">{{specific_alm.bal}} / {{specific_alm.num_issued}}</h1></tfoot>
+             </table>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</div>

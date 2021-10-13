@@ -1,0 +1,72 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+  <div class="container">
+  <div class="controlcontainer">
+       <p><label><h1>Program Controls:</h1></label><p>
+       <a href="http://192.168.0.10/arduino/temperature"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Temperature check function"></a>
+       <a href="http://192.168.0.10/arduino/barlights"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Barlight function"></a>
+       <a href="http://192.168.0.10/arduino/breathe"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Breathe function"></a>
+       <a href="http://192.168.0.10/arduino/flash"><img class="navbtn" ng-src="img/runprogramicon.png" alt="flash function"></a>
+       <a href="http://192.168.0.10/arduino/digital_test"><img class="navbtn" ng-src="img/runprogramicon.png" alt="digital test function"></a>
+  </div>
+  <div class="controlcontainer">
+    <p><label><h1>Bridge Key/Value Controls:</h1></label><p>
+      <a href="http://192.168.0.10/data/put/Light/0"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Stop Sun Program - Lights Off"></a>
+      <a href="http://192.168.0.10/data/put/Light/1"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Run Sun Program"></a>
+      <a href="http://192.168.0.10/data/put/Light/2"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Stop Sun Program - Lights On"></a>
+      <a href="http://192.168.0.10/data/put/Water/0"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Stop Water Program - Water Off"></a>
+      <a href="http://192.168.0.10/data/put/Water/1"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Run Water Program"></a>
+      <a href="http://192.168.0.10/data/put/Water/2"><img class="navbtn" ng-src="img/runprogramicon.png" alt="Stop Water Program - Water On"></a>
+  </div>
+  <div class="controlcontainer">
+      <p><label><h1>Digital Controls:</h1></label><p>
+      <div class="digitalcontrols">
+        <p> <label>D11</label>
+            <a href="http://192.168.0.10/arduino/digital/11/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/11/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D10</label>
+            <a href="http://192.168.0.10/arduino/digital/10/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/10/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D09</label>
+            <a href="http://192.168.0.10/arduino/digital/9/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/9/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D08</label>
+            <a href="http://192.168.0.10/arduino/digital/8/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/8/0"><button><h2>On</h1></button></a>
+        </p>
+      </div>
+      <div class="digitalcontrols">
+        <p> <label>D07</label>
+            <a href="http://192.168.0.10/arduino/digital/7/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/7/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D06</label>
+            <a href="http://192.168.0.10/arduino/digital/6/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/6/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D05</label>
+            <a href="http://192.168.0.10/arduino/digital/5/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/5/0"><button><h2>On</h1></button></a>
+        </p>
+        <p> <label>D04</label>
+            <a href="http://192.168.0.10/arduino/digital/4/1"><button><h2>Off</h1></button></a>
+            <a href="http://192.168.0.10/arduino/digital/4/0"><button><h2>On</h1></button></a>
+        </p>
+      </div>
+  </div>
+  <div class="controlcontainer datadash">
+      <p><label><h1>Bridge Data:</h1></label><p>
+      <button ng-click="showBridgeData()"><h2>Fetch</h2></button>
+      <div class="datadisplay">
+        <table>
+          <tr ng-repeat="(key, value) in greenhouse_variables">
+            <td>{{key}}</td><td>{{value}}</td>
+          </tr>
+        </table>
+      </div>
+  </div>
+  </div>
+</div>

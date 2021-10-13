@@ -6,3 +6,83 @@ body {
 a {
   color: #00B7FF;
 }
+.login {
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 5px;
+  display: inline-block;
+}
+.checkout_trash {
+  height: 25px;
+  width: 60px;
+  font-size: 10px;
+  text-align: center;
+  margin: auto;
+  padding: 1px;
+}
+.checkout_form {
+  color: #00B7FF;
+  text-align: left;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  width: 40%;
+}
+.checkout_form input {
+  box-sizing: border-box;
+  text-align: left;
+  padding-left: 4px;
+}
+.checkout_form div {
+  height: 20px;
+  margin: 4px;
+  padding: 4px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 90%;
+}
+.form_input {
+  border: 1px solid #00B7FF;
+  border-radius: 5px;
+  background: #f1f1f1;
+  width: 100%;
+  margin: 2px;
+}
+.checkout_form label {
+  height: 20px;
+  margin: 6px;
+  padding: 6px;
+}
+.card_icons {
+  position: relative;
+  bottom: 5%;
+  right: 5%;
+  margin: 2px;
+  padding: 2px;
+}
+.card_icons img {
+  height: 30px;
+  width: 35px;
+}
+.pay_btn {
+  height: 50px;
+  width: 100px;
+  text-align: center;
+}
+.promocode {
+  color: #00B7FF;
+  text-align: left;
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  width: 40%;
+}
+.pc_btn {
+  height: 50px;
+  width: 100px;
+  margin: 4px;
+  right: 10%;
+}

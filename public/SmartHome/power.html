@@ -1,0 +1,138 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+  <div class="container">
+    <div class="container view2 clearNight" ng-init="fetchGreenhouseData();" change_Scenes_Bat_Temp();">
+      <div class="row">
+        <div class="col-md-3">
+          <h1 class="emgOverrideAlert" ng-if="greenhouse_variables.EmergencyPowerOverride == 1 ">Emergency Power Override</h1>
+          <div class="powerGreeting" ng-if="greenhouse_variables.EmergencyPowerOverride == 0 ">
+            Power Systems<h1>OK</h1>
+          </div>
+        </div>
+        <div class="col-md-3 sunShining" ng-hide="greenhouse_variables.array_voltage < 50" ng-show="greenhouse_variables.array_voltage >= 50"></div>
+        <div class="col-md-3 fullMoon" ng-hide="greenhouse_variables.array_voltage >= 15" ng-show="greenhouse_variables.array_voltage <= 15"></div>
+
+        <div class="col-md-3 lineSwitch">
+          <p>Line to House:
+            <button class="powerOn btn" ng-show="greenhouse_variables.Line_To_House == 1 "><h1>ON</h1></button>
+            <button class="emgPower btn" ng-show="greenhouse_variables.Line_To_House == 0 "><h1>OFF</h1></button>
+          </p>
+        </div>
+      </div>
+
+        <br>
+
+        <div id="power" class="power">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                <div id="smarthome" class="col-md-3 smarthome" ></div>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                <div id="solarpanel" class="col-md-3 solarpanel" ></div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                Solar Array
+                <p>Solar Array Voltage: {{greenhouse_variables.array_voltage}} Volts</p>
+                <p>Solar Array Current: {{greenhouse_variables.array_current}} Amps</p>
+                <p>sweep_Vmp: {{greenhouse_variables.sweep_Vmp}} V</p>
+                <p>sweep_Voc: {{greenhouse_variables.sweep_Voc}} V</p>
+                <p>sweep_Pmax: {{greenhouse_variables.sweep_Pmax}} V</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                Home Power Consumption
+                <p>rp1: {{greenhouse_variables.rp1}}</p>
+                <p>rp2: {{greenhouse_variables.rp2}}</p>
+                <p>rp3: {{greenhouse_variables.rp3}}</p>
+                <p>rp4: {{greenhouse_variables.rp4}}</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+
+                <div ng-show="greenhouse_variables.Charge_Percentage > 1" ng-hide="greenhouse_variables.Charge_Percentage >= 100" class="battery_charge_container">
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 99" class="battery_cell battery_charge_100">{{greenhouse_variables.Charge_Percentage}}%</div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 99" class="battery_cell battery_cell_empty">{{greenhouse_variables.Charge_Percentage}}%</div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 90" class="battery_cell battery_charge_90"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 90" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 80" class="battery_cell battery_charge_80"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 80" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 70" class="battery_cell battery_charge_70"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 70" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 60" class="battery_cell battery_charge_60"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 60" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 50" class="battery_cell battery_charge_50"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 50" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 40" class="battery_cell battery_charge_40"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 40" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 30" class="battery_cell battery_charge_30"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 30" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 20" class="battery_cell battery_charge_20"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 20" class="battery_cell battery_cell_empty"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage >= 10" class="battery_cell battery_charge_10"></div>
+                  <div ng-if="greenhouse_variables.Charge_Percentage < 10" class="battery_cell battery_cell_empty"></div>
+                </div>
+
+                <div ng-show="greenhouse_variables.Charge_Percentage >= 100" class="battery_charge_container">
+                  <div class="battery_charging">
+                    <div class="bat_text">{{greenhouse_variables.charging_state}}</div>
+                  </div>
+                </div>
+
+                <div ng-show="greenhouse_variables.Charge_Percentage == 0" class="battery_charge_container">
+                  <div class="battery_dead">
+                    <div class="bat_text">
+                      {{greenhouse_variables.charging_state}}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                Battery Bank
+                <p>battery_sense_voltage: {{greenhouse_variables.battery_sense_voltage}}</p>
+                <p>battery_current: {{greenhouse_variables.battery_current}}</p>
+                <p>target_voltage: {{greenhouse_variables.target_voltage}}</p>
+                <p>battery_temp_F: {{greenhouse_variables.battery_temp_F}}</p>
+                <p>charging_current: {{greenhouse_variables.charging_current}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="gridsquare clearNight">
+                <p>total_kwh_resetable: {{greenhouse_variables.total_kwh_resetable}}</p>
+                <p>charging_state: {{greenhouse_variables.charging_state}}</p>
+                <p>heat_sink_temp_F: {{greenhouse_variables.heat_sink_temp_F}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</div>

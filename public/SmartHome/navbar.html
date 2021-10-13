@@ -1,0 +1,31 @@
+<div class="container navbar" ng-init="fetchusername()">
+  <a href="#!/SmartHome/about" ><img class="btn btn-primary navbtn" ng-src="img/smarthome/about.png" alt="About"></a>
+  <a href="#!/SmartHome/home"><img class="btn btn-primary navbtn" ng-src="img/smarthome/home.png" alt="Home"></a>
+  <a href="#!/SmartHome/power">
+    <div ng-show="greenhouse_variables.EmergencyPowerOverride == 0 ">
+      <img class="btn btn-primary navbtn powerOn" ng-src="img/smarthome/power.png" alt="Power">
+    </div>
+    <div ng-show="greenhouse_variables.EmergencyPowerOverride == 1 ">
+      <img class="btn btn-primary navbtn emgPower" ng-src="img/smarthome/power.png" alt="Power">
+    </div>
+  </a>
+  <a href="#!/SmartHome/water">
+    <div ng-show="greenhouse_variables.wellpumpMain == 0" >
+      <img class="btn btn-primary navbtn wellpumpMainOff" ng-src="img/smarthome/water.jpg" alt="Water">
+    </div>
+    <div ng-show="greenhouse_variables.wellpumpMain == 1">
+      <img class="btn btn-primary navbtn wellpumpMainOn" ng-src="img/smarthome/water.jpg" alt="Water">
+    </div>
+  </a>
+  <a href="#!/SmartHome/dashboard"><img class="btn btn-primary navbtn" ng-src="img/smarthome/dashboard.png" alt="Dashboard"></a>
+  <a href="#!/SmartHome/brewery"><img class="btn btn-primary navbtn" ng-src="img/smarthome/brewery.png" alt="Brewery"></a>
+  <a href="#!/SmartHome/shroomery"><img class="btn btn-primary navbtn" ng-src="img/smarthome/shroomery.jpg" alt="Shroomery"></a>
+  <a href="#!/SmartHome/greenhouse"><img class="btn btn-primary navbtn" ng-src="img/smarthome/greenhouse.png" alt="Greenhouse"></a>
+  <a href="#!/SmartHome/coop"><img class="btn btn-primary navbtn" ng-src="img/smarthome/coop.png" alt="Coop"></a>
+  <a href="#!/SmartHome/ledger"><img class="btn btn-primary navbtn" ng-src="img/smarthome/ledger.png" alt="ledger"></a>
+  <a href="#!/SmartHome/video"><img class="btn btn-primary navbtn" ng-src="img/smarthome/video.png" alt="video"></a>
+  <a href="#!/SmartHome/charts"><img class="btn btn-primary navbtn" ng-src="img/smarthome/charts.png" alt="charts"></a>
+  <a href="#!/SmartHome/weather"><img class="btn btn-primary navbtn" ng-src="img/smarthome/weather.png" alt="weather"></a>
+  <a href="#!/StoreFront"><img class="btn btn-primary navbtn storefrontnav" ng-src="img/smarthome/CafLaM.png" alt="Store Front"></a>
+  <a href="#!/BehindTheCounter"><img class="btn btn-primary navbtn behindthecounternav" ng-src="img/smarthome/CafLaM.png" alt="Store Front"></a>
+</div>

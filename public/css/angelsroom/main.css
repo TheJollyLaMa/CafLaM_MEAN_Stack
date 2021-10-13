@@ -1,0 +1,417 @@
+$finalHeight: 250px;
+$finalWidth: 3 * $finalHeight;
+$scrollBarHeight: 1px;
+
+::-webkit-scrollbar {
+  width: $scrollBarHeight;
+  height: $scrollBarHeight;
+}
+
+::-webkit-scrollbar-button {
+  width: $scrollBarHeight;
+  height: $scrollBarHeight;
+}
+
+html, body {
+  background: linear-gradient(to left, #b3fcf0, #1BB3B6);/*#1BB3B6;*/
+  color: #FAFAC8;
+  width: 100%;
+  text-align: center;
+  padding-top: 30px;
+
+}
+
+h1 {
+  color: #FAFAC8;
+}
+.cart{
+  height: auto;
+  width: 90%;
+  background-color: rgb(240,255,225);
+  color: rgb(27, 179, 182);
+  border: 5px double rgb(27, 179, 182);
+  border-radius: 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+  float: center;
+  display: inline-block;
+  margin:2%;
+  padding:2%;
+}
+.cart h1 {
+  color: rgb(27, 179, 182);
+  text-align: center;
+}
+.cart table {
+  height: 20%;
+  width: 100%;
+  padding: 3%;
+  margin: 1%;
+  border: 5px;
+  border-color: : white;
+  border-radius: 10px;
+}
+.cart th {
+  text-align: center;
+}
+.cart tr {
+  text-align: center;
+}
+.cart tr:nth-child(odd) {
+  color: rgb(0,120,120);
+}
+.uni_logo {
+  background-image: url("Uni_Logo.gif");
+  height: 200px;
+  width: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  text-align:center;
+  opacity: 0.5;
+}
+.arduino {
+  background-image: url("arduino.png");
+  height: 50px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: 60px;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+  offset-path: path('M-70,-40 C-70,70 70,70 70,-40');
+  animation: move 3000ms infinite alternate ease-in-out;
+  opacity: 0.7;
+
+}
+.oasis:hover {
+  transform: scale(5);
+}
+.oasis {
+  background-image: url("oasis.png");
+  height: 80px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: 60px;
+  background-position: center center;
+  border-radius: 50%;
+  margin-bottom: 40px;
+  margin-right: 50px;
+  text-align:center;
+  border-color: #03fcc2;
+  opacity: 0.9;
+
+}
+.morningstar {
+  background-image: url("morningstar.png");
+  height: 50px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: 60px;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+  offset-path: path('M-70,-40 C-70,70 70,70 70,-40');
+  animation: move 3000ms infinite alternate ease-in-out;
+  opacity: 0.7;
+
+}
+.github_logo {
+  background-image: url("Github_Logo.png");
+  height: 100px;
+  width: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  text-align:center;
+}
+.newtokenform {
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  top: 780px;
+  bottom: auto;
+}
+.fox_div {
+  position: relative;
+  top: 50px;
+  display: inline-block;
+}
+.spacer{
+  height: 100px;
+}
+.at_logo {
+  top: 50px;
+  width: auto;
+  height: auto;
+  position: relative;
+  display: block;
+  opacity: 0.8;
+
+}
+.rare_links {
+    z-index: 1;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    box-shadow: 15px 15px 25px 0 white inset, -15px -15px 25px 0 white inset;
+
+}
+.opensourcegems:hover {
+  transform: scale(5);
+}
+.opensourcegems {
+  background-image: url("OpenSourceGems.gif");
+  height: 50px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  box-shadow: 5px 5px 5px 0 white inset, -5px -5px 5px 0 white inset;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+}
+.cl_token {
+  background-image: url("tokenfront.png");
+  height: 100px;
+  width: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  text-align:center;
+}
+.mm_logo {
+  background-image: url("metamask_logo.png");
+  height: 50px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+}
+.IPFS_logo {
+  background-image: url("IPFS_Logo.png");
+  height: 100px;
+  width: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 20px;
+  margin-top: 45px;
+  text-align:center;
+  border-color: #03fcc2;
+  opacity: 0.5;
+
+}
+.Rari_logo {
+  background-image: url("Rari_logo.png");
+  height: 50px;
+  width: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+}
+.rev11:hover {
+  transform: scale(5);
+}
+.rev11 {
+  background-image: url("revolution11.gif");
+  height: 50px;
+  width: 50px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 10px 10px 10px 0 white inset, -10px -10px 10px 0 white inset;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 10px;
+  text-align:center;
+  border-color: #03fcc2;
+}
+.alchemist{
+  background-image: url("Alchemist_CapeTown.gif");
+  height: 100px;
+  width: 180px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 10px 10px 10px 0 #03fcc2 inset, -10px -10px 10px 0 #03fcc2 inset;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 10px;
+}
+
+.rare_links img {
+  height: 150px;
+  box-shadow: 15px 15px 25px 0 white inset, -15px -15px 25px 0 white inset;
+  border-radius: 50%;
+
+}
+.rare_links:hover {
+  transform: scale(1.5);
+
+}
+.space {
+  background-image: url("T4T_LandingV2.gif");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  opacity: 0.99;
+  padding: 20px;
+  z-index: 0;
+
+}
+.mainViewWindow {
+  background-color: linear-gradient(to left, #b3fcf0, #1BB3B6);
+  color: #FAFAC8;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  border-width: : 5px;
+  border-style: double;
+  border-color: #FAFAC8;
+  border-radius: 10px;
+  overflow-y: scroll;
+  padding: 10px;
+}
+.scroller{
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  width: calc(#{$finalHeight} + #{$scrollBarHeight});
+  max-height: $finalWidth;
+  margin: 5px;
+  padding-top: 5px;
+}
+.scroller a {
+  height: 10%;
+  display: inline-block;
+  color: #FAFAC8;
+  text-align: center;
+}
+.sales_category_buttons h4 {
+  font-size: 14px;
+}
+.sales_category_buttons {
+  white-space: normal;
+  height: 200px;
+  width: 25%;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  color: #FAFAC8;
+  position: relative;
+  border: 5px;
+  border-radius: 10px;
+  border-color: #FAFAC8;
+  border-style: double;
+  margin: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform-origin: right top;
+
+  padding: $finalHeight 0 0 0;
+   & > div {
+     width: $finalHeight;
+     height: $finalHeight;
+     margin: 0px 0;
+
+}
+.backend_category_buttons {
+  height: 100px;
+  vertical-align: middle;
+  text-align: center;
+  word-wrap: normal;
+  display: inline-block;
+  color: rgb(250,250,200);
+  position: relative;
+  border: 5px;
+  border-radius: 10px;
+  border-color: rgb(250,250,200); /* #FAFAC8 */
+  border-style: double;
+  margin: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform-origin: right top;
+  padding: $finalHeight 0 0 0;
+   & > div {
+     width: $finalHeight;
+     height: $finalHeight;
+     margin: 0px 0;
+}
+.backend_category_buttons p {
+  margin:20px;
+  padding:20px;
+  color: rgb(250,250,200);
+}
+.sub_button{
+  white-space: normal;
+  height: 30%;
+  width: 30%;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 50%;
+  text-decoration: none;
+  display: inline-block;
+  color: rgb(27, 179, 182);
+  background-color: rgb(255,255,255);
+  position: relative;
+  border: 5px;
+  border-radius: 10px;
+  border-color: rgb(27, 179, 182);
+  border-style: double;
+  margin: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform-origin: right top;
+
+  padding: $finalHeight 0 0 0;
+   & > div {
+     width: $finalHeight;
+     height: $finalHeight;
+     margin: 0px 0;
+
+}
+
+/* rgb(0,120,120) = #007878 */
+/* rgb(200, 91, 0) = #C85B00*/
+/* rgb(102,213,213) = #66D5D5*/

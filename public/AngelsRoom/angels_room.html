@@ -1,0 +1,154 @@
+<div class="angelsroom" ng-controller="StoreFrontController" ng-init="loadTheBlock(); fetchCurrentAlm(); fetchConnectedAccountsAlms();">
+  <atnavbarstorefrontangelsroom></atnavbarstorefrontangelsroom>
+  <div>
+    <div class="openseagems">
+
+    </div>
+    <script>document.getElementById("toke_fro").style.backgroundImage = "url({{cur_alm.img}})";</script>
+    <br/>
+    <div class="progress-wrapper">
+      <div class="progress">
+        <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70"
+            aria-valuemin="0" aria-valuemax="100">
+              {{cur_alm.tokens_sold}}
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+
+    <p>This Round : </p>
+    <div class="flip-container">
+      <div class="flipper">
+        <div class="token_front" id="toke_fro"></div>
+        <div class="token_back">
+            <table>
+                <thead class="tokenhead">{{cur_alm.status}}<hr class="tokebreak"/></thead>
+                <tbody>
+                    <h1 class="token-text">{{cur_alm.name}}</h1>
+                    <a href="/public/#!/TreasureChest/{{cur_alm.uri}}" style="text-decoration:none;" target="_blank" rel="noopener noreferrer"><h1 class="token-text">{{cur_alm.uri}}</h1></a>
+                    <h1 class="token-text">{{cur_alm.id}} </h1>
+                    <h1 class="token-text">{{cur_alm.product}}</h1>
+                    <h1 class="token-text">{{cur_alm.cost}}</h1>
+                    <h1 class="token-text">0.000{{cur_alm.angel_coefficient}}</h1>
+                    <h1 class="token-text">{{cur_alm.mint_date}}</h1>
+                    <h1 class="token-text">{{cur_alm.owner_display}}</h1>
+                </tbody>
+                <tfoot><h1 class="token-text">{{cur_alm.num_issued - cur_alm.tokens_sold}}/{{cur_alm.num_issued}}</h1></tfoot>
+             </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  <br/>
+  <form ng-submit="buy_alms(amt_to_buy)">
+    <!-- checkoutUser(transactions, "DAI"); -->
+    <input type='number' class="buy_counter form_table" placeholder="10" ng-model="amt_to_buy"/>
+    <div id="newtokesbtndiv" align="center" class="form_table">
+      <input id="newtokesbutton" type='submit' class='btn btn-block btn-primary' value='Buy'/>
+    </div>
+  </form>
+  <div class="row" ng-if="result != null">
+         <div class="col-xs-12">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Age</th>
+                     <th>Profession</th>
+                     <th>Years of Experience</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>{{result.name}}</td>
+                     <td>{{result.age}}</td>
+                     <td>{{result.profession}}</td>
+                     <td>{{result.yearsOfExp}}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+  <br/>
+  <hr/>
+  <a href="#!/TreasureChest"><img height="100px" width="100px" src="../public/css/TreasureChest.png" alt="TreasureChest"></a>
+  <!-- <div>
+    <p align="center">Search: <input style="width: 50%;" type='text' class='form-control mb-1' placeholder='id of alm' ng-model="search.alm_id"/>
+  </div> -->
+  <!-- Token Library:
+  <div class="scroller">
+    <div class="flip-container" ng-repeat="alm in AngelTokens">
+      <div class="flipper">
+        <div class="token_front">
+          <table>
+            <tfoot><h1 class="token-text">{{alm.mint_date}}</h1></tfoot>
+          </table>
+        </div>
+        <div class="token_back shimmer">
+            <table>
+                <thead class="tokenhead">{{alm.status}}<hr class="tokebreak"/></thead>
+                <tbody>
+                    <h1 class="token-text">{{alm.name}}</h1>
+                    <h1 class="token-text"><a href="/public/#!/TreasureChest/{{alm.uri}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{alm.uri}}</a></h1>
+                    <h1 class="token-text">{{alm.id}} </h1>
+                    <h1 class="token-text">{{alm.product}}</h1>
+                    <h1 class="token-text">{{alm.cost}}</h1>
+                    <h1 class="token-text">0.000{{alm.angel_coefficient}}</h1>
+                    <h1 class="token-text">{{alm.owner_display}}</h1>
+                </tbody>
+                <tfoot><h1 class="token-text">{{alm.bal}} / {{alm.num_issued}}</h1></tfoot>
+             </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div> -->
+  <!-- <div class="eth_bal" align="center">
+    <div class="container-fluid mt-5">
+      <div class="row text-center">
+          <div class="col text-center">
+              <br/>
+              <br/>
+              <div>
+                  <p><h1>Decode Bytes Array</h1></p>
+                  <hr/>
+              </div>
+              <div>
+                  <p>Enter a byte array:</p>
+                  <input type="text" size="50" ng-model="array" />
+                  <br/>
+                  <div><button class="btn btn-primary" type="button" ng-click="decode_bytes(array)">Decode</button></div>
+                  <br/>
+                  <div id="output"><h1 ng-repeat="each in bytes_decode_result" >{{each}}</h1></div>
+              </div>
+          </div>
+       </div>
+    </div>
+  </div>
+  <br/>
+  <br/> -->
+  <!-- <div class="ship" align="center">
+    <div class="container-fluid mt-5">
+      <div class="row text-center">
+        <div class="col text-center">
+            <br/>
+            <br/>
+            <div>
+              <p><h1>ETH Balance Fetcher</h1></p>
+              <hr/>
+            </div>
+            <div>
+                <p>Enter an Ethereum Address:</p>
+                <input type="text" size="50" id="address" />
+                <br/>
+                <button class="btn btn-primary" type="button" ng-click="getBalance()">Get Balance</button>
+                <br/>
+                <div id="output"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+</div>

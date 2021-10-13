@@ -1,0 +1,29 @@
+<div ng-controller="StoreFrontController" ng-init="showDiscountedInventory()" >
+    <atnavbarstorefront></atnavbarstorefront>
+    <h1>Beans roasted more than 2 weeks ago and other special deals!</h1>
+    <div class="tdCenter SoldOut" ng-if="discounted_inventory.length < 1"><div><p><h1 class="SoldOuttxt">Sold Out!</h1></p><p><h4>Go back to the store front and make a reservation or check our Regular fresh roasts and Samplers!</h4></p></div></div>
+
+    <div class="scroller">
+      <div class="sales_category_buttons btn btn-default" ng-repeat="item in discounted_inventory" ng-if="item.weight > 0" ng-click="add_discounted_purchase_to_cart(item.sku, item.origin, item.roast_type, item.price_per_lb, 1)">
+
+          <p>
+
+              <h2>{{item.origin}}</h2>
+              <p><img class="country_shape" ng-src="/img/country_shape/{{item.origin}}.png"></p>
+              <h3>{{item.roast_type}}</h3>
+              <h4>In Stock: {{item.weight}} lbs.</h4>
+              <h4> {{item.price_per_lb | currency}}/lb </h4>
+            </p>
+
+          <input type="hidden" name"sku" ng-model="item.sku">
+          <input type="hidden" name="origin"  ng-model="item.origin">
+          <input type="hidden" name="roast_type" ng-model="item.roast_type">
+          <input type="hidden" name="price" ng-model="item.price_per_lb">
+
+      </div>
+    </div>
+    <div>
+        <p><a href="#!/Store_Front"><div class="back_button btn btn-default">Back to the Store Front</div></a></p>
+    </div>
+</div>
+<shoppingcart></shoppingcart>

@@ -1,0 +1,55 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+
+  <div class="container">
+  <div class="container view2" ng-init="fetchGreenhouseData();">
+    <div class="row">
+      <div class="col-md-2">
+        <h1>Water</h1>
+        <p class="wellPumpMainOffAlert" ng-show="greenhouse_variables.wellpumpMain == 0">Well Pump Main is OFF</p>
+        <p class="wellPumpMainOnAlert" ng-show="greenhouse_variables.wellpumpMain == 1">Well Pump Main is ON</p>
+
+      </div>
+      <div class="col-md-2 lineSwitch">
+        Well Pump Main:
+          <button ng-click="changeProgramState('wellpumpMain');" class="emgPower btn" ng-show="greenhouse_variables.wellpumpMain == 0"><h1>OFF</h1></button>
+          <button ng-click="changeProgramState('wellpumpMain');" class="powerOn btn" ng-show="greenhouse_variables.wellpumpMain == 1"><h1>ON</h1></button>
+      </div>
+    </div>
+      <div class = "container">
+        <table>
+          <tr>
+            <td>ThreeDayRain program</td>
+            <td>{{greenhouse_variables.ThreeDayRain}}</td>
+            <td><div class="col-md-2 lineSwitch">
+                <button ng-click="changeProgramState('ThreeDayRain');" class="emgPower btn" ng-show="greenhouse_variables.ThreeDayRain == 0"><h1>OFF</h1></button>
+                <button ng-click="changeProgramState('ThreeDayRain');" class="powerOn btn" ng-show="greenhouse_variables.ThreeDayRain == 1"><h1>ON</h1></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>RainyDay program</td>
+            <td>{{greenhouse_variables.RainyDay}}</td>
+            <td><div class="col-md-2 lineSwitch">
+                <button ng-click="changeProgramState('RainyDay');" class="emgPower btn" ng-show="greenhouse_variables.RainyDay == 0"><h1>OFF</h1></button>
+                <button ng-click="changeProgramState('RainyDay');" class="powerOn btn" ng-show="greenhouse_variables.RainyDay == 1"><h1>ON</h1></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>MakeItRain program</td>
+            <td>{{greenhouse_variables.MakeItRain}}</td>
+            <td><div class="col-md-2 lineSwitch">
+                <button ng-click="changeProgramState('MakeItRain');" class="emgPower btn" ng-show="greenhouse_variables.MakeItRain == 0"><h1>OFF</h1></button>
+                <button ng-click="changeProgramState('MakeItRain');" class="powerOn btn" ng-show="greenhouse_variables.MakeItRain == 1"><h1>ON</h1></button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>Valve 1 State</td><td>{{greenhouse_variables.valve1State}}</td>
+          </tr>
+          <tr>
+            <td>Valve 2 State</td><td>{{greenhouse_variables.valve2State}}</td>
+          </tr>
+        </table>
+      </div>
+  </div>
+  </div>
+</div>

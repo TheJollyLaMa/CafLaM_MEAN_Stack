@@ -1,0 +1,58 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+
+  <div>
+    <div class="view2">
+      <select name="chart_sel" id="chart_sel" ng-options="each for each in chart_selector_list" selected = "chart1" ng-model="chart_sel.selected"></select>
+      {{chart_sel.selected}}
+      <select name="year_to_chart" id="year_to_chart" ng-options="each for each in yearToChartList" selected = "doy" ng-model="year_to_chart.selected"></select>
+      <select name="time_window" id="time_window" ng-options="time_window.name for time_window in timeWindowList" ng-model="time_window.name"></select>
+      {{time_window.name.name}}
+      <select ng-if="time_window.name.name === 'doy'" name="doy_window" id="doy_window" ng-options="each for each in time_window.name.range" ng-model="time_range.doy"></select>
+      {{time_range.doy}}
+      <select ng-if="time_window.name.name === 'woy'" name="woy_window" id="woy_window" ng-options="each for each in time_window.name.range" ng-model="time_range.woy"></select>
+      <select ng-if="time_window.name.name === 'moy'" name="moy_window" id="moy_window" ng-options="each for each in time_window.name.range" ng-model="time_range.moy"></select>
+
+      <select name="selected_data_set_1" id="selected_data_set_1" ng-options="each for each in tristarVariableList" ng-model="d.selected_data_set_1"></select>
+      {{d.selected_data_set_1}}
+      <select name="selected_data_set_2" id="selected_data_set_2" ng-options="each for each in tristarVariableList" ng-model="d.selected_data_set_2"></select>
+      {{d.selected_data_set_2}}
+      <button class="btn btn-primary"ng-click="updateCharts()"><h1>Update Chart</h1></button>
+    </div>
+    <div class="view2" ng-init="fetchChartData();">
+      <div id="integrallinechartcon">
+        <canvas id="integralLineChart" width="800" height="400" class="view2 chart chart-line" chart-data="Chart1data" chart-options="Chart1options" chart-click="onClick"></canvas>
+      </div>
+    </div>
+    <div class="view2">
+      <div id="Chart2con">
+          <canvas id="Chart2" width="800" height="400" class="chart chart-line" chart-data="Chart2data" chart-options="Chart2options" chart-click="onClick"></canvas>
+      </div>
+    </div>
+    <div class="view2" ng-init="fetch_event_log();">
+      <table class="table">
+        <thead>
+          <h2>Significant States:</h2>
+        </thead>
+        <tbody>
+          <tr><th><h3>Total Kwh harnessed</h3</th><td><h3>{{greenhouse_variables["total_kwh"]}}</h3></td></tr>
+          <tr><th><h3>Charging State</h3</th><td><h3>{{charge_state}}</h3></td></tr>
+          <tr><th><h3>Emergency Power Override</h3</th><td><h3>{{greenhouse_variables["EmergencyPowerOverride"]}}</h3></td></tr>
+          <tr><th><h3>Well Pump State</h3</th><td><h3>{{charge_state}}</h3></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="view2" ng-init="fetch_event_log();">
+      <table class="table">
+        <thead>
+          <h1>    Event Log:</h1>
+        </thead>
+        <tbody>
+          <tr class="alternate-background" ng-repeat="event in event_log | orderBy:'id':true">
+            <td>{{event.update}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

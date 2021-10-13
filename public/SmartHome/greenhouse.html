@@ -1,0 +1,232 @@
+<div id="main">
+  <smarthome-Navbar></smarthome-Navbar>
+
+  <div class="container">
+  <div class="container" >
+    <div class="container view2" ng-init="fetchGreenhouseData(); change_Scenes_Greenhouse_Temp();">
+      <!-- <div class="view2">
+        <ul>
+          <li>Show and Animate Environmental Sensor Data</li>
+          <li>Log Seed, Cuttings, Living, and Harvest Inventory</li>
+          <li>Log Fertilizer & Cleaning Events</li>
+        </ul>
+      </div -->
+
+      <div id="greenhouse" class="greenhouse view2">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="gridsquare">
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+              <p>Light Program: {{greenhouse_variables.Light}}</p>
+              <p>SunMH: {{greenhouse_variables.sunMHState}}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="gridsquare">
+              <p>inletFanState: {{greenhouse_variables.inletFanState}}</p>
+              <p>outletFanState: {{greenhouse_variables.outletFanState}}</p>
+              <p>geoFan: {{greenhouse_variables.geoFanState}}</p>
+              <p>heater: {{greenhouse_variables.heaterState}}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+              <p>outsideTemp: {{greenhouse_variables.outsideTemp}}</p>
+              <p>insideTemp: {{greenhouse_variables.insideTemp}}</p>
+              <p>outsideHumidity: {{greenhouse_variables.outsideHumidity}}</p>
+              <p>insideHumidity: {{greenhouse_variables.insideHumidity}}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+              <p>valve1State: {{greenhouse_variables.valve1State}}</p>
+              <p>valve2State: {{greenhouse_variables.valve2State}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="gridsquare"></div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+              <p>well Pump Main: {{greenhouse_variables.wellpumpMain}}</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="gridsquare">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view2">
+      <div class="view">
+        <div class='align-items-center text-center'>
+          <h1>Log Cuttings!</h1>
+        </div>
+        <form name="newInventoryForm" ng-submit="" data-ng-model="newInventoryForm" class="justify-content-center">
+
+          <div class="form-group text-center">
+              <label for="origin">Plant Species: </label>
+              <input name="origin" type="text" class="form-control input-group text-center" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+          </div>
+
+          <div class="form-group text-center">
+            <label>Date Started: </label>
+            <div class="input-group">
+              <input type="text" class="form-control " uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <button type="button" class="input-group-btn btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <p>
+              <label>Nutrient/Method Used:</label>
+              <input name="origin" type="text" class="form-control input-group text-center" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+          </div>
+          <div class="form-group text-center">
+              <label for="cost_per_lb">Quantity</label>
+              <input name="cost_per_lb" type="text" class="form-control text-center input-group" data-ng-model="cost_per_lb" placeholder="cost per pound" ng-required="true">
+          </div>
+
+          <div class="form-actions text-center">
+            <input type="submit" class="backend_category_buttons btn btn-default">
+          </div>
+      </form>
+    </div>
+
+    <div class="view">
+      <div class='align-items-center text-center'>
+        <h1>Log Seeds, Plants, and Harvest!</h1>
+      </div>
+      <form name="newInventoryForm" ng-submit="" data-ng-model="newInventoryForm" class="justify-content-center">
+
+        <div class="form-group text-center">
+            <label for="origin">Bean Origin: </label>
+            <input name="origin" type="text" class="form-control input-group text-center" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+        </div>
+
+        <div class="form-group text-center">
+          <label>Date Received: </label>
+          <div class="input-group">
+            <input type="text" class="form-control " uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <button type="button" class="input-group-btn btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <p>
+            <label>Weight:</label>
+            <select ng-name="weight" type="number" class="form-control input-group" ng-options="weight for weight in Range(1, 100)" data-ng-model="weight"  placeholder="lbs" ng-required="true"></select>
+
+        </div>
+        <div class="form-group text-center">
+            <label for="cost_per_lb">Cost/lb</label>
+            <input name="cost_per_lb" type="text" class="form-control text-center input-group" data-ng-model="cost_per_lb" placeholder="cost per pound" ng-required="true">
+        </div>
+
+        <div class="form-actions text-center">
+          <input type="submit" class="backend_category_buttons btn btn-default">
+        </div>
+      </form>
+    </div>
+
+    <div class="view">
+      <div class='row-sm align-items-center text-center'>
+        <h1>Log Fertilizer Applications</h1>
+      </div>
+      <div class="row-sm">
+            <form name="newInventoryForm" ng-submit="" data-ng-model="newInventoryForm" class="justify-content-center">
+
+              <div class="form-group text-center">
+                  <label for="origin">Entry Date: </label>
+                  <input name="origin" type="text" class="form-control input-group text-center" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+              </div>
+
+              <div class="form-group text-center">
+                <label>Event Description: </label>
+                <div class="input-group">
+                  <input type="text" class="form-control " uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                  <button type="button" class="input-group-btn btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </div>
+              </div>
+
+              <div class="form-group text-center">
+                  <label for="origin">Type: </label>
+                  <input name="origin" type="text" class="form-control input-group text-center" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+              </div>
+
+              <div class="form-group text-center">
+                <label>Amount: </label>
+                <div class="input-group">
+                  <input type="text" class="form-control " uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                </div>
+              </div>
+
+              <div class="form-actions text-center">
+                <input type="submit" class="backend_category_buttons btn btn-default">
+              </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div class='view2'>
+      <table class="table table-bordered table-hover" >
+        <label><h1>Healthy Plants Growing</h1></label>
+        <thead><tr><th>Entry Date</th><th>Plant Name</th><th>Size</th><th>Price/Plant</th><th>Number</th><th>Est Retail Value</th></tr></thead>
+        <tbody>
+          <tr ng-repeat="item in plant_inventory | orderBy : '-reception_date'">
+            <td>{{item.origin}}9/7/2021</td>
+            <td>Tomato (test){{item.reception_date | date:'ddMMMyyyy'}}</td>
+            <td>{{item.weight}} hieght and width </td>
+            <td>{{item.timestamp}}</td>
+            <td>{{item.cost_per_lb | currency}}</td>
+            <td>{{item.cost_per_lb * item.weight | currency}}</td>
+            <td>{{(item.price_per_lb * (item.weight - (item.weight * 0.2))) - (item.price_per_lb * 0.2) | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered table-hover" >
+        <label><h1>Harvest Inventory</h1></label>
+        <thead><tr><th>Date</th><th>Name</th><th>Number/Weight</th><th>Price/Plant</th><th>Est Retail Value</th></tr></thead>
+        <tbody>
+          <tr ng-repeat="item in harvest_inventory | orderBy : '-reception_date'">
+            <td>{{item.origin}}9/7/2021</td>
+            <td>Tomato (test){{item.reception_date | date:'ddMMMyyyy'}}</td>
+            <td>{{item.weight}} hieght and width </td>
+            <td>{{item.timestamp}}</td>
+            <td>{{item.cost_per_lb | currency}}</td>
+            <td>{{item.cost_per_lb * item.weight | currency}}</td>
+            <td>{{(item.price_per_lb * (item.weight - (item.weight * 0.2))) - (item.price_per_lb * 0.2) | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered table-hover" >
+        <label><h1>Seed Bank</h1></label>
+        <thead><tr><th>Entry Date</th><th>Plant Name</th><th>Price/Weight(unit)</th><th>Weight/Quantity</th><th>Est Retail Value</th></tr></thead>
+        <tbody>
+          <tr ng-repeat="item in seed_inventory | orderBy : '-reception_date'">
+            <td>{{item.origin}}9/7/2021</td>
+            <td>Tomato (test){{item.reception_date | date:'ddMMMyyyy'}}</td>
+            <td>{{item.weight}} hieght and width </td>
+            <td>{{item.timestamp}}</td>
+            <td>{{item.cost_per_lb | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>

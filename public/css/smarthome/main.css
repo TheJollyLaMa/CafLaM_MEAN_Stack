@@ -1,0 +1,136 @@
+body {
+	background-color:#8CEBC3;
+	background-size: 100%;
+
+	/*
+		other colors in scheme, light to dark
+			green		blue		yellow	orange
+			8CEBC3  91C3E9	FFD398	FFB598
+			4EA881	4F7B9D	F5BD72	F59772
+			277553  29506D	AA7939	AA5939
+			0D412B	102A3D	5F3F13	5F2913
+			010E09	02080D	150D01	150701
+	 */
+}
+p {
+  font-size: 16;
+}
+.behindthecounternav{
+	background-color: grey;
+}
+.storefrontnav{
+	background-color: linear-gradient(to left, #b3fcf0, #1BB3B6);
+}
+.circulardatadisplay{
+	border-radius: 50%;
+	background-color: white;
+	border: 5px inset #FFB598;
+	margin: 5px;
+	padding: 20px;
+	overflow : scroll;
+	position: absolute;
+}
+.container {
+	position: relative;
+	margin: 3px;
+}
+.controlcontainer {
+	float: left;
+	margin: 3px;
+}
+.dashbutton {
+	height: 200px;
+	width: 200px;
+	float: left;
+	margin: 10px;
+
+}
+.digitalcontrols {
+	float: left;
+	margin: 3px;
+}
+.datadisplay {
+	border: 5px double silver;
+	border-radius: 10px;
+	background-color: #BCF8DE;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 10px;
+	display: inline-block;
+}
+.datadash {
+	float: right;
+	margin-right: 5%;
+	width: 50%
+}
+.full button span {
+	background-color: limegreen;
+	border-radius: 32px;
+	color: black;
+}
+.gridsquare {
+	/* border: 2px solid white; */
+	border-radius: 10px;
+	margin: 5px;
+	padding: 10px;
+	width: 200px;
+	height: 200px;
+	font-size: 12px;
+	display: inline-block;
+	background-color: white;
+
+}
+.navbtn {
+	height: 75px;
+	width: 75px;
+	float: left;
+	margin: 5px;
+	color: white;
+}
+.menubar {
+	position: absolute;
+	bottom: 0;
+}
+.partially button span {
+	background-color: orange;
+	border-radius: 32px;
+	color: black;
+}
+.view{
+	border: 5px double white;
+	border-radius: 10px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 10px;
+	width: 400px;
+	display: inline-block;
+}
+.view2{
+	border: 5px double #0b4f2d;
+	border-radius: 10px;
+	background-color: white;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 5px;
+	display: inline-block;
+}
+.weatherCard{
+	border: 5px double #0b4f2d;
+	border-radius: 10px;
+	background-color: white;
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 2px;
+	width: 400px;
+	height: 400px;
+	overflow : scroll;
+	display: inline-block;
+}

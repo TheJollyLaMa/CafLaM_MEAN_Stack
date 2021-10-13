@@ -1,0 +1,46 @@
+<div class="cart" >
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr><p><i class="glyphicon glyphicon-shopping-cart" /> Shopping Cart <i class="glyphicon glyphicon-shopping-cart" /></p></tr>
+      <tr><th>
+          <p class="text-info">
+            <button type="button" id="checkout" class="cart_btn btn btn-block btn-primary" ng-click="payflow()" ng-disabled="cart.getTotalCount() < 1" ><i class="glyphicon glyphicon-usd" />Checkout  <i class="glyphicon glyphicon-usd" /></button>
+
+            <button type="button" id="trash" class="cart_btn btn btn-block btn-danger" ng-click="clear_cart()" ng-disabled="cart.getTotalCount() < 1" ><i class="glyphicon glyphicon-trash" />  Clear Cart  <i class="glyphicon glyphicon-trash" /></button>
+          </p>
+
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+          <h4>Subtotal: {{Total | currency}}</h4>
+      </th></tr>
+    </thead>
+    <thead><tr><p> </p></tr></thead>
+    <thead><tr><th><h4>Item Name</h4></th><th><h4>Description</h4></th><th><h4>Quantity</h4></th><th><h4>$/lb</h4></th></tr></thead>
+    <tbody>
+      <!-- empty cart message -->
+      <tr ng-hide="cart.getTotalPrice() > 0" >
+          <td class="tdCenter" colspan="4">
+              Your cart is empty.
+          </td>
+      </tr>
+      <!-- cart items -->
+      <tr ng-repeat="item in cart.items" class="shopping_cart_item">
+        <td>
+          <p>
+              <button class="btn btn-block btn-danger checkout_trash" ng-click="remove_from_cart(item.sku, item.description)">
+                <span class="glyphicon glyphicon-trash">Remove</span>
+              </button>
+          </p>
+          <p>{{item.name}}</p>
+
+        </td>
+        <td>{{item.description}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.price | currency}}</td>
+      </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
+</div>

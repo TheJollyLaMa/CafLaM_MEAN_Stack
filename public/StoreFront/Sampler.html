@@ -1,0 +1,24 @@
+<script>gtag('config', 'UA-159252939-1', {'page_title' : 'Sampler','page_path': '/#!/Store_Front/Sampler.html'});</script>
+<style>
+.promotxt h5 {
+    color: rgb(200, 91, 0);
+}
+</style>
+<div ng-controller="StoreFrontController" ng-init="runPromotional(running_promo);">
+    <div class="promotxt"><h5 ng-if="running_promo">Hurry {{running_promo}}! Only {{promos_left}} left!</h5></div><h1>Variety Sampler!</h1><div class="promotxt"><h5 class="promotxt" ng-if="running_promo">Hurry {{running_promo}}! Only {{promos_left}} left!</h5></div>
+    <div class="scroller">
+      <div class="sales_category_buttons btn btn-default" ng-repeat="item in Samplers"ng-click="add_workweek_sampler_to_cart(item.sku, item.name, item.roast_type, item.price, 1)">
+          <p><h3> {{item.name}} </h3></p>
+          <p><h5> {{item.msg}}</h5></p>
+          <p><h4> {{item.price | currency}}  </h4></p>
+          <p><h4> FREE Shipping!!  </h4></p>
+          <input type="hidden" name"sku" ng-model="item.sku">
+          <input type="hidden" name="name"  ng-model="item.name">
+          <input type="hidden" name="price" ng-model="item.price">
+      </div>
+    </div>
+    <div>
+        <p><a href="#!/Store_Front"><div class="back_button btn btn-default">Back to the Store Front</div></a></p>
+    </div>
+</div>
+<shoppingcart></shoppingcart>

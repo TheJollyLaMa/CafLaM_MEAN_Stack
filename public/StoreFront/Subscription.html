@@ -1,0 +1,86 @@
+<style>
+  .roast_type{
+    color: rgb(240,255,225);
+  }
+
+  table.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>
+<div ng-controller="StoreFrontController">
+    <atnavbarstorefront></atnavbarstorefront>
+    <h1>Schedule Automatic Deliveries!</h1>
+    <div class="scroller" >
+        <div class="sub_button btn btn-outline-light" ng-repeat="item in subscription_inventory" ng-if="item.duration == 'weekly'">
+            <img class="cup_stain rotate3" ng-src="./img/storefront/cup_stain.png">
+            <h4>{{item.name}}</h4>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="CKTY7UFAFUXU8">
+                    <table>
+                    <tr><td><input type="hidden" name="on0" value="Weight">Weight</td></tr><tr><td><select name="os0">
+                    	<option value="1/2 lb">1/2 lb : $10.00 USD - weekly</option>
+                    	<option value="1 lb">1 lb : $19.00 USD - weekly</option>
+                    	<option value="2 lbs">2 lbs : $28.50 USD - weekly</option>
+                    	<option value="3 lbs">3 lbs : $38.00 USD - weekly</option>
+                    	<option value="4 lbs">4 lbs : $47.50 USD - weekly</option>
+                    	<option value="5 lbs">5 lbs : $57.00 USD - weekly</option>
+                    	<option value="10 lbs">10 lbs : $105.00 USD - weekly</option>
+                    	<option value="20 lbs">20 lbs : $190.00 USD - weekly</option>
+                    </select> </td></tr>
+                    <tr><td><input type="hidden" name="on1" value="Roast Type">Roast Type</td></tr><tr><td><select name="os1">
+                    	<option value="Light">Light </option>
+                    	<option value="Medium">Medium </option>
+                    	<option value="Dark">Dark </option>
+                    </select> </td></tr>
+                    <tr><td><input type="hidden" name="on2" value="Origin">Origin</td></tr><tr><td><select name="os2">
+                    	<option value="Honduras FTO">Honduras FTO </option>
+                    	<option value="Mexico-Chiapas FTO">Mexico-Chiapas FTO </option>
+                    	<option value="Colombia">Colombia </option>
+                    </select> </td></tr>
+                    </table>
+                    <p></p>
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+              </form>
+        </div>
+        <div class="sub_button btn btn-light" ng-repeat="item in subscription_inventory" ng-if="item.duration == 'monthly'" ng-click="add_subscription_to_cart(item.sku, item.origin, item.roast_type = description, item.price_per_lb, 1)">
+            <img class="cup_stain rotate3" ng-src="./img/storefront/cup_stain.png">
+            <h4>{{item.name}}</h4>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="hosted_button_id" value="WMZ6CL952NRCE">
+                  <table>
+                  <tr><td><input type="hidden" name="on0" value="Weight">Weight</td></tr><tr><td><select name="os0">
+                  	<option value="1/2 lb">1/2 lb : $10.00 USD - monthly</option>
+                  	<option value="1 lb">1 lb : $19.00 USD - monthly</option>
+                  	<option value="2 lbs">2 lbs : $28.50 USD - monthly</option>
+                  	<option value="3 lbs">3 lbs : $38.00 USD - monthly</option>
+                  	<option value="4 lbs">4 lbs : $47.50 USD - monthly</option>
+                  	<option value="5 lbs">5 lbs : $57.00 USD - monthly</option>
+                  	<option value="10 lbs">10 lbs : $105.00 USD - monthly</option>
+                  	<option value="20 lbs">20 lbs : $200.00 USD - monthly</option>
+                  </select> </td></tr>
+                  <tr><td><input type="hidden" name="on1" value="Roast Type">Roast Type</td></tr><tr><td><select name="os1">
+                  	<option value="Light">Light </option>
+                  	<option value="Medium">Medium </option>
+                  	<option value="Dark">Dark </option>
+                  </select> </td></tr>
+                  <tr><td><input type="hidden" name="on2" value="Origin">Origin</td></tr><tr><td><select name="os2">
+                  	<option value="Honduras FTO">Honduras FTO </option>
+                  	<option value="Mexico-Chiapas FTO">Mexico-Chiapas FTO </option>
+                  	<option value="Colombia">Colombia </option>
+                  </select> </td></tr>
+                  </table>
+                  <p></p>
+                  <input type="hidden" name="currency_code" value="USD">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                  </form>
+      </div>
+    </div>
+    <a class="back_button btn btn-default" href="#!/Store_Front">Store Front</a>
+</div>
+<shoppingcart></shoppingcart>

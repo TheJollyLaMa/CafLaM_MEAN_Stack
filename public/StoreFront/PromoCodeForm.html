@@ -1,0 +1,8 @@
+<div class="view2 promocode">
+  <form ng-submit="checkPromoCode(promo_code);" id="promocode-form" method="post">
+    <label for="promocode">
+    Promocode:</label>
+    <div><input class="form_input" id="promocode" placeholder="#PROMOCODE" ng-model="promo_code"></input></div>
+    <input class="btn btn-default pc_btn" type="submit" value="Go" ng-disabled="!promo_code" />
+  </form>
+</div>

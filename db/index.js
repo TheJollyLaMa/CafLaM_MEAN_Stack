@@ -1,5 +1,7 @@
 const mysql = require('mysql2');
 var moment = require('moment');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 let date = moment().format('yyyy-mm-dd:hh:mm:ss');
@@ -41,6 +43,14 @@ const ordersPool = mysql.createPool({
     host: host, // localhost
     port: db_port
 });
+const customerPool = mysql.createPool({
+    connectionLimit: 10,
+    user: user, // root
+    password: pass, // GroWBetteR
+    database: 'Customers',
+    host: host, // localhost
+    port: db_port
+});
 
 let db = {};
 // get Users
@@ -50,6 +60,31 @@ db.get_employee_list = () => {
             return resolve(results);
         });
     });
+};
+// check user creds
+db.check_credentials = (_username,_password) => {
+    let values = [_username, _password], $response = [];
+    // console.log(values);
+    return new Promise((resolve, reject) => {
+        userPool.query(`SELECT * FROM Auth WHERE username = ? AND password = ?`, values, (err, results) => {
+          if(!results) {
+            return results = {success:false, msg: 'User not found'};
+          }else{
+            var user = {username: _username}
+            // console.log(user.username);
+            const token= jwt.sign(user, 'somesecret', {
+              expiresIn: 604800 //1 week worth of seconds
+            });
+            // console.log(token);
+            results = {
+              success: true,
+              token: 'JWT ' + token,
+              user: user.username
+            }
+          return resolve(results);
+        };
+    });
+  })
 };
 // get Green_Inventory
 db.get_green_inventory = () => {
@@ -91,11 +126,51 @@ db.get_promocodes = () => {
         });
     });
 };
+// check promocode
+db.check_promocode = (_promocode) => {
+    _promocode = '#' + _promocode;
+    let values = [[_promocode]], $response = [];
+    console.log(_promocode);
+    return new Promise((resolve, reject) => {
+        promocodePool.query(`SELECT * FROM PromoCodeTally WHERE promo_code = ?`, values, (err, results) => {
+          if(!results) {
+            // console.log(results);
+            return results = {success:false, msg: 'Promocode not found'};
+          }
+          // else if(results.discount.limit_on_uses === results.discount.uses){
+          //   return results = {success:false, msg: 'Limit on uses has been reached'};
+          // }
+          else{
+            console.log(resolve(results));
+          return resolve(results);
+        };
+    });
+  })
+};
 db.add_employee = (_username, _password) => {
     return new Promise((resolve, reject) => {
       let values = [[_username, _password]];
       userPool.query(`INSERT INTO Auth (username, password) VALUES ?`, [values], (err, results) => {
           return resolve(results);
+      });
+   });
+};
+db.add_customer = (_customer) => {
+    // console.log(_customer.first_name);
+    return new Promise((resolve, reject) => {
+      let values = [[_customer.first_name, _customer.last_name, _customer.email, _customer.street, _customer.street2, _customer.city, _customer.state, _customer.zipcode, _customer.shiptobilling]];
+      console.log(values);
+      customerPool.query(`INSERT INTO CustomerList (first_name, last_name, email, street, street2, city, state, zipcode, shiptobilling) VALUES ?`, [values], (err, results) => {
+        console.log(results);
+        console.log(err);
+        if(err) {
+          // console.log(results);
+          return results = {success:false, msg: 'Something wrong in entry', err: err};
+        }
+        return resolve(results);
+          // CREATE TABLE CustomerList (first_name VARCHAR(40) NOT NULL, last_name VARCHAR(40) NOT NULL, email VARCHAR(40) NOT NULL, street VARCHAR(40) NOT NULL, street2 VARCHAR(40), city VARCHAR(40) NOT NULL, state VARCHAR(15) NOT NULL, zipcode INT NOT NULL, shiptobilling BOOL NOT NULL);
+          // INSERT INTO CustomerList (first_name, last_name, email, street, street2, city, state, zipcode, shiptobilling) VALUES ('Testy', 'Tester', 'Testys@yahoo.com', '69 Johnson St', '', 'Petersville', 'FL', '98064', true);
+
       });
    });
 };

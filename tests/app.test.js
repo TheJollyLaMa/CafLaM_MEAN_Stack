@@ -4,44 +4,16 @@ const app = require('../app');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
-jest.setTimeout(40000);
+jest.setTimeout(20000);
 const user = process.env.DB_USERNAME;
 const pass = process.env.DB_PASS;
 const host = process.env.DB_HOST;
 const db_port = process.env.DB_PORT;
 const employee_username = process.env.BEHIND_THE_COUNTER_USERNAME;
-process.env.NODE_ENV = 'live';
-  /* --- Bring in DATABASES and TABLES --- */
-  // const userPool = mysql.createPool({
-  //     connectionLimit: 10,
-  //     user: user,
-  //     password: pass,
-  //     database: 'RoastMeister',
-  //     host: host,
-  //     port: db_port
-  // });
-  // const inventoryPool = mysql.createPool({
-  //     connectionLimit: 10,
-  //     user: user,
-  //     password: pass,
-  //     database: 'Inventory',
-  //     host: host,
-  //     port: db_port
-  // });
-  // const promocodePool = mysql.createPool({
-  //     connectionLimit: 10,
-  //     user: user,
-  //     password: pass,
-  //     database: 'PromoCode',
-  //     host: host,
-  //     port: db_port
-  // });
-  // connection = await mysql.connect(global.__MONGO_URI__, {
-  //   useNewUrlParser: true,
-  // });
-  // db = await connection.db(global.__MONGO_DB_NAME__);
+const employee_password = process.env.BEHIND_THE_COUNTER_PASSWORD;
+// process.env.NODE_ENV = 'live';
 
-
+/*--**     SEE CafLaM_MEAN_Stack WORKORDER    **--*/
 
 describe('CaffeineLaManna.Com E2E tests:', () => {
 
@@ -54,7 +26,7 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
   });
 
   /* --- Check Backend Routes and Database --- */
-  describe('Backend Database and Routes tests:', () => {
+  describe('Main Routes and Backend Database tests:', () => {
 
     /* --- Check Main Route --- */
     it('checking main Frontend route', async () => {
@@ -348,6 +320,7 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
         });
 
     });
+
     /* --- Check Greenhouse Routes --- */
     describe('Greenhouse backend', () => {
         it('checking main Greenhouse Data Route', async () => {
@@ -358,7 +331,8 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
                              });
         })
     });
-    /* --- Check Greenhouse/SmartHome Routes --- */
+
+    /* --- Check SmartHome Routes --- */
     describe('Smarthome', () => {
         it('checking Smarthome FrontEnd Main Route', async () => {
           return await request(app).get('/public/#!/SmartHome/store_front.html')
@@ -367,20 +341,14 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
                                  // console.log(response.body);
                              });
         })
-        it('checking main Smarthome Data Route', async () => {
-          return await request(app).get('/smarthome/powerData')
-                             .expect(200) //http success
-                             .then((response) => {
-                                 // console.log(response.body);
-                             });
-        })
-        // it('checking main SmartHome Data Route', async () => {
-        //     await request(app).get('/smarthome/powerData')
+        // it('checking main Smarthome Data Route', async () => {
+        //   return await request(app).get('/smarthome/powerData')
         //                      .expect(200) //http success
         //                      .then((response) => {
         //                          // console.log(response.body);
         //                      });
         // })
+
     });
   });
 
@@ -536,110 +504,140 @@ describe('CaffeineLaManna.Com E2E tests:', () => {
   //     });
   // });
   //
-  // /* --- Check BehindTheCounter User Interface --- */
-  // describe('Behind The Counter UI', () => {
-  //   /* --- Chack Frontend BehindTheCounter Login Reroute --- */
-  //   it('should be exclusive to Authorized members', () => {
-  //       //Authorization call to database
-  //       //check against improper access
-  //       //reroute to login page whenever exclusive routes are called
-  //       expect.hasAssertions();
-  //   });
-  //   describe('Authorization', () => {
-  //       it('should be the landign page for all BehindTheCounter operations unless signed in', () => {
-  //           //Gateway to BehindTheCounter Routes
-  //           expect.hasAssertions();
-  //
-  //       });
-  //       it('should have a sign in form', () => {
-  //           expect.hasAssertions();
-  //
-  //       });
-  //       it('should save a session token ', () => {
-  //           expect.hasAssertions();
-  //
-  //       });
-  //       it('should have an add an employee form', () => {
-  //           //Learn how to send verification email with acceptence button and link
-  //           expect.hasAssertions();
-  //
-  //       });
-  //
-  //   });
-  //   describe('checking main BehindTheCounter route when signed in ...', () => {
-  //       describe('Current Orders', () => {
-  //           it('should display a Roast List of current orders', () => {
-  //               //request to get list of current orders that have not yet shipped and need to be roasted
-  //               //should send email to roastmeister to alert of new customer order
-  //               expect.hasAssertions();
-  //           });
-  //       });
-  //
-  //       describe('Inventory', () => {
-  //           it('should have a main inventory page and show all inventory with a selector', () => {
-  //              // return request(app).get('/inventory') //service request to backend inventory database
-  //              //             .expect(200) //http success
-  //              //             .expect('Content-Type', /json/) // check Content-Type is json
-  //              expect.hasAssertions();
-  //
-  //
-  //           });
-  //           it('should have an add inventory form', () => {
-  //              expect.hasAssertions();
-  //
-  //           });
-  //           it('should have a way to update inventory records', () => {
-  //              expect.hasAssertions();
-  //
-  //           });
-  //
-  //       });
-  //       describe('PromoCode', () => {
-  //           it('should display all codes and terms with a GET request', () => {
-  //             // return request(app).get('/promocode')
-  //             //                    .expect(200) //http success
-  //             //                    .expect('Content-Type', /json/) // check Content-Type is json
-  //             //                    .then((response) => {
-  //             //                        // console.log(response.body.Promocodes[0].promo_code);
-  //             //                        expect(response.body.Promocodes);
-  //             //                    });
-  //               expect.hasAssertions();
-  //
-  //
-  //           });
-  //           it('should have a form to add a new promotional', () => {
-  //               expect.hasAssertions();
-  //
-  //           });
-  //           it('should have a way to end a promotion', () => {
-  //               expect.hasAssertions();
-  //
-  //           });
-  //           it('should have a way to change a promotion\'s terms', () => {
-  //               expect.hasAssertions();
-  //
-  //           });
-  //
-  //       });
-  //       describe('Customers List', () => {
-  //           it('should display a Customer List of past customers', () => {
-  //               //request to get list of current orders that have not yet shipped and need to be roasted
-  //               expect.hasAssertions();
-  //
-  //           });
-  //
-  //       });
-  //       describe('External Links', () => {
-  //           it('should display Links to operational partners', () => {
-  //               //shipstation, post office or shipping partners, Green Bean Supplier, Bag Supplier
-  //               expect.hasAssertions();
-  //           });
-  //       })
-  //
-  //     });
-  //
-  // });
-  // userPool.end();
-  // inventoryPool.end();
-  // promocodePool.end();
+  describe('User Experience tests', () => {
+
+      // /* --- Check BehindTheCounter User Interface --- */
+      describe('Behind The Counter UI', () => {
+
+        /* --- Check Frontend BehindTheCounter Login Reroute --- */
+        it('should be exclusive to Authorized members', () => {
+            //Authorization call to database
+            //check against improper access
+            //reroute to login page whenever exclusive routes are called
+            expect.hasAssertions();
+        });
+
+        describe('Authorization', () => {
+            var userPool;
+            beforeEach( async () => {
+              return userPool = await mysql.createPool({
+                  connectionLimit: 10,
+                  user: user,
+                  password: pass,
+                  database: 'RoastMeister',
+                  host: host,
+                  port: db_port
+              });
+            });
+            afterEach(() => {
+              return userPool.end();
+            });
+            it('should be the landing page for all BehindTheCounter operations unless signed in', () => {
+                //Gateway to BehindTheCounter Routes
+                expect.hasAssertions();
+
+            });
+            it('should have a sign in form', async () => {
+                //name and a password input
+                return await request(app).get('/public/#!/Login')
+                                         .expect(200)
+                                         .then((res) => {
+                                           // console.log(res);
+                                         });
+
+            });
+            // it('should save a session token ', async () => {
+            //    //call to backend checkCredentials()
+            //    //returns userid and token
+            //    let url = '/user/checkCredentials/' + employee_username + '/' + employee_password;
+            //    // console.log(url);
+            //    return await request(app).post('/users/checkCredentials/' + employee_username + '/' + employee_password)
+            //                             .expect(200)
+            //                             .expect('Content-Type', /json/) // check Content-Type is json
+            //                             .then((response) => {
+            //                                return response;
+            //                             });
+            //
+            // });
+            // it('should have an add an employee form', () => {
+            //     //Learn how to send verification email with acceptence button and link
+            //     expect.hasAssertions();
+            //
+            // });
+
+        });
+      //   describe('checking main BehindTheCounter route when signed in ...', () => {
+      //       describe('Current Orders', () => {
+      //           it('should display a Roast List of current orders', () => {
+      //               //request to get list of current orders that have not yet shipped and need to be roasted
+      //               //should send email to roastmeister to alert of new customer order
+      //               expect.hasAssertions();
+      //           });
+      //       });
+      //
+      //       describe('Inventory', () => {
+      //           it('should have a main inventory page and show all inventory with a selector', () => {
+      //              // return request(app).get('/inventory') //service request to backend inventory database
+      //              //             .expect(200) //http success
+      //              //             .expect('Content-Type', /json/) // check Content-Type is json
+      //              expect.hasAssertions();
+      //
+      //
+      //           });
+      //           it('should have an add inventory form', () => {
+      //              expect.hasAssertions();
+      //
+      //           });
+      //           it('should have a way to update inventory records', () => {
+      //              expect.hasAssertions();
+      //
+      //           });
+      //
+      //       });
+      //       describe('PromoCode', () => {
+      //           it('should display all codes and terms with a GET request', () => {
+      //             // return request(app).get('/promocode')
+      //             //                    .expect(200) //http success
+      //             //                    .expect('Content-Type', /json/) // check Content-Type is json
+      //             //                    .then((response) => {
+      //             //                        // console.log(response.body.Promocodes[0].promo_code);
+      //             //                        expect(response.body.Promocodes);
+      //             //                    });
+      //               expect.hasAssertions();
+      //
+      //
+      //           });
+      //           it('should have a form to add a new promotional', () => {
+      //               expect.hasAssertions();
+      //
+      //           });
+      //           it('should have a way to end a promotion', () => {
+      //               expect.hasAssertions();
+      //
+      //           });
+      //           it('should have a way to change a promotion\'s terms', () => {
+      //               expect.hasAssertions();
+      //
+      //           });
+      //
+      //       });
+      //       describe('Customers List', () => {
+      //           it('should display a Customer List of past customers', () => {
+      //               //request to get list of current orders that have not yet shipped and need to be roasted
+      //               expect.hasAssertions();
+      //
+      //           });
+      //
+      //       });
+      //       describe('External Links', () => {
+      //           it('should display Links to operational partners', () => {
+      //               //shipstation, post office or shipping partners, Green Bean Supplier, Bag Supplier
+      //               expect.hasAssertions();
+      //           });
+      //       })
+      //
+      //     });
+      //
+     });
+  });
 });

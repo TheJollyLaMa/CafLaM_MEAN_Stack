@@ -1,0 +1,36 @@
+<div class="angelsroom" ng-controller="TreasureChestController" ng-init="loadTheBlock(); fetchAngelTokens();">
+  <atnavbarstorefrontangelsroom></atnavbarstorefrontangelsroom>
+
+  <!-- <div>
+    <p align="center">Search: <input style="width: 50%;" type='text' class='form-control mb-1' placeholder='id of alm' ng-model="search.alm_id"/>
+  </div> -->
+  Token Library:
+  <div class="scroller">
+    <div class="flip-container" ng-repeat="alm in AngelTokens">
+      <div class="flipper">
+        <div class="token_front">
+          <table>
+            <tfoot><h1 class="token-text">{{alm.mint_date}}</h1></tfoot>
+          </table>
+        </div>
+        <div class="token_back shimmer">
+            <table>
+                <thead class="tokenhead">{{alm.status}}<hr class="tokebreak"/></thead>
+                <tbody>
+                    <h1 class="token-text">{{alm.name}}</h1>
+                    <h1 class="token-text"><a ng-href="/public/#!/TreasureChest/{{alm.uri}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{alm.uri}}</a></h1>
+                    <h1 class="token-text">{{alm.id}} </h1>
+                    <h1 class="token-text">{{alm.product}}</h1>
+                    <h1 class="token-text">{{alm.cost}}</h1>
+                    <h1 class="token-text">0.000{{alm.angel_coefficient}}</h1>
+                    <h1 class="token-text">{{alm.owner_display}}</h1>
+                </tbody>
+                <tfoot><h1 class="token-text">{{alm.bal}} / {{alm.num_issued}}</h1></tfoot>
+             </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  <br/>
+
+</div>
