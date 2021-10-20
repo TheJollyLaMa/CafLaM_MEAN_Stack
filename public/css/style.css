@@ -23,13 +23,21 @@ a {
   margin: auto;
   padding: 1px;
 }
+
 .checkout_form {
   color: #00B7FF;
   text-align: left;
   margin: 10px;
   padding: 10px;
   position: relative;
-  width: 40%;
+  width: 90%;
+}
+.checkout_form button {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  bottom: 10px;
+  position: relative;
 }
 .checkout_form input {
   box-sizing: border-box;
@@ -37,7 +45,7 @@ a {
   padding-left: 4px;
 }
 .checkout_form div {
-  height: 20px;
+  height: 25px;
   margin: 4px;
   padding: 4px;
   display: inline-block;
@@ -51,6 +59,61 @@ a {
   width: 100%;
   margin: 2px;
 }
+input.ng-pristine {
+   background-color: #f1f1f1;
+   color: black;
+}
+
+input.ng-touched.ng-invalid {
+   background-color: #f1f1f1;
+   border: 2px solid #ffb3b3;
+   color: #ffb3b3;
+}
+
+input.ng-touched.ng-valid {
+   background-color: #f1f1f1;
+   border: 2px solid #75d46c;
+   color: #75d46c;
+
+}
+.blurToBack {
+  opacity: 0.3;
+  z-index: -1;
+}
+.checkout_form_container {
+  border: 5px double #0b4f2d;
+  position: absolute;
+  margin-top: 20px;
+  top: 10px;
+  left: 25%;
+  width: 50%;
+  height: 100%;
+  z-index: 999;
+  background-color: white;
+  border-radius: 10px;
+  overflow: scroll;
+}
+.checkout_flow_active {
+  background-color: #91C3E9;
+  border-radius: 50%;
+}
+.checkout_flow_inactive {
+  background-color: grey;
+  border-radius: 50%;
+}
+.checkout_flow_done {
+  background-color: #4EA881;
+  border-radius: 50%;
+}
+
+.checkout_progress_bar div {
+  display: inline-block;
+}
+.checkout_progress_bar img {
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+}
 .checkout_form label {
   height: 20px;
   margin: 6px;
@@ -59,9 +122,10 @@ a {
 .card_icons {
   position: relative;
   bottom: 5%;
-  right: 5%;
+  right: 5px;
   margin: 2px;
   padding: 2px;
+  display: inline-block;
 }
 .card_icons img {
   height: 30px;
@@ -75,10 +139,11 @@ a {
 .promocode {
   color: #00B7FF;
   text-align: left;
+  top: 40px;
   margin: 10px;
   padding: 10px;
   position: relative;
-  width: 40%;
+  width: 80%;
 }
 .pc_btn {
   height: 50px;

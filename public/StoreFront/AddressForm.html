@@ -1,31 +1,32 @@
 <div class="view2 checkout_form">
-  <form ng-submit="saveAddress(customer);" id="address-form" method="post">
+  <form ng-submit="saveAddress(customer);" id="address-form" method="post" name="addressForm">
     <div>
-      <p>Billing Address</p>
+      <p>Shipping Address</p>
       <hr/>
-      <div><label for="first_name">First Name:</label><input class="form_input" id="first_name" ng-model="customer.first_name"></input></div>
-      <div><label for="last_name">Last Name:</label><input class="form_input" id="last_name" ng-model="customer.last_name"></input></div>
-      <div><label for="email">Email:</label><input class="form_input" id="email" ng-model="customer.email"></input></div>
-      <div><label for="street">Street:</label><input class="form_input" id="street" ng-model="customer.street"></input></div>
-      <div><label for="street2">address line 2:</label><input class="form_input" id="street2" ng-model="customer.street2"></input></div>
-      <div><label for="city">City:</label><input class="form_input" id="city" ng-model="customer.city"></input></div>
-      <div><label for="state">State:</label><input class="form_input" id="state" ng-model="customer.state"></input></div>
-      <div><label for="zipcode">Zip Code:</label><input class="form_input" id="zipcode" ng-model="customer.zipcode"></input></div>
+      <div><label for="first_name">First Name:</label><input class="form_input" id="first_name" ng-model="customer.first_name" name="first_name" required></input>
+      <div><label for="last_name">Last Name:</label><input class="form_input" id="last_name" ng-model="customer.last_name" name="last_name" required></input></div>
+      <div><label for="email">Email:</label><input class="form_input" id="email" ng-model="customer.email" type="email" name="email" required></input></div>
+      <div><label for="street">Street:</label><input class="form_input" id="street" ng-model="customer.street" name="street" required></input></div>
+      <div><label for="street2">address line 2:</label><input class="form_input" id="street2" ng-model="customer.street2" name="street2"></input></div>
+      <div><label for="city">City:</label><input class="form_input" id="city" ng-model="customer.city" name="city" required></input></div>
+      <div><label for="state">State:</label><input class="form_input" id="state" ng-model="customer.state" name="state" required></input></div>
+      <div><label for="zipcode">Zip Code:</label><input class="form_input" id="zipcode" ng-model="customer.zipcode" name="zipcode" required></input></div>
+
     </div>
 
     <br><br>
     <label for="shiptobilling">
       Shipping same as billing?
-      <input type="checkbox" ng-model="customer.shiptobilling" id="shiptobilling" name="shiptobilling" value="yes" checked="true">
+      <input type="checkbox" ng-model="customer.shiptobilling" id="shiptobilling" name="shiptobilling" value="yes" checked="true" required>
     </label>
     <br><br>
 
     <div ng-show="!customer.shiptobilling">
-      <p>Shipping Address</p>
+      <p>Billing Address</p>
       <hr/>
       <div><label for="first_name">First Name:</label><input class="form_input" id="first_name" ng-model="customer.first_name"></input></div>
       <div><label for="last_name">Last Name:</label><input class="form_input" id="last_name" ng-model="customer.last_name"></input></div>
-      <div><label for="email">Email:</label><input class="form_input" id="email" ng-model="customer.email"></input></div>
+      <div><label for="email">Email:</label><input class="form_input" id="email" ng-model="customer.email" type="email" ></input></div>
       <div><label for="street">Street:</label><input class="form_input" id="street" ng-model="customer.street"></input></div>
       <div><label for="street2">address line 2:</label><input class="form_input" id="street2" ng-model="customer.street2"></input></div>
       <div><label for="city">City:</label><input class="form_input" id="city" ng-model="customer.city"></input></div>
@@ -34,8 +35,10 @@
     </div>
 
     <div id="checkout-message"></div>
-
-    <button class="btn btn-default pay_btn" type="submit">Save</button>
+    <div>
+      <button class="btn btn-default pay_btn" type="submit" ng-disabled="!customer.first_name || !customer.last_name || !customer.email || !customer.street || !customer.city || !customer.state || !customer.zipcode || !customer.shiptobilling">Save</button>
+      <a href="#!/CancelCheckout"><button name="cancel" class="btn btn-default" type="cancel">Cancel</button></a>
+    </div>
 
   </form>
 </div>

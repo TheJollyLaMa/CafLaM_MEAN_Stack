@@ -55,6 +55,11 @@ app.use('/customer', customerRouter);
 app.use('/greenhouse', greenhouseRouter);
 app.use('/smarthome', smarthomeRouter);
 
+app.use('/node_modules/jquery/dist/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
+app.use('/node_modules/angular/angular.js', express.static(__dirname + '/node_modules/angular/angular.js'));
+app.use('/node_modules/angular-route/angular-route.js', express.static(__dirname + '/node_modules/angular-route/angular-route.js'));
+app.use('/node_modules/angular-animate/angular-animate.js', express.static(__dirname + '/node_modules/angular-animate/angular-animate.js'));
+
 /* Frontend Routes*/
 app.use('/public', publicRouter);
 app.use('/checkout', checkoutRouter);

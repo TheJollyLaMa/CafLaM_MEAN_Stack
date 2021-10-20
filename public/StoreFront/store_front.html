@@ -1,25 +1,32 @@
-<div class="angelsroom" ng-controller="StoreFrontController">
-  <atnavbarstorefront></atnavbarstorefront>
-  <h1>{{title}}</h1>
-  <br>
-  <div class="scroller">
-    <div>
-        <h2>
-        <a class="sales_category_buttons btn btn-default shimmer" ng-repeat = "category in sales_category" href="#!/StoreFront/{{category.name}}">
-          <strong><i class="{{category.icon}}"/> {{category.name}} <i class="{{category.icon}}"/><strong>
-        </a>
-      </h2>
-    </div>
+<div ng-controller="StoreFrontController">
+  <div class="angelsroom">
+      <atnavbarstorefront></atnavbarstorefront>
+      <h1>{{title}}</h1>
+      <br>
+      <div class="scroller">
+        <div>
+            <h2>
+            <a class="sales_category_buttons btn btn-default shimmer" ng-repeat = "category in sales_category" href="#!/StoreFront/{{category.name}}">
+              <strong><i class="{{category.icon}}"/> {{category.name}} <i class="{{category.icon}}"/><strong>
+            </a>
+          </h2>
+        </div>
+      </div>
+
+      <div id="newtokesbtndiv" align="center" ><a id="newtokesbutton" class='sales_category_buttons btn btn-block btn-primary' href="#!/AngelsRoom" value='Angels'></a></div>
+
+      <a class="back_button btn btn-default"  href="#!/BehindTheCounter">Behind The Counter</a>
+
+      <br>
+      <shoppingcart></shoppingcart>
   </div>
-
-  <div id="newtokesbtndiv" align="center" ><a id="newtokesbutton" class='sales_category_buttons btn btn-block btn-primary' href="#!/AngelsRoom" value='Angels'></a></div>
-
-  <a class="back_button btn btn-default"  href="#!/BehindTheCounter">Behind The Counter</a>
-
-  <br>
-  <shoppingcart></shoppingcart>
-
-  <div class="container">
+  <div class="checkout_form_container" ng-show="show_checkout_flow()">
+    <div class="checkout_progress_bar" >
+      <div><img src="../public/img/storefront/location-glyph-gold.png" alt="address form" id="address_form_glyph"/></div>
+      <div><img src="../public/img/storefront/promocode-glyph-gold.png" alt="promocode form" id="promocode_form_glyph" /></div>
+      <div><img src="../public/img/storefront/checkout-glyph.png" alt="checkout form" id="checkout_form_glyph" /></div>
+      <div><img src="../public/img/storefront/done-glyph.png" alt="checkout complete" id="checkout_complete_glyph" /></div>
+    </div>
     <div ng-show="checkoutFlowProgress.showAddressFlow">
       <addressformflow></addressformflow>
     </div>
@@ -27,7 +34,10 @@
       <promocodeflow></promocodeflow>
     </div>
     <div ng-show="checkoutFlowProgress.showCheckoutFlow">
-      <checkoutflow ng-init="config_checkout();"></checkoutflow>
+      <checkoutflow></checkoutflow>
+    </div>
+    <div ng-show="checkoutFlowProgress.showCheckoutComplete">
+      <checkoutcomplete></checkoutcomplete>
     </div>
   </div>
 

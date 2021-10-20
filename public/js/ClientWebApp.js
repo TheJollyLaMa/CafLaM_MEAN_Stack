@@ -27,6 +27,10 @@ app.config([
       controller: "StoreFrontController",
       templateUrl: "StoreFront/Discount.html"
     })
+    .when("/CancelCheckout", {
+      controller: "StoreFrontController",
+      templateUrl: "StoreFront/cancel_checkout.html"
+    })
 
     /* --- Front End AngelsRoom Routes---*/
     .when("/AngelsRoom", {
@@ -231,6 +235,14 @@ app.directive("checkoutflow",function(){
     replace:!0,
     restrict:"E",
     templateUrl:"StoreFront/Checkout.html"
+  };});
+app.directive("checkoutcomplete",function(){
+  return{
+    data:{stock:"=",action:"&"},
+    controller:"StoreFrontController",
+    replace:!0,
+    restrict:"E",
+    templateUrl:"StoreFront/CheckoutComplete.html"
   };});
 app.directive("atnavbarstorefront",function(){
   return{

@@ -21,3 +21,15 @@
     <a class="back_button btn btn-default" href="#!/StoreFront">Store Front</a>
 </div>
 <shoppingcart></shoppingcart>
+
+<div class="container">
+  <div ng-show="checkoutFlowProgress.showAddressFlow">
+    <addressformflow></addressformflow>
+  </div>
+  <div ng-show="checkoutFlowProgress.showPromoCodeFlow">
+    <promocodeflow></promocodeflow>
+  </div>
+  <div ng-show="checkoutFlowProgress.showCheckoutFlow">
+    <checkoutflow></checkoutflow>
+  </div>
+</div>

@@ -159,10 +159,10 @@ db.add_customer = (_customer) => {
     // console.log(_customer.first_name);
     return new Promise((resolve, reject) => {
       let values = [[_customer.first_name, _customer.last_name, _customer.email, _customer.street, _customer.street2, _customer.city, _customer.state, _customer.zipcode, _customer.shiptobilling]];
-      console.log(values);
+      // console.log(values);
       customerPool.query(`INSERT INTO CustomerList (first_name, last_name, email, street, street2, city, state, zipcode, shiptobilling) VALUES ?`, [values], (err, results) => {
-        console.log(results);
-        console.log(err);
+        // console.log(results);
+        // console.log(err);
         if(err) {
           // console.log(results);
           return results = {success:false, msg: 'Something wrong in entry', err: err};

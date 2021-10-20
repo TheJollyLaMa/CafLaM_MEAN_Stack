@@ -7,6 +7,7 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
       $scope.backend_category =[{name: "Receiving", text: "Log new Bean Shipment"}, {name: "Packaging", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Discounted", text: "Inventory not sold after two weeks is moved at a discount!"}, {name: "Merchandise", text: "Other Merchandise"}, {name: "PurchaseOrders", text: "View Purchase Orders"}];
       $scope.useful_links = [{name: "ShipStation", url: "https://ss.shipstation.com"},{name: "Paypal", url: "https://www.paypal.com/us/signin"},{name: "SonoFresco", url: "https://sonofresco.com/my-account/"},{name: "ClearBags", url: "https://www.clearbags.com/customer/account/login/"},{name: "USPS", url: "https://store.usps.com/store/product/shipping-supplies/priority-mail-medium-flat-rate-box-1-P_O_FRB1"}]
       $scope.dev_links = [{name: "Manifest_Tokens", url: "#!/BehindTheCounter/Manifest_Tokens"},{name: "Sandbox", url: "https://www.caffeinelamanna.com/#!/Sandbox"},{name: "Braintree", url: "https://www.caffeinelamanna.com/#!/Braintree"},{name: "SmartHome", url: "#!/SmartHome", text:"SmartHome Console"}];
+      $scope.ethereum_links = [{name: "Zapper", url:"https://zapper.fi/dashboard"},{name: "Alchemix", url:"https://app.alchemix.fi/"},{name: "DecentraLand", url:"https://play.decentraland.org/"},{name: "Coinbase", url: "https://www.coinbase.com/signin"}];
       $scope.origin = "";
       $scope.roast_type_cats = ['1st crack', '2nd crack', 'Dark'];
       $scope.roast_type = "";
