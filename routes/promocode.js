@@ -13,9 +13,9 @@ router.get('/check/:promocode', async (req, res, next) => {
     res.json({promocode: await db.check_promocode(req.params.promocode)});
 });
 /* POST new PromoCodes */
-router.post('/:promo_code/:discount_rate/:uses/:total_amount_discounted/:limit_on_uses', async (req, res, next) => {
+router.post('/:promo_code/:discount_rate/:limit_on_uses', async (req, res, next) => {
     res.json({msg: 'Posted New Promocode',
-              res: await db.add_promocode(req.params.promo_code, req.params.discount_rate, req.params.uses, req.params.total_amount_discounted, req.params.limit_on_uses)
+              res: await db.add_promocode(req.params.promo_code, req.params.discount_rate, req.params.limit_on_uses)
    });
 });
 /* Tally Promocode after purchase */

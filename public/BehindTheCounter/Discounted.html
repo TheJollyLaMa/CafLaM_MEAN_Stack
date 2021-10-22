@@ -1,0 +1,32 @@
+<style>
+  .view {
+    border: 5px double white;
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+</style>
+<div ng-controller='BehindTheCounterController' ng-init="showDiscountedInventory()">
+  <div>
+    <a href=#!/BehindTheCounter>
+      <div class="back_button btn btn-default">Back to Dashboard</div>
+    </a>
+  </div>
+  <p></p>
+  <div class="view2">
+    <table class="table table-bordered table-hover">
+      <thead><tr><th>Origin</th><th>Weight</th><th>Packaged Date</th><th>Timestamp</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="item in discounted_inventory">
+          <td>{{item.origin}}</td>
+          <td>{{item.weight}}</td>
+          <td>{{item.packaged_date}}</td>
+          <td>{{item.timestamp}}</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<style>
+  .v {
+    color: #00B7FF;
+    text-align: center;
+  }
+  h1 {
+    color: #00B7FF;
+  }
+  .v tbody {
+    background-color: white;
+    border-style: double;
+    border-color: rgb(27, 179, 182);
+    padding: 5px 10px;
+    text-align: center;
+    margin: 20px;
+  }
+
+  th {
+    background-color: white;
+    border-style: double;
+    border-color: rgb(27, 179, 182);
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+  .v td {
+      background-color: white;
+      border: 1px solid #00B7FF;
+      border-radius: 5px;
+      padding: 5px 10px;
+      text-align: center;
+  }
+</style>
+<div ng-controller='BehindTheCounterController' ng-init="showPurchaseOrders()">
+  <div>
+    <a href=#!/BehindTheCounter>
+      <div class="back_button btn btn-default">Back to Dashboard</div>
+    </a>
+  </div>
+  <br/>
+  <div class="v view2">
+    <br>
+    <br>
+    Purchase Order List
+    <br>
+    <hr>
+    <table>
+      <thead><tr><th>Cart</th><th>Buyer</th><th>Total</th><th>Timestamp</th><th>Payer Email</th><th>ID</th><th>Payment Status</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="order in purchase_orders | orderBy: '-timestamp'">
+          <td>{{order.promo_code}}
+              <table>
+              <thead><tr><th>Sku</th><th>Origin</th><th>Roast Type</th><th>Quantity</th></tr></thead>
+              <tbody>
+                <tr ng-repeat="item in order.cart">
+                  <td>{{item.sku}}</td>
+                  <td>{{item.origin}}</td>
+                  <td>{{item.roast_type}}</td>
+                  <td>{{item.quantity | number:0}}</td>
+                </tr>
+              </tbody>
+              </table>
+          </td>
+          <td>{{order.buyer}}</td>
+          <td>{{order.total}}</td>
+          <td>{{order.timestamp}}</td>
+          <td>{{order.email}}</td>
+          <td>{{order.id}}</td>
+          <td>{{order.payment_status}}</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>

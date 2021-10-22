@@ -1,0 +1,153 @@
+<div class="manifesttokens" ng-controller="BehindTheCounterController" ng-init="loadTheBlock()">
+  <script type="text/javascript">
+     window.addEventListener('load', function () {
+          if (typeof web3 !== 'undefined') {
+              console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
+              window.web3 = new Web3(web3.currentProvider);
+          } else {
+              console.log('No Web3 Detected... using HTTP Provider')
+              window.web3 = new Web3(new Web3.providers.HttpProvider("https:localhost:7545"));
+              // window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/<APIKEY>"));
+          }
+    })
+  </script>
+  <atnavbarbehindthecountermanifest></atnavbarbehindthecountermanifest>
+  <div class="fox_div">
+    <div class="foxie" align="left">
+      <!-- <script src="/public/BehindTheCounter/bundle.js"></script> -->
+        <svg class="foxie_mov"></svg>
+    </div>
+    <a href="https://metamask.io/">MetaMask</a>
+    <div class="foxie" align="right">
+      <!-- <script src="/public/BehindTheCounter/bundle.js"></script> -->
+        <svg class="foxie_mov"></svg>
+    </div>
+  </div>
+  <div class="content mr-auto ml-auto">
+
+    <div class="space" align="center">
+
+    <div class="row">
+      <!-- <div class="col-sm-4 "><a href="https://uniswap.org/" target="_blank" title="Uniswap.org"> <div class="uni_logo"> </div></a> </div> -->
+      <div class="col-sm-4 ">
+        <!-- <div class="at_logo"><img height="200px" src="./angelL.png"><img height="180px" src="./AT_ETH_ENS_Logo.gif"><img height="200px" src="./angelR.png"></div> -->
+      </div>
+      <!-- <div class="col-sm-4 "><a href="https://ipfs.io/" target="_blank" title="IPFS.io"><div class="IPFS_logo rotate3"></div></a></div> -->
+    </div>
+
+      <div class="row">
+        <div class="col-sm-4 ">
+          <!-- <a href="https://ipfs.io/" target="_blank" title="IPFS.io"><div class="IPFS_logo rotate3"></div></a> -->
+        </div>
+        <div class="col-sm-4 "></div>
+        <div class="col-sm-4 "><a href="https://caffeinelamanna.com/#!/" target="_blank" title="CaffeineLaManna.Com"><div class="cl_token rotate3"></div></a></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 spacer"></div>
+        <!-- <div class="col-sm-3"><a href="https://github.com/TheJollyLaMa" target="_blank" title="Jolly's Git"><div class="github_logo rotate3"></div></a></div> -->
+        <div class="col-sm-3 "></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4 "><a href="https://app.rarible.com" target="_blank" title="Rarible App"><div class="Rari_logo"></div></a></div>
+        <div class="col-xs-4 "></div>
+        <div class="col-xs-4 "><div class="opensourcegems"></div></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm spacer"><a title="Jolly's 1st Rarible" href="https://app.rarible.com/token/0xd07dc4262bcdbf85190c01c996b4c06a461d2430:129824:0xcaeed8422fb5682c298b7f0971906d446ffd4e7a"><div class="rev11"></div></a></div>
+        <!-- <div class="col-sm"><div class="alchemist"></div></div> -->
+        <!-- <div class="col-sm"><a href="/eden" target="_blank" title="Garden of Eden"><div class="oasis"></div></a><div id="motion-demo" class="arduino"></div><div id="motion-demo" class="morningstar"></div></div> -->
+        <div class="col-sm"><a href="https://metamask.io/" target="_blank" title="metamask.io"><div class="mm_logo rotate3"></div></a></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 spacer"></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 "></div>
+      </div>
+
+    </div>
+    <div class="newtokenform">
+      latest block: {{blockNum}}
+      <br>
+      totes_tokes: {{totalAlms}}
+      <h1>Manifest Angel Tokens</h1>
+      <form align="center" ng-submit="manifest_angel_token(new_alm)">
+          <table align="center">
+            <tr class="form_table">
+              <td class="form_table">Endeavor Name: {{new_alm.ename}}<input type='text' class='form-control mb-1' placeholder='Angel Endeavor' ng-model="new_alm.ename"/></td>
+              <td class="form_table">Endeavor Symbol: {{new_alm.esym}}<input type='text' class='form-control mb-1' placeholder='ANGEL' ng-model="new_alm.esym"/></td>
+            </tr>
+            <tr class="form_table">
+              <td class="form_table">Amount To Issue: {{new_alm.issue_num}}<input type='number' class='form-control mb-1' placeholder='1000' ng-model="new_alm.issue_num"/></td>
+              <td class="form_table">Angel Coefficient: {{new_alm.angel_coefficient}}<input type='number' class='form-control mb-1' placeholder='0005' ng-model="new_alm.angel_coefficient"/></td>
+            </tr>
+            <tr class="form_table">
+              <td class="form_table">Cost: {{new_alm.cost}}<input type='number' class='form-control mb-1' placeholder='10' ng-model="new_alm.cost"/></td>
+              <td class="form_table">Product: {{new_alm.product}}<input type='text' class='form-control mb-1' placeholder='1/2 lb fresh shit of bull' ng-model="new_alm.product"/></td>
+            </tr>
+          </table>
+          <br/>
+            <div id="newtokesbtndiv" align="center" ><input id="newtokesbutton" type='submit' class='btn btn-block btn-primary' value='Manifest' /></div>
+      </form>
+    </div>
+  </div>
+  <div class="scroller">
+    <div class="flip-container" ng-repeat="alm in AngelTokens">
+      <div class="flipper">
+        <div class="token_front"></div>
+        <div class="token_back shimmer">
+            <table>
+                <thead class="tokenhead">{{alm.status}}<hr class="tokebreak"/></thead>
+                <tbody>
+                    <h1 class="token-text">{{alm.name}}</h1>
+                    <a href="http://localhost:3000/treasure_chest/{{alm.uri}}" style="text-decoration:none;" target="_blank" rel="noopener noreferrer"><h1 class="token-text">{{alm.uri}}</h1></a>
+                    <h1 class="token-text">{{alm.id}} </h1>
+                    <h1 class="token-text">{{alm.product}}</h1>
+                    <h1 class="token-text">{{alm.cost}}</h1>
+                    <h1 class="token-text">0.000{{alm.angel_coefficient}}</h1>
+                    <h1 class="token-text">{{alm.mint_date}}</h1>
+                </tbody>
+                <tfoot><h1 class="token-text">{{alm.bal}}/{{alm.num_issued}}</h1></tfoot>
+             </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  <br/>
+  <div class="ship" align="center">
+    <div class="container-fluid mt-5">
+      <div class="text-center" align="center">
+        <br />
+        <p>Mark an Angel Token as shipped</p>
+        <p>Enter a token ID:</p>
+        <br />
+        <input type="text" size="50" id="token_id" ng-model="token_id"/>
+        <br />
+        <br />
+        <button class="btn btn-primary" type="button" ng-click="StatusShipped(token_id)">Set Status To Shipped</button>
+        <br />
+        <br />
+        <div id="output">{{StatusShippedmsg}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="eth_bal" align="center">
+    <div class="container-fluid mt-5" align="center">
+        <a href="https://www.google.com/search?q=eth+to+dollars&rlz=1C5CHFA_enUS926US926&oq=eth+to+dollars&aqs=chrome..69i57j0i22i30l4.3528j1j7&sourceid=chrome&ie=UTF-8" target="_blank">Google Eth To Dollar Converter</a>
+        <div align="center" class="row text-center">
+        <br />
+        <br />
+        <div><p><h1>ETH Balance Fetcher</h1></p></div>
+        <div><p>Enter an Ethereum Address:</p></div>
+        <div><input type="text" size="50" id="address" /></div>
+        <br />
+        <button class="btn btn-primary" type="button" ng-click="getBalance()">Get Balance</button>
+        <br />
+        <div id="output"></div>
+      </div>
+    </div>
+  </div>
+</div>

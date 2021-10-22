@@ -7,90 +7,45 @@ app.config([
     .when("/", {controller: "StoreFrontController", templateUrl: "StoreFront/store_front.html"})
 
     /* --- Front End Store Front Routes---*/
-    .when("/StoreFront", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/store_front.html"
-    })
-    .when("/StoreFront/about_store_front", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/about_store_front.html"
-    })
-    .when("/StoreFront/OrderBeans", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/OrderBeans.html"
-    })
-    .when("/StoreFront/Subscription", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/Subscription.html"
-    })
-    .when("/StoreFront/Discount", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/Discount.html"
-    })
-    .when("/CancelCheckout", {
-      controller: "StoreFrontController",
-      templateUrl: "StoreFront/cancel_checkout.html"
-    })
+    .when("/StoreFront", {controller: "StoreFrontController",templateUrl: "StoreFront/store_front.html"})
+    .when("/StoreFront/about_store_front", {controller: "StoreFrontController",templateUrl: "StoreFront/about_store_front.html"})
+    .when("/StoreFront/OrderBeans", {controller: "StoreFrontController",templateUrl: "StoreFront/OrderBeans.html"})
+    .when("/StoreFront/Subscription", {controller: "StoreFrontController",templateUrl: "StoreFront/Subscription.html"})
+    .when("/StoreFront/Discount", {controller: "StoreFrontController",templateUrl: "StoreFront/Discount.html"})
+    .when("/CancelCheckout", {controller: "StoreFrontController",templateUrl: "StoreFront/cancel_checkout.html"})
 
     /* --- Front End AngelsRoom Routes---*/
-    .when("/AngelsRoom", {
-      controller: "StoreFrontController",
-      templateUrl: "AngelsRoom/angels_room.html"
-    })
-    .when("/AngelsRoom/last_round", {
-      controller: "StoreFrontController",
-      templateUrl: "AngelsRoom/last_round.html"
-    })
-    .when("/AngelsRoom/this_round", {
-      controller: "StoreFrontController",
-      templateUrl: "AngelsRoom/this_round.html"
-    })
-    .when("/AngelsRoom/next_round", {
-      controller: "StoreFrontController",
-      templateUrl: "AngelsRoom/next_round.html"
-    })
+    .when("/AngelsRoom", {controller: "StoreFrontController",templateUrl: "AngelsRoom/angels_room.html"})
+    .when("/AngelsRoom/last_round", {controller: "StoreFrontController",templateUrl: "AngelsRoom/last_round.html"})
+    .when("/AngelsRoom/this_round", {controller: "StoreFrontController",templateUrl: "AngelsRoom/this_round.html"})
+    .when("/AngelsRoom/next_round", {controller: "StoreFrontController",templateUrl: "AngelsRoom/next_round.html"})
 
     /* --- Front End Treasure Chest Routes---*/
-    .when("/TreasureChest", {
-      controller: "TreasureChestController",
-      templateUrl: "TreasureChest/treasure_chest.html"
-    })
-    .when("/TreasureChest/:sym", {
-      controller: "TreasureChestController",
-      templateUrl: "TreasureChest/token.html"
-    })
-    .when("/TreasureChest/:sym/:file", {
-      controller: "TreasureChestController",
-      templateUrl: "TreasureChest/token.html"
-    })
+    .when("/TreasureChest", {controller: "TreasureChestController",templateUrl: "TreasureChest/treasure_chest.html"})
+    .when("/TreasureChest/:sym", {controller: "TreasureChestController",templateUrl: "TreasureChest/token.html"})
+    .when("/TreasureChest/:sym/:file", {controller: "TreasureChestController",templateUrl: "TreasureChest/token.html"})
 
     /* --- Login Routes---*/
     .when("/Login", {controller: "AuthController",templateUrl: "Login.html"})
     .when("/Logout", {resolve: {deadResolve: function ($location, AuthFactory) {AuthFactory.clearData(); $location.path('/Login'); } }})
 
-    /* --- Behind The Counter Authorized Routes---*/
-    .when("/BehindTheCounter", {
-      resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
-      controller : "BehindTheCounterController",
-      templateUrl : "BehindTheCounter/behind_the_counter.html"
-    })
-    // .when("/Behind_The_Counter/about", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller : "BehindTheCounterController", templateUrl : "Behind_The_Counter/about_behind_the_counter.html"})
-    // .when("/Behind_The_Counter/Receiving", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/Receiving.html"})
-    // .when("/Behind_The_Counter/Packaging", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/Packaging.html"})
-    // .when("/Behind_The_Counter/Discounted", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/Discounted.html"})
-    // .when("/Behind_The_Counter/Merchandise", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/Merchandise.html"})
-    // .when("/Behind_The_Counter/PurchaseOrders", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/Purchase_Orders.html"})
-    // .when("/Behind_The_Counter/RoastList", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController", templateUrl : "Behind_The_Counter/RoastList.html"})
-    // .when("/Behind_The_Counter/SolarSystem", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "BehindTheCounterController",templateUrl: "Behind_The_Counter/solar_system.html"})
+    /* --- Exclusive Behind The Counter Routes---*/
+    .when("/BehindTheCounter", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},controller : "BehindTheCounterController",templateUrl : "BehindTheCounter/behind_the_counter.html"})
+    .when("/BehindTheCounter/about", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller : "BehindTheCounterController", templateUrl : "BehindTheCounter/about_behind_the_counter.html"})
+    .when("/BehindTheCounter/Receiving", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/Receiving.html"})
+    .when("/BehindTheCounter/PromoCodes", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/PromoCodes.html"})
+    .when("/BehindTheCounter/CustomerList", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/CustomerList.html"})
+    .when("/BehindTheCounter/Packaging", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/Packaging.html"})
+    .when("/BehindTheCounter/Discounted", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/Discounted.html"})
+    .when("/BehindTheCounter/Merchandise", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/Merchandise.html"})
+    .when("/BehindTheCounter/PurchaseOrders", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/PurchaseOrders.html"})
+    .when("/BehindTheCounter/RoastList", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/RoastList.html"})
+
     /* --- Behind the Counter Treasure Chest---*/
-    // .when("/Behind_The_Counter/TreasureChest", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Store_Front/RoastMeister'); } }}, controller: "TreasureChestController",templateUrl: "Behind_The_Counter/treasure_chest.html"})
+    .when("/BehindTheCounter/TreasureChest", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "TreasureChestController",templateUrl: "BehindTheCounter/treasure_chest.html"})
 
     /* --- SmartHome Routes---*/
-    .when("/SmartHome", {
-      resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
-      controller: "SmartHomeController",
-      templateUrl: "SmartHome/home.html"
-    })
+    .when("/SmartHome", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},controller: "SmartHomeController",templateUrl: "SmartHome/home.html"})
     .when("/SmartHome/about", {
       resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
       controller: "SmartHomeController",

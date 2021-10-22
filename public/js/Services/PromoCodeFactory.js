@@ -24,12 +24,12 @@ app.factory('PromoCodeFactory', ['$http', 'ShoppingCartFactory', function($http,
           var request = {method: 'GET', url: '/promocode/check/' + _promo_code, headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
           var total = ShoppingCartFactory.cart.getTotalPrice();
           return $http(request).then(function(res){
-            console.log(res.data.promocode[0].discount_rate);
-            console.log(total);
+            // console.log(res.data.promocode[0].discount_rate);
+            // console.log(total);
                 var promo_discount_rate = res.data.promocode[0].discount_rate;
                 var promo_discount_amount = 0;
                 promo_discount_amount = Number(promo_discount_rate) * total;
-                console.log(promo_discount_amount);
+                console.log("Discount: ", promo_discount_amount);
                 return promo_discount_amount;
         });
       }

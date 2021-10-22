@@ -1,0 +1,96 @@
+<style>
+  .v {
+    color: #00B7FF;
+    text-align: center;
+
+  }
+  h1 {
+    color: #00B7FF;
+  }
+  .view{
+    border: 5px double white;
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+<div data-ng-controller='BehindTheCounterController'>
+  <div>
+    <a href=#!/BehindTheCounter>
+      <div class="back_button btn btn-default">Back to Dashboard</div>
+    </a>
+  </div>
+  <div class="view">
+    <div class='row-sm'>
+      <h1>Create New PromoCodes</h1>
+    </div>
+    <div class="row-sm">
+          <form name="newPromocodeForm" ng-submit="addNewPromocode" data-ng-model="newPromocodeForm" class="form-inline">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="code">PromoCode: </label>
+                    <div class="input-group">
+                      <input name="code" type="text" class="form-control" data-ng-model="new_code" placeholder="#PROMOCODE" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Discount Rate: </label>
+                    <div class="input-group">
+                      <input name="discount_rate" type="text" class="form-control" data-ng-model="discount_rate" placeholder="0.10" ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Use Limit:</label>
+                    <div class="input-group">
+                      <input name="limit_on_uses" type="number" class="form-control" data-ng-model="limit_on_uses"  placeholder="0" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+              <input type="submit" class="backend_category_buttons btn btn-default">
+            </div>
+        </form>
+      </div>
+  </div>
+
+  <div class='view2'>
+    <table class="table table-bordered table-hover" >
+      <label><h1>PromoCodes</h1></label>
+      <!-- <thead><tr><th>Origin</th><th>Reception Date</th><th>Weight</th><th>Timestamp of Last Update</th><th>Cost/lb</th><th>Cost Value of Inventory</th><th>Est Retail Value</th></tr></thead>
+      <thead>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td>{{ greenInventoryTotalWeight }} lbs. </td>
+          <td></td>
+          <td></td>
+          <td>{{ greenInventoryTotalCost | currency }}</td>
+          <td>{{ greenInventoryTotalRetailValue | currency }}</td>
+        </tr>
+      </thead> -->
+      <tbody>
+        <tr ng-repeat="item in promocodes | orderBy : '-reception_date'">
+          <td>{{item.origin}}</td>
+          <td>{{item.reception_date | date:'ddMMMyyyy'}}</td>
+          <td>{{item.weight}}</td>
+          <td>{{item.timestamp}}</td>
+          <td>{{item.cost_per_lb | currency}}</td>
+          <td>{{item.cost_per_lb * item.weight | currency}}</td>
+          <td>{{(item.price_per_lb * (item.weight - (item.weight * 0.2))) - (item.price_per_lb * 0.2) | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,8 +1,42 @@
+
 <div class="view2 checkout_form">
-  Checkout Complete
-  <div id="checkout-message" class="view1">
-      {{checkout_success_message}}
-      {{checkout_return_details}}
-      {{checkout_error}}
+  <style>
+    .v {
+      color: #00B7FF;
+    }
+    h1 {
+      color: #00B7FF;
+    }
+  </style>
+  <div id="checkout-message">
+    <img width="100%" height="50px" src="./img/storefront/bean_bar.png" alt="bean bar">
+    <br/>
+      <div class="v" ng-show="!checkout_error">
+          <h1>Checkout Complete. Order Receieved!</h1>
+          <hr/>
+          <br/>
+          <p>Your payment of {{payment_receipt.amount}} from {{payment_receipt.cardType}}: {{payment_receipt.cardLast4}} has been {{payment_receipt.processorResponseText}}!</p>
+          <p>Your payment recepit id: {{payment_receipt.id}}</p>
+          <p>Thank you for shopping at {{transaction_details.merchantAccountId}}.</p>
+          <p>A confirmation email has been sent to your inbox. </p>
+          <br/>
+          <a href="mailto:J@caffeinelamanna.com">J@CaffeineLaManna.com</a>
+          <br/>
+          <hr/>
+          <p class="NGOlinks"><a href="https://www.cafefemenino.com" target="_blank"><img height="50px" class="img_spacer" src="./img/angels/CFF_Logo.png">Cafe Femenino<img height="50px" class="img_spacer" src="./img/angels/CFF_Logo.png"></a></p>
+          <p class="NGOlinks"><a href="https://www.rainforest-alliance.org" target="_blank"><img height="50px" class="img_spacer" src="./img/angels/RFA_Logo.svg">Rainforest Alliance<img height="50px" class="img_spacer" src="./img/angels/RFA_Logo.svg"></a></p>
+          <p class="NGOlinks"><a href="https://www.fairtradecertified.org" target="_blank"><img height="50px" class="img_spacer" src="./img/angels/FTO_Logo.png">Fair Trade<img height="50px" class="img_spacer" src="./img/angels/FTO_Logo.png"></a></p>
+          <br/>
+          <a class="back_button btn btn-default" href="#!/Store_Front">Store Front</a>
+      </div>
+      <div class="v" ng-show="checkout_error">
+        <h1>Checkout Error: </h1> {{checkout_error}}
+      </div>
+    <img width="100%" height="50px" src="./img/storefront/bean_bar.png" alt="bean bar">
+
   </div>
 </div>
+
+
+<!-- The cost was {{transaction amount}} -->
+<!-- Thank you for shopping at {{merchantAccountId}} -->

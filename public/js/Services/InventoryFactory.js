@@ -13,27 +13,28 @@ app.factory('InventoryFactory', ['$http', function ($http) {
         updateInventoryAfterPurchase: updateInventoryAfterPurchase
     }
     function showGreenInventory () {
-        var request = {method: 'GET', url: 'https://www.caffeinelamanna.com/php/get_green_inventory.php'};
+        var request = {method: 'GET', url: '/inventory/Green'};
         return $http(request).then(function(response) {
-          return response.data;
+          console.log(response.data.greenInventory);
+          return response.data.greenInventory;
         });
     }
     function showPackagedInventory () {
-      var request = {method: 'GET', url: 'https://www.caffeinelamanna.com/php/get_packaged_inventory.php'};
+      var request = {method: 'GET', url: '/inventory/Packaged'};
       return $http(request).then(function(response) {
-        return response.data;
+        return response.data.packagedInventory;
       });
     }
     function showDiscountedInventory () {
-      var request = {method: 'GET', url: 'https://www.caffeinelamanna.com/php/get_discounted_inventory.php'};
+      var request = {method: 'GET', url: '/inventory/Discounted'};
       return $http(request).then(function(response) {
-        return response.data;
+        return response.data.discountedInventory;
       });
     }
     function showMerchandiseInventory () {
-      var request = {method: 'GET', url: 'https://www.caffeinelamanna.com/php/get_merchandise_inventory.php'};
+      var request = {method: 'GET', url: '/inventory/Merchandise'};
       return $http(request).then(function(response) {
-        return response.data;
+        return response.data.merchandiseInventory;
       });
     }
     function addGreenInventory (newInventoryForm) {

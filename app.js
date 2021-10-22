@@ -13,7 +13,7 @@ const usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventory');
 const promocodeRouter = require('./routes/promocode');
 const customerRouter = require('./routes/customer');
-// const ordersRouter = require('./routes/orders');
+const ordersRouter = require('./routes/orders');
 const greenhouseRouter = require('./routes/greenhouse');
 const smarthomeRouter = require('./routes/smarthome');
 const publicRouter = require('./routes/public');
@@ -50,7 +50,7 @@ app.use('/users', usersRouter);
 app.use('/inventory', inventoryRouter);
 app.use('/promocode', promocodeRouter);
 app.use('/customer', customerRouter);
-// app.use('/orders', ordersRouter);
+app.use('/orders', ordersRouter);
 
 app.use('/greenhouse', greenhouseRouter);
 app.use('/smarthome', smarthomeRouter);

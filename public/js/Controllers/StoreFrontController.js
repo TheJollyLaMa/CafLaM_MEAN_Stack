@@ -410,9 +410,9 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
       // console.log($scope.payload);
       var buy_amount = ShoppingCartFactory.cart.getTotalPrice();
       buy_amount -= $scope.promo_discount_amount;
-      console.log(buy_amount);
+      // console.log(buy_amount);
       PurchaseFactory.braintreePostPayment($scope.payload, buy_amount.toFixed(2).toString(), $scope.deviceData).then((res)=> {
-        // console.log(res);
+        console.log(res);//same output as PurchaseFactory line17
         // Since the following code will overwrite the contents of
         // your page with a success or error message, first teardown
         // the Hosted Fields form to remove any extra event listeners
@@ -426,16 +426,13 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
             $('#hosted-fields-form').remove();
           }
         });
-        if (res.result.success) {
+        if (res.success) {
           console.log("Checkout Success!");
           $scope.checkout_success_message = res.msg;
-          $scope.checkout_return_details = res.result.transaction;
-
-          /* --- Send Order to Database --- */
-          /* --- Update inventory --- */
-          /* --- Tally Promocode Usage --- */
-          /* --- send Confirmation Email --- */
-
+          $scope.checkout_return = res.result;
+          $scope.transaction_details = res.result.transaction;
+          $scope.payment_receipt = res.result.transaction.paymentReceipt;
+          /* --- Parse transaction details in html to display onscreen for customer ---*/
         } else {
           console.log("Checkout Error!");
           $scope.checkout_error = "Error in Checkout";
@@ -443,7 +440,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
         angular.element(document.querySelector('#checkout_complete_glyph')).removeClass('checkout_flow_active');
         angular.element(document.querySelector('#checkout_complete_glyph')).addClass('checkout_flow_done');
       });
-      $scope.clear_cart();
+      // $scope.clear_cart();
     }
 
     $scope.initBraintreeFields = function () {
@@ -455,7 +452,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
           braintree.dataCollector.create({client: clientInstance})
             .then(function (dataCollectorInstance) {
               $scope.deviceData = JSON.parse(dataCollectorInstance.deviceData).correlation_id;
-              console.log($scope.deviceData);
+              // console.log($scope.deviceData);
             })
             .catch(function (err) {
               console.log(err);

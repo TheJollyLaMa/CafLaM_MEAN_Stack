@@ -6,6 +6,10 @@ body {
 a {
   color: #00B7FF;
 }
+.NGOlinks {
+  text-align: center;
+  margin: 5px;
+}
 .login {
   width: 40%;
   margin-left: 5%;
@@ -85,13 +89,16 @@ input.ng-touched.ng-valid {
   position: absolute;
   margin-top: 20px;
   top: 10px;
-  left: 25%;
-  width: 50%;
+  left: 12%;
+  width: 75%;
   height: 100%;
   z-index: 999;
   background-color: white;
   border-radius: 10px;
   overflow: scroll;
+}
+.checkout_form h1 {
+  color: #FAFAC8;
 }
 .checkout_flow_active {
   background-color: #91C3E9;

@@ -61,6 +61,21 @@ db.get_employee_list = () => {
         });
     });
 };
+db.get_orders_list = () => {
+    return new Promise((resolve, reject) => {
+        ordersPool.query(`SELECT * FROM current`, (err, results) => {
+            return resolve(results);
+        });
+    });
+};
+db.post_new_order = (_id, _buyer, _email, _payment_status, _total, _cart) => {
+    return new Promise((resolve, reject) => {
+      let values = [[_id, _buyer, _email, _payment_status, _total, _cart]];
+      ordersPool.query(`INSERT INTO current (id, buyer, email, payment_status, total, cart) VALUES ?`, [values], (err, results) => {
+          return resolve(results);
+      });
+   });
+};
 // check user creds
 db.check_credentials = (_username,_password) => {
     let values = [_username, _password], $response = [];
@@ -215,11 +230,11 @@ db.insert_merchandise_inventory = (_sku,_name,_description,_price,_quantity,_cos
    });
 };
 // add new PromoCode
-db.add_promocode = (_promo_code, _discount_rate, _uses, _total_amount_discounted, _limit_on_uses) => {
+db.add_promocode = (_promo_code, _discount_rate, _limit_on_uses) => {
     return new Promise((resolve, reject) => {
-      let values = [[_promo_code, _discount_rate, _uses, _total_amount_discounted, _limit_on_uses]];
+      let values = [[_promo_code, _discount_rate, _limit_on_uses]];
       // console.log('add to inventory ...');
-      promocodePool.query(`INSERT INTO PromoCodeTally (promo_code, discount_rate, Uses, total_amount_discounted, limit_on_uses) VALUES ?`, [values], (err, results) => {
+      promocodePool.query(`INSERT INTO PromoCodeTally (promo_code, discount_rate, limit_on_uses) VALUES ?`, [values], (err, results) => {
           // console.log(results);
           return resolve(results);
       });

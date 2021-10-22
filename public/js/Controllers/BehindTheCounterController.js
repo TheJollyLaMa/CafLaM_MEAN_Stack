@@ -4,7 +4,7 @@
 app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'InventoryFactory', 'PurchaseFactory', 'BlockFactory', function($scope, $filter, $window, InventoryFactory, PurchaseFactory, BlockFactory){
   var init = function() {
       $scope.title = 'Behind The Counter';
-      $scope.backend_category =[{name: "Receiving", text: "Log new Bean Shipment"}, {name: "Packaging", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Discounted", text: "Inventory not sold after two weeks is moved at a discount!"}, {name: "Merchandise", text: "Other Merchandise"}, {name: "PurchaseOrders", text: "View Purchase Orders"}];
+      $scope.backend_category =[{name: "Receiving", text: "Log new Bean Shipment"}, {name: "PromoCodes", text: "View, Create, and Manage Promocodes"}, {name: "CustomerList", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Packaging", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Discounted", text: "Inventory not sold after two weeks is moved at a discount!"}, {name: "Merchandise", text: "Other Merchandise"}, {name: "PurchaseOrders", text: "View Purchase Orders"}];
       $scope.useful_links = [{name: "ShipStation", url: "https://ss.shipstation.com"},{name: "Paypal", url: "https://www.paypal.com/us/signin"},{name: "SonoFresco", url: "https://sonofresco.com/my-account/"},{name: "ClearBags", url: "https://www.clearbags.com/customer/account/login/"},{name: "USPS", url: "https://store.usps.com/store/product/shipping-supplies/priority-mail-medium-flat-rate-box-1-P_O_FRB1"}]
       $scope.dev_links = [{name: "Manifest_Tokens", url: "#!/BehindTheCounter/Manifest_Tokens"},{name: "Sandbox", url: "https://www.caffeinelamanna.com/#!/Sandbox"},{name: "Braintree", url: "https://www.caffeinelamanna.com/#!/Braintree"},{name: "SmartHome", url: "#!/SmartHome", text:"SmartHome Console"}];
       $scope.ethereum_links = [{name: "Zapper", url:"https://zapper.fi/dashboard"},{name: "Alchemix", url:"https://app.alchemix.fi/"},{name: "DecentraLand", url:"https://play.decentraland.org/"},{name: "Coinbase", url: "https://www.coinbase.com/signin"}];
@@ -12,7 +12,8 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
       $scope.roast_type_cats = ['1st crack', '2nd crack', 'Dark'];
       $scope.roast_type = "";
       $scope.newtoken = "";$scope.ids = {};$scope.uris = {};$scope.AngelTokens = [];$scope.token_ids_owned = [];$scope.mintDataArray = [];$scope.new_alm = {};
-
+      $scope.order_view_state = "byBean";
+      $scope.change_order_list_view_state = function () {if($scope.order_view_state === "byBean"){$scope.order_view_state = "byOrder";}else{$scope.order_view_state = "byBean";}}
       $scope.loadTheBlock = async function () {
         // const web3 = window.web3;
         const web3 = new Web3(window.ethereum);
@@ -136,8 +137,10 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
       }
 
       $scope.greenInventoryTotals = function () {
+        console.log($scope.green_inventory.length);
         $scope.greenInventoryTotalWeight = 0;$scope.greenInventoryTotalCost = 0;$scope.greenInventoryTotalRetailValue = 0;
         for (var i=0; i <= $scope.green_inventory.length; i++) {
+          console.log($scope.green_inventory[i]);
           $scope.greenInventoryTotalWeight += parseInt($scope.green_inventory[i].weight);
           $scope.greenInventoryTotalCost += $scope.green_inventory[i].weight * $scope.green_inventory[i].cost_per_lb;
           $scope.greenInventoryTotalRetailValue +=  ($scope.green_inventory[i].price_per_lb * ($scope.green_inventory[i].weight - ($scope.green_inventory[i].weight * 0.2)))-($scope.green_inventory[i].price_per_lb * 0.2); /*waterloss and time duration loss for discounted product*/
@@ -167,15 +170,16 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
       $scope.Range = function(start, end) {var result = [];for (var i = start; i <= end; i++) {result.push(i);}return result;};
       $scope.fillWeight = function() {var key = $scope.green_inventory.indexOf($scope.origin);console.log(key);if(key>=0){$scope.inventory_weight = $scope.green_inventory[key].weight;}else{$scope.inventory_weight = $scope.green_inventory[0].weight;};};
       $scope.fetchusername = function() {var val = JSON.parse($window.localStorage.getItem('login'));$scope.username = val.username;};
-      $scope.showGreenInventory = function() {InventoryFactory.showGreenInventory().then(function(data){$scope.green_inventory = data;$scope.greenInventoryTotals();});};
+      $scope.showGreenInventory = function() {InventoryFactory.showGreenInventory().then(function(data){$scope.green_inventory = data;console.log($scope.green_inventory.length);$scope.greenInventoryTotals();});};
       $scope.showPackagedInventory = function() {InventoryFactory.showPackagedInventory().then(function(data){$scope.packaged_inventory = data;$scope.packagedInventoryTotals();});};
       $scope.showDiscountedInventory = function() {InventoryFactory.showDiscountedInventory().then(function(data){$scope.discounted_inventory = data;$scope.discountedInventoryTotals();});};
       $scope.showMerchandiseInventory = function() {InventoryFactory.showMerchandiseInventory().then(function(data){$scope.merchandise_inventory = data;$scope.merchandiseInventoryTotals();});};
+      $scope.showPromoCodes = function() {return PromoCodeFactory.showPromoCodes().then(function(data){var data = data;console.log(data);return data;});};
       $scope.showPurchaseOrders = function() {
         PurchaseFactory.showPurchaseOrders()
         .then(function(data){
           $scope.purchase_orders = data;
-          console.log(data);
+          // console.log(data);
           angular.forEach($scope.purchase_orders, function(value, key){
               $scope.purchase_orders[key].promo_code = $scope.purchase_orders[key].cart.split('~')[0];
               var n = $scope.purchase_orders[key].cart.indexOf('~');

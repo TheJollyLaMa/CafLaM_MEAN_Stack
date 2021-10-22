@@ -1,0 +1,126 @@
+<style>
+  .v {
+    color: #00B7FF;
+    text-align: center;
+  }
+  h1 {
+    color: #00B7FF;
+  }
+  form {
+    text-align: center;
+
+  }
+  .view {
+    border: 5px double white;
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+<div data-ng-controller='BehindTheCounterController' ng-init="showMerchandiseInventory();">
+  <div>
+    <a href=#!/BehindTheCounter>
+      <div class="back_button btn btn-default">Back to Dashboard</div>
+    </a>
+  </div>
+  <div class='row-sm view2 v'>
+    <h1>Enter Merchandise into Inventory!</h1>
+    <div class="col-md-4 col-md-offset-4">
+        <form name="newMerchandiseForm" ng-submit="addMerchandiseInventory()" data-ng-model="newMerchandiseForm" class="form-inline">
+            <div class="form-group">
+                <label for="sku">Product sku: </label>
+                <p class="input-group">
+                    <input type="text" name="sku" class="form-control centered" data-ng-model="sku" ng-required />
+                    <span ng-show="newMerchandiseForm.sku.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name: </label>
+                <p class="input-group">
+                  <input type="text" class="form-control centered"  data-ng-model="name"  ng-required />
+                  <span ng-show="newMerchandiseForm.name.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <p class="input-group">
+                  <input name="description" type="text" class="form-control centered" data-ng-model="description" ng-required />
+                  <span ng-show="newMerchandiseForm.description.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <p class="input-group">
+                  <input name="price" type="text" class="form-control centered" data-ng-model="price" ng-required />
+                  <span ng-show="newMerchandiseForm.price.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <p class="input-group">
+                  <input name="quantity" type="text" class="form-control centered" data-ng-model="quantity" ng-required />
+                  <span ng-show="newMerchandiseForm.quantity.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="cost">Cost:</label>
+                <p class="input-group">
+                  <input name="cost" type="text" class="form-control centered" data-ng-model="cost" ng-required />
+                  <span ng-show="newMerchandiseForm.cost.$error.required"></span>
+                </p>
+            </div>
+
+            <div class="form-actions">
+              <input type="submit" class="backend_category_buttons btn btn-default">
+            </div>
+        </form>
+    </div>
+  </div>
+
+
+  <div class="view2 v">
+      <table class="table table-bordered table-hover">
+        <label><h1>Merchandise List</h1></label>
+        <thead><tr><th>Sku</th><th>Name</th><th>Description</th><th>Price</th><th>Quantity</th><th>Cost/Unit</th><th>Cost Value of Inventory</th></tr></thead>
+        <thead>
+          <tr>
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ merchandiseInventoryTotalCost | currency }}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in merchandise_inventory">
+            <td>{{item.sku}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.price | currency}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.cost}}</td>
+            <td>{{item.cost * item.quantity | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

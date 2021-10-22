@@ -1,0 +1,91 @@
+<style>
+  .v {
+    color: #00B7FF;
+    text-align: center;
+
+  }
+  h1 {
+    color: #00B7FF;
+  }
+
+  .v tbody {
+    background-color: white;
+    border-style: double;
+    border-color: rgb(27, 179, 182);
+    padding: 5px 10px;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .v th {
+    background-color: white;
+    border-style: solid;
+    border-color: rgb(27, 179, 182);
+    padding: 5px 10px;
+    text-align: left;
+  }
+
+  .v td {
+      background-color: white;
+      border: 1px solid #00B7FF;
+      border-radius: 5px;
+      padding: 5px 10px;
+      text-align: center;
+  }
+</style>
+<div ng-controller='BehindTheCounterController' ng-init="showPurchaseOrders()">
+  <div>
+    <a href=#!/BehindTheCounter><div class="back_button btn btn-default">Back to Dashboard</div></a>
+  </div>
+  <br>
+
+  <div class="v view2">
+    <button class="order_list_btn btn btn-default" ng-click="change_order_list_view_state()"><div ng-show="order_view_state === 'byBean'">By Order</div><div ng-show="order_view_state === 'byOrder'">By Bean</div></button>
+    <!-- <button class="order_list_btn btn btn-default" >By Bean</button> -->
+    <h1>Purchase Order List</h1>
+    <table ng-show="order_view_state === 'byOrder'">
+      <thead><tr><th>By Order</th><th>Buyer</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="order in purchase_orders | orderBy: '-timestamp'">
+          <td>Promocode: {{order.promo_code}}<br>
+              <table>
+              <thead><tr><th>Sku</th><th>Origin</th><th>Roast Type</th><th>Quantity</th></tr></thead>
+              <tbody>
+                <tr ng-repeat="item in order.cart">
+                  <td>{{item.sku}}</td>
+                  <td>{{item.origin}}</td>
+                  <td>{{item.roast_type}}</td>
+                  <td>{{item.quantity | number:0}}</td>
+                </tr>
+              </tbody>
+              </table>
+          </td>
+          <td>{{order.buyer}}</td>
+          <td>{{order.total}}</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+    <table ng-show="order_view_state === 'byBean'">
+      <thead><tr><th>By Bean</th></tr></thead>
+      <tbody>
+        <tr ng-repeat="order in purchase_orders | orderBy: '-timestamp'">
+          <td>Timestamp: {{order.timestamp}}<br/><br/>
+              <table>
+              <thead><tr><th>Bean</th><th>Roast Type</th><th>Weight</th></tr></thead>
+              <tbody>
+                <tr ng-repeat="item in order.cart">
+                  <td>{{item.origin}}</td>
+                  <td>{{item.roast_type}}</td>
+                  <td>{{item.quantity}}</td>
+                </tr>
+              </tbody>
+              </table>
+          </td>
+          <br/><br/>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<!--
+      Log new bean shipment by submitting the form.
+      Form entries will become items in inventory list.
+      Inventory list is updated upon the completion of sales on the frontend.
+      RoastMeister will controll the backend inventory to record
+      shipments, roasting schedules and package dates, and sales during promotional
+      sale periods using an ipad and credit card swiper.
+      Field sales will be entered on a frontend route of the website at time of sale.
+-->
+<style>
+  .v {
+    color: #00B7FF;
+    text-align: center;
+
+  }
+  h1 {
+    color: #00B7FF;
+  }
+  .view{
+    border: 5px double white;
+    border-radius: 10px;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+<div data-ng-controller='BehindTheCounterController' ng-init="showGreenInventory()">
+  <div class="">
+    <a href=#!/BehindTheCounter>
+      <div class="back_button btn btn-default">Back to Dashboard</div>
+    </a>
+  </div>
+  <div class="view">
+    <div class='row-sm'>
+      <h1>Log New Bean Shipments!</h1>
+    </div>
+    <div class="row-sm">
+          <form name="newInventoryForm" ng-submit="addGreenInventory()" data-ng-model="newInventoryForm" class="form-inline">
+            <div class="col-sm">
+                <div class="form-group">
+                  <p>
+                    <label for="origin">Bean Origin: </label>
+                    <p class="input-group">
+                      <input name="origin" type="text" class="form-control" data-ng-model="origin" placeholder="Country of Origin" ng-required="true">
+                    </p>
+                  </p>
+                </div>
+                <div class="form-group">
+                  <p>
+                    <label>Date Received: </label>
+                    <p class="input-group">
+                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                  </p>
+                </div>
+            </div>
+            <div class="col-sm">
+              <div class="form-group">
+                <p>
+                  <label>Weight:</label>
+                  <p class="input-group">
+                    <select ng-name="weight" type="number" class="form-control" ng-options="weight for weight in Range(1, 100)" data-ng-model="weight"  placeholder="lbs" ng-required="true"></select>
+                  </p>
+                </p>
+              </div>
+              <div class="form-group">
+                <p>
+                  <label for="cost_per_lb">Cost/lb</label>
+                  <p class="input-group">
+                    <input name="cost_per_lb" type="text" class="form-control" data-ng-model="cost_per_lb" placeholder="cost per pound" ng-required="true">
+                  </p>
+                </p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <input type="submit" class="backend_category_buttons btn btn-default">
+            </div>
+        </form>
+      </div>
+  </div>
+
+<br><hr>
+
+  <div class='v view2'>
+    <table class="table table-bordered table-hover" >
+      <label><h1>Green Beans</h1></label>
+      <thead><tr><th>Origin</th><th>Reception Date</th><th>Weight</th><th>Timestamp of Last Update</th><th>Cost/lb</th><th>Cost Value of Inventory</th><th>Est Retail Value</th></tr></thead>
+      <thead>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td>{{ greenInventoryTotalWeight }} lbs. </td>
+          <td></td>
+          <td></td>
+          <td>{{ greenInventoryTotalCost | currency }}</td>
+          <td>{{ greenInventoryTotalRetailValue | currency }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in green_inventory | orderBy : '-reception_date'">
+          <td>{{item.origin}}</td>
+          <td>{{item.reception_date | date:'ddMMMyyyy'}}</td>
+          <td>{{item.weight}}</td>
+          <td>{{item.timestamp}}</td>
+          <td>{{item.cost_per_lb | currency}}</td>
+          <td>{{item.cost_per_lb * item.weight | currency}}</td>
+          <td>{{(item.price_per_lb * (item.weight - (item.weight * 0.2))) - (item.price_per_lb * 0.2) | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
