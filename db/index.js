@@ -145,7 +145,7 @@ db.get_promocodes = () => {
 db.check_promocode = (_promocode) => {
     _promocode = '#' + _promocode;
     let values = [[_promocode]], $response = [];
-    console.log(_promocode);
+    // console.log(_promocode);
     return new Promise((resolve, reject) => {
         promocodePool.query(`SELECT * FROM PromoCodeTally WHERE promo_code = ?`, values, (err, results) => {
           if(!results) {
@@ -156,7 +156,7 @@ db.check_promocode = (_promocode) => {
           //   return results = {success:false, msg: 'Limit on uses has been reached'};
           // }
           else{
-            console.log(resolve(results));
+            // console.log(results);
           return resolve(results);
         };
     });
@@ -173,7 +173,7 @@ db.add_employee = (_username, _password) => {
 db.add_customer = (_customer) => {
     // console.log(_customer.first_name);
     return new Promise((resolve, reject) => {
-      let values = [[_customer.first_name, _customer.last_name, _customer.email, _customer.street, _customer.street2, _customer.city, _customer.state, _customer.zipcode, _customer.shiptobilling]];
+      let values = [[_customer.billing.first_name, _customer.billing.last_name, _customer.billing.email, _customer.billing.street, _customer.billing.street2, _customer.billing.city, _customer.billing.state, _customer.billing.zipcode, _customer.shiptobilling]];
       // console.log(values);
       customerPool.query(`INSERT INTO CustomerList (first_name, last_name, email, street, street2, city, state, zipcode, shiptobilling) VALUES ?`, [values], (err, results) => {
         // console.log(results);
@@ -190,52 +190,82 @@ db.add_customer = (_customer) => {
    });
 };
 //insert incoming green beans
-db.insert_green_inventory = (_origin, _reception_date, _weight) => {
+db.insert_green_inventory = (newInventoryForm) => {
     return new Promise((resolve, reject) => {
-      let values = [[_origin, _reception_date, _weight]];
-      // console.log('add to inventory ...');
-      inventoryPool.query(`INSERT INTO Green_Inventory (origin, reception_date, weight) VALUES ?`, [values], (err, results) => {
+      let values = [[newInventoryForm.origin, newInventoryForm.reception_date, newInventoryForm.weight, newInventoryForm.cost_per_lb]];
+      console.log('add to inventory ...');
+      inventoryPool.query(`INSERT INTO Green_Inventory (origin, reception_date, weight, cost_per_lb) VALUES ?`, [values], (err, results) => {
           // console.log(results);
+          if(err) {
+            console.error(err);
+            console.log(results);
+            return results = {success:false, msg: 'Something wrong in entry', err: err};
+          }
           return resolve(results);
       });
       // console.log('generate sku ...');
       inventoryPool.query(`UPDATE Green_Inventory SET sku = CONCAT(id,batch) WHERE sku = 'G0'`, (err, results) => {
+        if(err) {
+          console.error(err);
+          console.log(results);
+          return results = {success:false, msg: 'Something wrong in entry', err: err};
+        }
         return resolve(results);
       });
    });
 };
-//insert incoming green beans
-db.insert_packaged_inventory = (_origin,_weight,_packaged_date,_timestamp,_roast_type) => {
+//insert beans as packaged - meaning already roasted and ready to ship
+db.insert_packaged_inventory = (newPackagedForm) => {
     return new Promise((resolve, reject) => {
-      let values = [[_origin,_weight,_packaged_date,_timestamp,_roast_type]];
+      let values = [[newPackagedForm.origin, newPackagedForm.weight, newPackagedForm.packaged_date, newPackagedForm.timestamp, newPackagedForm.roast_type]];
       // console.log('add to inventory ...');
       inventoryPool.query(`INSERT INTO Packaged_Inventory (origin, weight, packaged_date, timestamp, roast_type) VALUES ?`, [values], (err, results) => {
           // console.log(results);
+          if(err) {
+            console.error(err);
+            console.log(results);
+            return results = {success:false, msg: 'Something wrong in entry', err: err};
+          }
           return resolve(results);
       });
       inventoryPool.query(`UPDATE Packaged_Inventory SET sku = CONCAT(id,batch) WHERE sku = 'P0'`, (err, results) => {
+        if(err) {
+          console.error(err);
+          console.log(results);
+          return results = {success:false, msg: 'Something wrong in entry', err: err};
+        }
         return resolve(results);
       });
    });
 };
-//insert incoming green beans
-db.insert_merchandise_inventory = (_sku,_name,_description,_price,_quantity,_cost) => {
+//insert incoming merchandise
+db.insert_merchandise_inventory = (newMerchandiseForm) => {
     return new Promise((resolve, reject) => {
-      let values = [[_sku,_name,_description,_price,_quantity,_cost]];
+      let values = [[newMerchandiseForm.sku,newMerchandiseForm.name,newMerchandiseForm.description,newMerchandiseForm.price,newMerchandiseForm.quantity,newMerchandiseForm.cost]];
       // console.log('add to inventory ...');
       inventoryPool.query(`INSERT INTO Merchandise_Inventory (sku, name, description, price, quantity, cost) VALUES ?`, [values], (err, results) => {
           // console.log(results);
+          if(err) {
+            console.error(err);
+            console.log(results);
+            return results = {success:false, msg: 'Something wrong in entry', err: err};
+          }
           return resolve(results);
       });
    });
 };
 // add new PromoCode
-db.add_promocode = (_promo_code, _discount_rate, _limit_on_uses) => {
+db.add_promocode = (newPromocodeForm) => {
+    console.log(newPromocodeForm);
     return new Promise((resolve, reject) => {
-      let values = [[_promo_code, _discount_rate, _limit_on_uses]];
+      let values = [[newPromocodeForm.new_code, newPromocodeForm.discount_rate, newPromocodeForm.limit_on_uses]];
       // console.log('add to inventory ...');
       promocodePool.query(`INSERT INTO PromoCodeTally (promo_code, discount_rate, limit_on_uses) VALUES ?`, [values], (err, results) => {
-          // console.log(results);
+          if(err) {
+            console.error(err);
+            console.log(results);
+            return results = {success:false, msg: 'Something wrong in entry', err: err};
+          }
           return resolve(results);
       });
    });
@@ -283,16 +313,47 @@ db.delete_test_promocode = () => {
 };
 
 //Update after purchase
-// dB.update_inventory_after_purchase = (data) => {
-//     return new Promise((resolve, reject) => {
-//       // inventoryPool.query(`SELECT * FROM Merchandise_Inventory`, data, (err, results) => { //WHERE weight > 0
-//           if(err) {
-//             return reject(err);
-//           }
-//           return resolve(results);
-//       });
-//   });
-// };
+db.update_inventory_after_purchase = (_cart) => {
+    console.log(_cart);
+    _cart.forEach((element) => {
+     var $sku = element.sku;
+     var db_code = $sku.split('');
+     db_code = db_code[0];
+     var $quantity = element.quantity;
+     var $table = '';
+     if(db_code==='G'){
+       $table='Green_Inventory';
+     }else if (db_code==='P'){
+       $table='Packaged_Inventory';
+     }else if (db_code==='M'){
+       $table='Merchandise_Inventory';
+     }
+     $timestamp = moment().format('YYYY-MM-DD hh:mm:ss');
+     return new Promise((resolve, reject) => {
+        inventoryPool.query("UPDATE " + $table + " SET weight=weight-" + $quantity + ", timestamp='" + $timestamp + "' WHERE sku='" + $sku + "';", (err, results) => {
+          if(err) {
+            console.log(err);
+            return reject(err);
+          }
+          console.log("Inventory Update: ", results);
+          return resolve(results);
+        });
+     })
+  });
+};
+//Tally Promocode Usage after purchase
+db.tally_promo_code = (_discountamount, _promocode) => {
+    return new Promise((resolve, reject) => {
+      promocodePool.query("UPDATE PromoCodeTally SET uses=uses+1, total_amount_discounted=total_amount_discounted+'" + _discountamount + "' WHERE promo_code='" + _promocode + "';", (err, results) => { //WHERE weight > 0
+          if(err) {
+            console.log(err);
+            return reject(err);
+          }
+          console.log("Promocode Tallied: ", results);
+          return resolve(results);
+      });
+  });
+};
 // Set A trigger in MYSQL
 // DELIMITER |
 // CREATE TRIGGER `packaged_sku_trigger` BEFORE INSERT ON `Packaged_Inventory`

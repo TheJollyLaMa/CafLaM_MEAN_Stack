@@ -16,7 +16,17 @@ router.get('/powerData', (req, res) => {
         res.json(JSON.parse(body));
       })
   });
-
+  // //Get Power Data from Smarthome
+  // router.get('/powerData/dataFile', (req, res) => {
+  //       request({ url: 'http://192.168.0.204/sd/arduino/www/jonesGreenHouse/D' }, (error, response, body) => {
+  //         // console.log(error);
+  //         if (error || response.statusCode !== 200) {
+  //           // console.log(err.message);
+  //           return res.status(500).json({ type: 'error', message: error });
+  //         }
+  //         res.json(JSON.parse(body));
+  //       })
+  //   });
 
 
 module.exports = router;

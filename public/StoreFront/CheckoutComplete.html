@@ -4,7 +4,7 @@
     .v {
       color: #00B7FF;
     }
-    h1 {
+    .v h1 {
       color: #00B7FF;
     }
   </style>
@@ -15,10 +15,12 @@
           <h1>Checkout Complete. Order Receieved!</h1>
           <hr/>
           <br/>
-          <p>Your payment of {{payment_receipt.amount}} from {{payment_receipt.cardType}}: {{payment_receipt.cardLast4}} has been {{payment_receipt.processorResponseText}}!</p>
-          <p>Your payment recepit id: {{payment_receipt.id}}</p>
+          <p>Your payment of ${{payment_receipt.amount}} from <img width="40px" height="25px" src="{{transaction_details.creditCard.imageUrl}}" alt="{{payment_receipt.cardType}}"> {{payment_receipt.cardLast4}} has been {{payment_receipt.processorResponseText}}!</p>
+          <p>Your payment receipt id: {{payment_receipt.id}}</p>
           <p>Thank you for shopping at {{transaction_details.merchantAccountId}}.</p>
           <p>A confirmation email has been sent to your inbox. </p>
+          <br/>
+          <div>cart: {{transaction_details.customFields.cart}}</div>
           <br/>
           <a href="mailto:J@caffeinelamanna.com">J@CaffeineLaManna.com</a>
           <br/>

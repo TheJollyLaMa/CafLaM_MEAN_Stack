@@ -26,22 +26,22 @@
     color: black;
   }
 </style>
-<div class="v" data-ng-controller='BehindTheCounterController' ng-init="showGreenInventory(); showPackagedInventory(); showDiscountedInventory();">
+<div data-ng-controller='BehindTheCounterController' ng-init="showGreenInventory(); showPackagedInventory(); showDiscountedInventory();">
   <div>
       <a href=#!/BehindTheCounter>
         <div class="back_button btn btn-default">Back to Dashboard</div>
       </a>
   </div>
-  <div class='row-sm view2'>
+  <div class='row-sm view'>
     <h1>Log Roasts as they are Packaged!</h1>
-    <div class="col-md-4 col-md-offset-4">
+    <div class="row-sm">
         <form name="newPackagedForm" ng-submit="addPackagedInventory()" data-ng-model="newPackagedForm" class="form-inline">
           <div class="col-sm">
             <div class="form-group">
                 <label for="origin">Bean Origin: </label>
                 <p class="input-group">
-                    <select name="origin" type="text" class="form-control centered" data-ng-options="item.origin for item in green_inventory" ng-init="origin = green_inventory[0].origin;" data-ng-model="origin" data-ng-change="fillWeight()" ng-required></select>
-                    {{origin.origin}}
+                    <select name="origin" type="text" class="form-control centered" data-ng-options="item as item.origin for item in green_inventory | orderBy: '-weight'" data-ng-model="origin" data-ng-change="fillWeight()" ng-required></select>
+
                 </p>
             </div>
             <div class="form-group">
@@ -76,7 +76,7 @@
       <label><h1>Packaged Beans</h1></label>
       <thead><tr><th>Origin</th><th>Weight</th><th>Packaged Date</th><th>Entry Timestamp</th><th>Price per Lb</th><th>Roast Type</th></tr></thead>
       <tbody>
-        <tr ng-repeat="item in packaged_inventory">
+        <tr ng-repeat="item in packaged_inventory | orderBy: '-weight'">
           <td>{{item.origin}}</td>
           <td>{{item.weight}} lbs.</td>
           <td>{{item.packaged_date}}</td>
@@ -91,8 +91,8 @@
           <td>{{ packagedInventoryTotalWeight }} lbs. </td>
           <td></td>
           <td></td>
-          <td></td>
           <td>${{ packagedInventoryTotalCost }}</td>
+          <td></td>
         </tr>
       </tfoot>
     </table>
@@ -102,7 +102,7 @@
     <label><h1>Discounted Beans</h1></label>
     <thead><tr><th>Origin</th><th>Weight</th><th>Packaged Date</th><th>Entry Timestamp</th><th>Price per Lb</th><th>Roast Type</th></tr></thead>
     <tbody>
-      <tr ng-repeat="item in discounted_inventory">
+      <tr ng-repeat="item in discounted_inventory | orderBy: '-weight'">
         <td>{{item.origin}}</td>
         <td>{{item.weight}} lbs.</td>
         <td>{{item.packaged_date}}</td>
@@ -117,8 +117,8 @@
         <td>{{ discountedInventoryTotalWeight }} lbs. </td>
         <td></td>
         <td></td>
-        <td></td>
         <td>${{ discountedInventoryTotalCost }}</td>
+        <td></td>
       </tr>
     </tfoot>
   </table>
@@ -128,7 +128,7 @@
       <label><h1>Green Beans</h1></label>
       <thead><tr><th>Origin</th><th>Reception Date</th><th>Weight</th><th>Entry Timestamp</th><th>Cost/lb</th><th>Cost Value of Inventory</th></tr></thead>
       <tbody>
-        <tr ng-repeat="item in green_inventory">
+        <tr ng-repeat="item in green_inventory | orderBy: '-weight'">
           <td>{{item.origin}}</td>
           <td>{{item.reception_date}}</td>
           <td>{{item.weight}} lbs.</td>

@@ -157,7 +157,7 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
             this.checkoutBankless(parms, clearCart);
             break;
         case "Braintree":
-            this.checkoutBraintree(parms, clearCart);
+            return this.checkoutBraintree(parms, clearCart);
             break;
         case "PayPal":
             this.checkoutPayPal(parms, clearCart);
@@ -173,66 +173,24 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
     }
 }
 shoppingCart.prototype.checkoutBraintree = function (parms, clearCart) {
-  console.log("braintree checkout");
-  var data = {
-      cmd: "_cart",
-      business: parms.merchantID,
-      upload: "1",
-      rm: "2",
-      charset: "utf-8"
-      },
-      $product_str = "";
-  console.log(data);
-  console.log(parms.options['custom']);
+  console.log("braintree checkout.... forming cart into string");
+  var cart = '';
+
   // item data
   for (var i = 0; i < this.items.length; i++) {
       var item = this.items[i];
       var ctr = i + 1;
-
-      data["item_number_" + ctr] = item.sku;
-      $product_str += data["item_number_" + ctr];
-      $product_str += ",";
-
-      data["item_name_" + ctr] = item.name;
-      $product_str += data["item_name_" + ctr];
-      $product_str += ",";
-
-      data["description_" + ctr] = item.description;
-      $product_str += data["description_" + ctr];
-      $product_str += ",";
-
-      if (item.sku == "S0001" || item.sku == "S0002" || item.sku == "M000001" || item.sku == "M000002" || item.sku == "M000003" || item.sku == "M000004" || item.sku == "M000005") {
-          data["quantity_" + ctr] = item.quantity;
-
-      }else{
-          data["quantity_" + ctr] = item.quantity;
-          data["weight_" + ctr] = item.quantity;
-      }
-      $product_str += data["quantity_" + ctr];
-      $product_str += "~";
-      data["amount_" + ctr] = item.price.toFixed(2);
+      custom_str += item.sku;
+      custom_str += ",";
+      custom_str += item.name;
+      custom_str += ",";
+      custom_str += item.description;
+      custom_str += ",";
+      custom_str += item.quantity;
+      custom_str += "~";
   }
-
-  data["custom"] = parms.options['custom'];
-  data["custom"] += "~";
-  data["custom"] += $product_str;
-  data["custom"] += ";";
-  parms.options['custom'] = data["custom"];
-  //data["custom"] += "Promocode: ";
-  //data["custom"] += parms.discount_amount_cart or promo_code;
-  console.log(data["custom"]);
-  // build form
-  var form = $('<form/></form>');
-  form.attr("action", "/checkout/braintree/buy");  /* --- Send form to backend express route handling braintree comms --- */
-  form.attr("method", "POST");
-  form.attr("style", "display:none;");
-  this.addFormFields(form, data);
-  this.addFormFields(form, parms.options);
-  $("body").append(form);
-  // submit form
-  this.clearCart = clearCart == null || clearCart;
-  form.submit();
-  form.remove();
+  console.log(custom_str);
+  return custom_str;
 
 }
 // check out using PayPal

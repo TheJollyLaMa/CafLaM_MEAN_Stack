@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1634889480088" clover="3.2.0">
-  <project timestamp="1634889480088" name="All files">
-    <metrics statements="346" coveredstatements="258" conditionals="35" coveredconditionals="5" methods="108" coveredmethods="69" elements="489" coveredelements="332" complexity="0" loc="346" ncloc="346" packages="4" files="15" classes="15"/>
+<coverage generated="1634889802542" clover="3.2.0">
+  <project timestamp="1634889802542" name="All files">
+    <metrics statements="346" coveredstatements="256" conditionals="35" coveredconditionals="2" methods="108" coveredmethods="68" elements="489" coveredelements="326" complexity="0" loc="346" ncloc="346" packages="4" files="15" classes="15"/>
     <package name="CafLaM_MEAN_Stack">
       <metrics statements="52" coveredstatements="52" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="app.js" path="/Users/j/Desktop/2021_Kode_Tut/CafLaM_MEAN_Stack/app.js">
@@ -243,7 +243,7 @@
       </file>
     </package>
     <package name="CafLaM_MEAN_Stack.routes">
-      <metrics statements="130" coveredstatements="95" conditionals="17" coveredconditionals="3" methods="31" coveredmethods="19"/>
+      <metrics statements="130" coveredstatements="93" conditionals="17" coveredconditionals="0" methods="31" coveredmethods="18"/>
       <file name="checkout.js" path="/Users/j/Desktop/2021_Kode_Tut/CafLaM_MEAN_Stack/routes/checkout.js">
         <metrics statements="33" coveredstatements="10" conditionals="9" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
@@ -292,15 +292,15 @@
         <line num="18" count="1" type="stmt"/>
       </file>
       <file name="greenhouse.js" path="/Users/j/Desktop/2021_Kode_Tut/CafLaM_MEAN_Stack/routes/greenhouse.js">
-        <metrics statements="9" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <metrics statements="9" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="/Users/j/Desktop/2021_Kode_Tut/CafLaM_MEAN_Stack/routes/index.js">

@@ -18,6 +18,7 @@ const greenhouseRouter = require('./routes/greenhouse');
 const smarthomeRouter = require('./routes/smarthome');
 const publicRouter = require('./routes/public');
 const checkoutRouter = require('./routes/checkout');
+const shipstationRouter = require('./routes/shipstation');
 
 // connections to separate SmartHome App
 // the app itself is run on the local microcontroller(arduino Yun)
@@ -51,6 +52,7 @@ app.use('/inventory', inventoryRouter);
 app.use('/promocode', promocodeRouter);
 app.use('/customer', customerRouter);
 app.use('/orders', ordersRouter);
+app.use('/shipstation', shipstationRouter);
 
 app.use('/greenhouse', greenhouseRouter);
 app.use('/smarthome', smarthomeRouter);

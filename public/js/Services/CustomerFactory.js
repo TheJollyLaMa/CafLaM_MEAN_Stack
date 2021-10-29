@@ -1,9 +1,9 @@
 'use strict';
 
 app.factory('CustomerFactory', ['$http', function($http) {
-    return {saveAddress: saveAddress}
+    return {saveCustomer: saveCustomer}
 
-      function saveAddress(customer) {
+      function saveCustomer(customer) {
         // console.log(customer);
           var req = {method: 'POST', url: '/customer/add', headers: {'Content-Type': 'application/json'}, data: customer};
           return $http(req).then(function(res){

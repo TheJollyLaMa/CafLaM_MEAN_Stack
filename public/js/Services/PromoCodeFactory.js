@@ -1,7 +1,7 @@
 'use strict';
 
 app.factory('PromoCodeFactory', ['$http', 'ShoppingCartFactory', function($http, ShoppingCartFactory) {
-    return {showPromoCodes: showPromoCodes, checkPromoCode: checkPromoCode, runPromotional: runPromotional}
+    return {showPromoCodes: showPromoCodes, fetchPromoCodes: fetchPromoCodes, addNewPromocode: addNewPromocode, checkPromoCode: checkPromoCode, runPromotional: runPromotional}
       function showPromoCodes() {
           var request = {method: 'GET', url: '/promocode'};
           var total = ShoppingCartFactory.cart.getTotalPrice();
@@ -19,6 +19,21 @@ app.factory('PromoCodeFactory', ['$http', 'ShoppingCartFactory', function($http,
                 }return promo_discount_amount;
         });
       }
+      function fetchPromoCodes() {
+          var request = {method: 'GET', url: '/promocode'};
+          return $http(request).then(function(response){
+            return response.data.Promocodes;
+          });
+      }
+      function addNewPromocode(newPromocodeForm) {
+        console.log(newPromocodeForm.new_code);
+        var request = {method: 'POST', url: '/promocode/', headers: {'Content-Type': 'application/json'}, data: newPromocodeForm};
+        return $http(request).then(function(response) {
+          console.log(response.data);
+          return response;
+        });
+      }
+
       function checkPromoCode(_promo_code) {
           _promo_code = _promo_code.substring(1);
           var request = {method: 'GET', url: '/promocode/check/' + _promo_code, headers: {'Content-Type': 'application/x-www-form-urlencoded'}};

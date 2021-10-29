@@ -26,7 +26,7 @@
     color: black;
   }
 </style>
-<div data-ng-controller='BehindTheCounterController'>
+<div data-ng-controller='BehindTheCounterController' ng-init="fetchPromoCodes();">
   <div>
     <a href=#!/BehindTheCounter>
       <div class="back_button btn btn-default">Back to Dashboard</div>
@@ -37,12 +37,12 @@
       <h1>Create New PromoCodes</h1>
     </div>
     <div class="row-sm">
-          <form name="newPromocodeForm" ng-submit="addNewPromocode" data-ng-model="newPromocodeForm" class="form-inline">
+          <form name="newPromocodeForm" ng-submit="addNewPromocode();" class="form-inline" data-ng-model="newPromocodeForm">
             <div class="col-sm">
                 <div class="form-group">
                     <label for="code">PromoCode: </label>
                     <div class="input-group">
-                      <input name="code" type="text" class="form-control" data-ng-model="new_code" placeholder="#PROMOCODE" ng-required="true">
+                      <input name="new_code" type="text" class="form-control" data-ng-model="new_code" placeholder="#PROMOCODE" ng-required="true">
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,22 +54,22 @@
                 <div class="form-group">
                     <label>Use Limit:</label>
                     <div class="input-group">
-                      <input name="limit_on_uses" type="number" class="form-control" data-ng-model="limit_on_uses"  placeholder="0" ng-required="true">
+                      <input name="limit_on_uses" type="text" class="form-control" data-ng-model="limit_on_uses" placeholder="1" ng-required="true">
                     </div>
                 </div>
             </div>
             <div class="form-actions">
               <input type="submit" class="backend_category_buttons btn btn-default">
             </div>
-        </form>
+         </form>
       </div>
   </div>
 
   <div class='view2'>
     <table class="table table-bordered table-hover" >
       <label><h1>PromoCodes</h1></label>
-      <!-- <thead><tr><th>Origin</th><th>Reception Date</th><th>Weight</th><th>Timestamp of Last Update</th><th>Cost/lb</th><th>Cost Value of Inventory</th><th>Est Retail Value</th></tr></thead>
-      <thead>
+     <thead><tr><th>Promo Code</th><th>Discount Rate</th><th>Uses</th><th>Total Amount Discounted</th><th>Limit On Uses</th></tr></thead>
+  <!-- <thead>
         <tr>
           <td>Total</td>
           <td></td>
@@ -82,13 +82,12 @@
       </thead> -->
       <tbody>
         <tr ng-repeat="item in promocodes | orderBy : '-reception_date'">
-          <td>{{item.origin}}</td>
-          <td>{{item.reception_date | date:'ddMMMyyyy'}}</td>
-          <td>{{item.weight}}</td>
-          <td>{{item.timestamp}}</td>
-          <td>{{item.cost_per_lb | currency}}</td>
-          <td>{{item.cost_per_lb * item.weight | currency}}</td>
-          <td>{{(item.price_per_lb * (item.weight - (item.weight * 0.2))) - (item.price_per_lb * 0.2) | currency }}</td>
+          <td>{{item.promo_code}}</td>
+          <td>{{item.discount_rate}}</td>
+          <td>{{item.uses}}</td>
+          <td>{{item.total_amount_discounted | currency}}</td>
+          <td>{{item.limit_on_uses}}</td>
+
         </tr>
       </tbody>
     </table>

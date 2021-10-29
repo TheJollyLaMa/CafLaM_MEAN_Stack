@@ -7,23 +7,27 @@ var router = express.Router();
 router.get('/', async (req, res, next) => {
     res.json({Promocodes: await db.get_promocodes()});
 });
-/* check promocode */
+/* Check promocode */
 router.get('/check/:promocode', async (req, res, next) => {
   console.log(req.params.promocode);
     res.json({promocode: await db.check_promocode(req.params.promocode)});
 });
 /* POST new PromoCodes */
-router.post('/:promo_code/:discount_rate/:limit_on_uses', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
+    console.log(req.body);
     res.json({msg: 'Posted New Promocode',
-              res: await db.add_promocode(req.params.promo_code, req.params.discount_rate, req.params.limit_on_uses)
+              res: await db.add_promocode(req.body)
    });
 });
-/* Tally Promocode after purchase */
+/* Tally Promocode after purchase is called from checkout route and therefore does not need its own route */
+/* The function is in db/index.js */
 
-// router.put('/inventory', async (req, res, next) => {
+
+/* Update details of Promotional Code */
+
+// router.put('/', async (req, res, next) => {
 //
-//
-//     let result = await db.update_inventory_after_purchase();
+//     let result = await db.tally_promo_code();
 //     res.json(result);
 //   } catch(e) {
 //     console.log(e);

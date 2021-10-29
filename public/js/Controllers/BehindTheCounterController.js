@@ -1,7 +1,7 @@
 'use strict';
 
 /*global app*/
-app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'InventoryFactory', 'PurchaseFactory', 'BlockFactory', function($scope, $filter, $window, InventoryFactory, PurchaseFactory, BlockFactory){
+app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'InventoryFactory', 'PurchaseFactory', 'BlockFactory', 'PromoCodeFactory', function($scope, $filter, $window, InventoryFactory, PurchaseFactory, BlockFactory, PromoCodeFactory){
   var init = function() {
       $scope.title = 'Behind The Counter';
       $scope.backend_category =[{name: "Receiving", text: "Log new Bean Shipment"}, {name: "PromoCodes", text: "View, Create, and Manage Promocodes"}, {name: "CustomerList", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Packaging", text: "Log Package Dates on Fresh Roasted Beans"}, {name: "Discounted", text: "Inventory not sold after two weeks is moved at a discount!"}, {name: "Merchandise", text: "Other Merchandise"}, {name: "PurchaseOrders", text: "View Purchase Orders"}];
@@ -137,44 +137,58 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
       }
 
       $scope.greenInventoryTotals = function () {
-        console.log($scope.green_inventory.length);
         $scope.greenInventoryTotalWeight = 0;$scope.greenInventoryTotalCost = 0;$scope.greenInventoryTotalRetailValue = 0;
-        for (var i=0; i <= $scope.green_inventory.length; i++) {
-          console.log($scope.green_inventory[i]);
-          $scope.greenInventoryTotalWeight += parseInt($scope.green_inventory[i].weight);
-          $scope.greenInventoryTotalCost += $scope.green_inventory[i].weight * $scope.green_inventory[i].cost_per_lb;
-          $scope.greenInventoryTotalRetailValue +=  ($scope.green_inventory[i].price_per_lb * ($scope.green_inventory[i].weight - ($scope.green_inventory[i].weight * 0.2)))-($scope.green_inventory[i].price_per_lb * 0.2); /*waterloss and time duration loss for discounted product*/
-        };
+        $scope.green_inventory.forEach(item => {
+            $scope.greenInventoryTotalWeight += item.weight;
+            $scope.greenInventoryTotalCost += item.weight * item.cost_per_lb;
+            $scope.greenInventoryTotalRetailValue += item.weight * item.price_per_lb;
+        });
+        // console.log($scope.greenInventoryTotalWeight);console.log($scope.greenInventoryTotalCost);console.log($scope.greenInventoryTotalRetailValue);
       };
       $scope.packagedInventoryTotals = function () {
-        $scope.packagedInventoryTotalWeight = 0;$scope.packagedInventoryTotalCost = 0;
-        for (var i=0; i <= $scope.packaged_inventory.length; i++) {
-          $scope.packagedInventoryTotalWeight += parseInt($scope.packaged_inventory[i].weight);
-          $scope.packagedInventoryTotalCost += $scope.packaged_inventory[i].weight * $scope.packaged_inventory[i].cost_per_lb;
-        };
+        $scope.packagedInventoryTotalWeight = 0;$scope.packagedInventoryTotalCost = 0;$scope.packagedInventoryTotalRetailValue = 0;
+        $scope.packaged_inventory.forEach(item => {
+            $scope.packagedInventoryTotalWeight += item.weight;
+            $scope.packagedInventoryTotalCost += item.weight * item.cost_per_lb;
+            $scope.packagedInventoryTotalRetailValue += item.weight * item.price_per_lb;
+        });
+        // console.log($scope.packagedInventoryTotalWeight);console.log($scope.packagedInventoryTotalCost);console.log($scope.packagedInventoryTotalRetailValue);
       };
       $scope.discountedInventoryTotals = function () {
-        $scope.discountedInventoryTotalWeight = 0;$scope.discountedInventoryTotalCost = 0;
-        for (var i=0; i <= $scope.discounted_inventory.length; i++) {
-          $scope.discountedInventoryTotalWeight += parseInt($scope.discounted_inventory[i].weight);
-          $scope.discountedInventoryTotalCost += $scope.discounted_inventory[i].weight * $scope.discounted_inventory[i].cost_per_lb;
-        };
+        $scope.discountedInventoryTotalWeight = 0;$scope.discountedInventoryTotalCost = 0;$scope.discountedInventoryTotalRetailValue = 0;
+        $scope.discounted_inventory.forEach(item => {
+            $scope.discountedInventoryTotalWeight += item.weight;
+            $scope.discountedInventoryTotalCost += item.weight * item.cost_per_lb;
+            $scope.discountedInventoryTotalRetailValue += item.weight * item.price_per_lb;
+        });
+        // console.log($scope.discountedInventoryTotalWeight);console.log($scope.discountedInventoryTotalCost);console.log($scope.discountedInventoryTotalRetailValue);
       };
       $scope.merchandiseInventoryTotals = function () {
-        $scope.merchandiseInventoryTotalCost = 0;
-        for (var i=0; i <= $scope.merchandise_inventory.length; i++) {
-          console.log(parseInt($scope.merchandise_inventory[i]));
-          $scope.merchandiseInventoryTotalCost += $scope.merchandise_inventory[i].quantity * $scope.merchandise_inventory[i].cost;
-        };
+        $scope.merchandiseInventoryTotalItems = 0;$scope.merchandiseInventoryTotalCost = 0;$scope.merchandiseInventoryTotalRetailValue = 0;
+        $scope.merchandise_inventory.forEach(item => {
+            $scope.merchandiseInventoryTotalItems += item.quantity;
+            $scope.merchandiseInventoryTotalCost += item.quantity * item.cost;
+            $scope.merchandiseInventoryTotalRetailValue += item.quantity * item.price;
+        });
+        // console.log($scope.merchandiseInventoryTotalItems);console.log($scope.merchandiseInventoryTotalCost);console.log($scope.merchandiseInventoryTotalRetailValue);
       };
       $scope.Range = function(start, end) {var result = [];for (var i = start; i <= end; i++) {result.push(i);}return result;};
-      $scope.fillWeight = function() {var key = $scope.green_inventory.indexOf($scope.origin);console.log(key);if(key>=0){$scope.inventory_weight = $scope.green_inventory[key].weight;}else{$scope.inventory_weight = $scope.green_inventory[0].weight;};};
+      $scope.fillWeight = function() {
+        var key = $scope.green_inventory.indexOf($scope.origin);
+        console.log(key);
+        if(key>=0){
+          $scope.inventory_weight = $scope.green_inventory[key].weight;
+          console.log($scope.inventory_weight);
+        }else{
+          $scope.inventory_weight = $scope.green_inventory[0].weight;
+        };
+      };
       $scope.fetchusername = function() {var val = JSON.parse($window.localStorage.getItem('login'));$scope.username = val.username;};
-      $scope.showGreenInventory = function() {InventoryFactory.showGreenInventory().then(function(data){$scope.green_inventory = data;console.log($scope.green_inventory.length);$scope.greenInventoryTotals();});};
+      $scope.showGreenInventory = function() {InventoryFactory.showGreenInventory().then(function(data){$scope.green_inventory = data;$scope.greenInventoryTotals();});};
       $scope.showPackagedInventory = function() {InventoryFactory.showPackagedInventory().then(function(data){$scope.packaged_inventory = data;$scope.packagedInventoryTotals();});};
       $scope.showDiscountedInventory = function() {InventoryFactory.showDiscountedInventory().then(function(data){$scope.discounted_inventory = data;$scope.discountedInventoryTotals();});};
-      $scope.showMerchandiseInventory = function() {InventoryFactory.showMerchandiseInventory().then(function(data){$scope.merchandise_inventory = data;$scope.merchandiseInventoryTotals();});};
-      $scope.showPromoCodes = function() {return PromoCodeFactory.showPromoCodes().then(function(data){var data = data;console.log(data);return data;});};
+      $scope.showMerchandiseInventory = function() {InventoryFactory.showMerchandiseInventory().then(function(data){$scope.merchandise_inventory = data;console.log(data);;$scope.merchandiseInventoryTotals();});};
+      $scope.fetchPromoCodes = function() {return PromoCodeFactory.fetchPromoCodes().then(function(data){var data = data; $scope.promocodes = data;});};
       $scope.showPurchaseOrders = function() {
         PurchaseFactory.showPurchaseOrders()
         .then(function(data){
@@ -213,7 +227,8 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
 
       var newInventoryForm = {origin: '', reception_date: '', weight: '', cost_per_lb: ''},
           newPackagedForm = {origin: '', weight: '', packaged_date: '', roast_type: ''},
-          newMerchandiseForm = {sku: '', name: '', description: '', price: '', quantity: ''};
+          newMerchandiseForm = {sku: '', name: '', description: '', price: '', quantity: ''},
+          newPromocodeForm = {new_code: '', discount_rate: '', limit_on_uses: ''};
 
       $scope.newInventoryForm =  angular.copy(newInventoryForm);
       $scope.addGreenInventory = function() {
@@ -224,7 +239,7 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
               if(data.status==200){
                   $scope.showGreenInventory();
                   $scope.newInventoryForm = {};
-                  window.location.reload();
+                  // window.location.reload();
                 }else {
                   $scope.error="Something went wrong while adding inventory ...";
                 }
@@ -241,7 +256,7 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
                   $scope.showPackagedInventory();
                   $scope.showGreenInventory();
                   $scope.newPackagedForm = {};
-                  window.location.reload();
+                  // window.location.reload();
                 } else {
                   $scope.error = "Something went wrong while logging packaged inventory ...";
                 }
@@ -259,6 +274,21 @@ app.controller('BehindTheCounterController', ['$scope', '$filter', '$window', 'I
                   window.location.reload();
                 }else {
                   $scope.error="Something went wrong while adding inventory ...";
+                }
+          });
+      };
+      $scope.newPromocodeForm =  angular.copy(newPromocodeForm);
+      $scope.addNewPromocode = function() {
+          $scope.newPromocodeForm ={new_code: $scope.new_code, discount_rate: $scope.discount_rate, limit_on_uses: $scope.limit_on_uses};
+          console.log($scope.newPromocodeForm);
+          PromoCodeFactory.addNewPromocode($scope.newPromocodeForm)
+          .then(function(data){
+              if(data.status==200){
+                  $scope.fetchPromoCodes();
+                  $scope.newPromocodeForm = {};
+                  window.location.reload();
+                }else {
+                  $scope.error="Something went wrong while adding promocode ...";
                 }
           });
       };

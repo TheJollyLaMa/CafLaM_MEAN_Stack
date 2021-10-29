@@ -41,10 +41,8 @@
       <div class="back_button btn btn-default">Back to Dashboard</div>
     </a>
   </div>
-  <div class="view">
-    <div class='row-sm'>
-      <h1>Log New Bean Shipments!</h1>
-    </div>
+  <div class="row-sm view">
+    <h1>Log New Bean Shipments!</h1>
     <div class="row-sm">
           <form name="newInventoryForm" ng-submit="addGreenInventory()" data-ng-model="newInventoryForm" class="form-inline">
             <div class="col-sm">
@@ -60,7 +58,7 @@
                   <p>
                     <label>Date Received: </label>
                     <p class="input-group">
-                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" data-ng-model="dt" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                      <input type="text" class="form-control" uib-datepicker-popup="{{format}}" data-ng-model="dt" value="{{format}}" data-is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>

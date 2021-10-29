@@ -20,6 +20,11 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
                                      {sku: "SUB002", duration: "monthly", name: "Monthly Subscription", msg: "Fresh roasted by the pound to perfection and delivered monthly!" }]
     $scope.cur_alm = {};
     $scope.amt_to_buy = 10;
+    $scope.customer = {};
+    $scope.customer.profile = {first_name: '', last_name: '', email: '', street: '', street2: '', city: '', state: '', zipcode: '', shiptobilling: true, savetovault: '', phone: ''};
+    $scope.customer.billing = {first_name: '', last_name: '', email: '', street: '', street2: '', city: '', state: '', zipcode: ''};
+    $scope.customer.shipping = {first_name: '', last_name: '', street: '', street2: '', city: '', state: '', zipcode: ''};
+
     $scope.loadTheBlock = async function () {
        const web3 = window.web3;
        $scope.AT_json = await BlockFactory.FetchTokenJSON();
@@ -293,6 +298,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
     //   const receipts = await checkoutManager.wait(txHashes);
     // }
   }
+
     $scope.cart = ShoppingCartFactory.cart;
     $scope.cart_length = $scope.cart.items.length;
     $scope.last_cart_item = ShoppingCartFactory.cart.items[$scope.cart_length-1];
@@ -301,42 +307,27 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
     $scope.Total = ShoppingCartFactory.cart.getTotalPrice();
     $scope.running_promo = 0;
     $scope.runPromotional = function(running_promo) {return PromoCodeFactory.runPromotional(running_promo).then(function(data){var promotional_uses = data.uses,limit = data.limit;$scope.promos_left = limit - promotional_uses;});};
-    $scope.showPromoCodes = function() {return PromoCodeFactory.showPromoCodes().then(function(data){var data = data;console.log(data);return data;});};
+    // $scope.showPromoCodes = function() {return PromoCodeFactory.showPromoCodes().then(function(data){var data = data;console.log(data);return data;});};
+
     $scope.payflow = function () {
       angular.element(document.querySelector('.angelsroom')).addClass('blurToBack');
       angular.element(document.querySelector('#address_form_glyph')).addClass('checkout_flow_active');
       angular.element(document.querySelector('#promocode_form_glyph')).addClass('checkout_flow_inactive');
       angular.element(document.querySelector('#checkout_form_glyph')).addClass('checkout_flow_inactive');
       angular.element(document.querySelector('#checkout_complete_glyph')).addClass('checkout_flow_inactive');
-
-      $scope.checkoutFlowProgress = {
-          showAddressFlow: true,
-          showPromoCodeFlow : false,
-          showCheckoutFlow : false,
-          showCheckoutComplete : false
-      }
-      // var customer = {first_name: 'Justin', last_name: 'LaManna', email: 'jrlamanna@mgail.com', street: '2 Jones Dr', street2: '', city: 'Fulton', state: 'NY', zipcode: '13069', shiptobilling: true}
-      // $scope.payform = { cardnumber: "4111111111111111", cvv: '400', expdate: '09/22', zipcode: '40000'};
-      // $scope.saveAddress(customer);
-      // $scope.promo_code = "#RADMOBILE";
-      // $scope.checkPromoCode(promo_code);
-      // $scope.initBraintreeFields();
+      $scope.checkoutFlowProgress = {showAddressFlow: true,showPromoCodeFlow : false,showCheckoutFlow : false,showCheckoutComplete : false}
     };
-    $scope.saveAddress = function (customer) {
-        CustomerFactory.saveAddress(customer).then((res) => {
-          // console.log(res);
-          angular.element(document.querySelector('#address_form_glyph')).removeClass('checkout_flow_active');
-          angular.element(document.querySelector('#address_form_glyph')).addClass('checkout_flow_done');
-          angular.element(document.querySelector('#promocode_form_glyph')).removeClass('checkout_flow_inactive');
-          angular.element(document.querySelector('#promocode_form_glyph')).addClass('checkout_flow_active');
-          $scope.checkoutFlowProgress = {
-              showAddressFlow: false,
-              showPromoCodeFlow : true,
-              showCheckoutFlow : false,
-              showCheckoutComplete : false
-          }
-        })
+
+    $scope.changeFlowAfterAddressForm = function () {
+        console.log();
+        angular.element(document.querySelector('#address_form_glyph')).removeClass('checkout_flow_active');
+        angular.element(document.querySelector('#address_form_glyph')).addClass('checkout_flow_done');
+        angular.element(document.querySelector('#promocode_form_glyph')).removeClass('checkout_flow_inactive');
+        angular.element(document.querySelector('#promocode_form_glyph')).addClass('checkout_flow_active');
+        $scope.checkoutFlowProgress = {showAddressFlow: false,showPromoCodeFlow : true,showCheckoutFlow : false,showCheckoutComplete : false}
+
     }
+
     $scope.checkPromoCode = function (_promo_code) {
       $scope.promo_code = _promo_code;
       if(_promo_code != null){
@@ -344,75 +335,74 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
                 .then((data) => {
                         var promo_discount_amount = data;
                         $scope.promo_discount_amount = data;
-                        //console.log(promo_discount_amount);
-                        // console.log(_promo_code);
-                        //console.log($scope.running_promo);
-                        //if discount amount is 0 and promocode is not default
                         if (promo_discount_amount == 0 && _promo_code != "#PROMOCODE"){
                             //check if promocode is the running promotion
                             if(_promo_code == $scope.running_promo){
-                              //console.log(promo_discount_amount);
-                              //console.log($scope.promo_code);
-                              //console.log($scope.running_promo);
                               alert('Cool Beans! If you hurry and finish checkout, you get a free grinder with your order! Do us a favor and tell EVERYBODY! #BEANSTOTHEFACE');
-                            }else{
-                              alert('Err1: Keep your eyes out for #PROMOCODES and be sure to enter them correctly! (All Caps starting with a #)');
-                            }
+                            }else{alert('Keep your eyes out for #PROMOCODES and be sure to enter them correctly! (All Caps starting with a #)');}
                         }else {
                           //if discount amount is 0
                           if (promo_discount_amount == 0){
-                            alert('Err2: Keep your eyes out for #PROMOCODES and be sure to enter them correctly! (All Caps starting with a #)');
+                            alert('Keep your eyes out for #PROMOCODES and be sure to enter them correctly! (All Caps starting with a #)');
                           //finally, if discount, affirmative alert and throw to checkout
-                          }else{
-                          alert('Sweet! You get a discount of $' + Number(promo_discount_amount).toFixed(2) + '!');
-                          }
+                          }else{alert('Sweet! You get a discount of $' + Number(promo_discount_amount).toFixed(2) + '!');}
                         }
-                        // $scope.shoppingCartTasks($scope.promo_code, promo_discount_amount);
                 }).then(() => {
                   angular.element(document.querySelector('#promocode_form_glyph')).removeClass('checkout_flow_active');
                   angular.element(document.querySelector('#promocode_form_glyph')).addClass('checkout_flow_done');
                   angular.element(document.querySelector('#checkout_form_glyph')).removeClass('checkout_flow_inactive');
                   angular.element(document.querySelector('#checkout_form_glyph')).addClass('checkout_flow_active');
-                  $scope.checkoutFlowProgress = {
-                      showAddressFlow: false,
-                      showPromoCodeFlow : false,
-                      showCheckoutFlow : true,
-                      showCheckoutComplete : false
-                  }
+                  $scope.checkoutFlowProgress = {showAddressFlow: false,showPromoCodeFlow : false,showCheckoutFlow : true,showCheckoutComplete : false}
                   $scope.initBraintreeFields();
                 })
       }
     }
+
     $scope.show_checkout_flow = function () {
        var show = false;
-       angular.forEach($scope.checkoutFlowProgress, function (value, key) {
-          if(value == true){
-            // console.log(key);
-            show=true;
-          }
-       })
+       angular.forEach($scope.checkoutFlowProgress, function (value, key) {if(value == true){show=true;}})
        return show;
     }
-    $scope.checkout = function () {
+
+    $scope.checkout = async function () {
       angular.element(document.querySelector('#checkout_form_glyph')).removeClass('checkout_flow_active');
       angular.element(document.querySelector('#checkout_form_glyph')).addClass('checkout_flow_done');
       angular.element(document.querySelector('#checkout_complete_glyph')).removeClass('checkout_flow_inactive');
       angular.element(document.querySelector('#checkout_complete_glyph')).addClass('checkout_flow_active');
-      $scope.checkoutFlowProgress = {
-          showAddressFlow: false,
-          showPromoCodeFlow : false,
-          showCheckoutFlow : false,
-          showCheckoutComplete : true
-      }
+      $scope.checkoutFlowProgress = {showAddressFlow: false,showPromoCodeFlow : false,showCheckoutFlow : false,showCheckoutComplete : true}
       // ShoppingCartFactory.cart.addCheckoutParameters('PayPal', 'J@CaffeineLamanna.com', {return: 'https://www.caffeinelamanna.com/#!/Store_Front/checkout_complete',cancel_return: 'https://www.caffeinelamanna.com/#!/Store_Front/cancel_checkout',discount_amount_cart: promo_discount_amount,custom: promo_code});  // 'jrlamanna-facilitator@gmail.com'  for sandbox
-      // ShoppingCartFactory.cart.addCheckoutParameters('Braintree', 'J@caffeinelamanna.com', {return: 'https://www.caffeinelamanna.com/#!/Store_Front/checkout_complete',cancel_return: 'https://www.caffeinelamanna.com/#!/Store_Front/cancel_checkout',discount_amount_cart: $scope.promo_discount_amount, custom: $scope.promo_code});
-      // ShoppingCartFactory.cart.checkout();
+      // await ShoppingCartFactory.cart.addCheckoutParameters('Braintree', 'J@caffeinelamanna.com', {return: 'https://www.caffeinelamanna.com/#!/Store_Front/checkout_complete',cancel_return: 'https://www.caffeinelamanna.com/#!/Store_Front/cancel_checkout', custom: {promocode: $scope.promo_code, discount_mount: $scope.promo_discount_amount, cart: cart.items});
+      // var _custom = await ShoppingCartFactory.cart.checkout();
       // console.log($scope.payload);
-      var buy_amount = ShoppingCartFactory.cart.getTotalPrice();
+      var buy_amount = await ShoppingCartFactory.cart.getTotalPrice();
       buy_amount -= $scope.promo_discount_amount;
       // console.log(buy_amount);
-      PurchaseFactory.braintreePostPayment($scope.payload, buy_amount.toFixed(2).toString(), $scope.deviceData).then((res)=> {
+      $scope.customer.billing = {
+        first_name: $scope.customer.profile.first_name,
+        last_name: $scope.customer.profile.last_name,
+        street: $scope.customer.profile.street,
+        street2: $scope.customer.profile.street2,
+        city: $scope.customer.profile.city,
+        state: $scope.customer.profile.state,
+        zipcode: $scope.customer.profile.zipcode
+      }
+      if($scope.customer.profile.shiptobilling){
+          $scope.customer.shipping = {
+            first_name: $scope.customer.profile.first_name,
+            last_name: $scope.customer.profile.last_name,
+            street: $scope.customer.profile.street,
+            street2: $scope.customer.profile.street2,
+            city: $scope.customer.profile.city,
+            state: $scope.customer.profile.state,
+            zipcode: $scope.customer.profile.zipcode
+          }
+      }
+      var cart = ShoppingCartFactory.cart.items;
+      console.log(cart);
+      await PurchaseFactory.braintreePostPayment($scope.payload, buy_amount.toFixed(2).toString(), $scope.deviceData, $scope.customer, $scope.promo_code, $scope.promo_discount_amount, cart).then((res)=> {
         console.log(res);//same output as PurchaseFactory line17
+        // console.log(res.result.success);//same output as PurchaseFactory line17
+        // console.log(res.result.transaction);//same output as PurchaseFactory line17
         // Since the following code will overwrite the contents of
         // your page with a success or error message, first teardown
         // the Hosted Fields form to remove any extra event listeners
@@ -426,7 +416,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
             $('#hosted-fields-form').remove();
           }
         });
-        if (res.success) {
+        if (res.result.success) {
           console.log("Checkout Success!");
           $scope.checkout_success_message = res.msg;
           $scope.checkout_return = res.result;
@@ -435,7 +425,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
           /* --- Parse transaction details in html to display onscreen for customer ---*/
         } else {
           console.log("Checkout Error!");
-          $scope.checkout_error = "Error in Checkout";
+          $scope.checkout_error = "Error in Checkout: " + res.result;
         }
         angular.element(document.querySelector('#checkout_complete_glyph')).removeClass('checkout_flow_active');
         angular.element(document.querySelector('#checkout_complete_glyph')).addClass('checkout_flow_done');
@@ -450,13 +440,8 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
           if (clientErr) {console.error(clientErr);return;}
           // console.log(clientInstance);
           braintree.dataCollector.create({client: clientInstance})
-            .then(function (dataCollectorInstance) {
-              $scope.deviceData = JSON.parse(dataCollectorInstance.deviceData).correlation_id;
-              // console.log($scope.deviceData);
-            })
-            .catch(function (err) {
-              console.log(err);
-            });
+            .then(function (dataCollectorInstance) {$scope.deviceData = JSON.parse(dataCollectorInstance.deviceData).correlation_id;})
+            .catch(function (err) {console.log(err);});
           // Create a hostedFields component to initialize the form
           braintree.hostedFields.create({
             client: clientInstance,
@@ -480,29 +465,12 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
               postalCode: {container: '#postal-code', placeholder: '40000'}
             }
           }, function (hostedFieldsErr, hostedFieldsInstance) {
-
               if (hostedFieldsErr) {console.error(hostedFieldsErr);}
               $scope.hostedFieldsInstance = hostedFieldsInstance;
               // console.log(hostedFieldsInstance);
-              // submit.removeAttribute('disabled');
               PurchaseFactory.braintreeCreateNonce($scope.hostedFieldsInstance).then((res) => {
                 // console.log(payload);
                 $scope.payload = res;
-                //send the encrypted payment information in a variable called a payment method nonce
-                // hostedFieldsInstance.tokenize(function (tokenizeErr, res) {
-                //   if (tokenizeErr) {
-                //       switch (tokenizeErr.code) {
-                //         case 'HOSTED_FIELDS_FIELDS_EMPTY':
-                //         // occurs when none of the fields are filled in
-                //         console.error('All fields are empty! Please fill out the form.');
-                //         break;
-                //         console.error(tokenizeErr);
-                //       }
-                //   }else {
-                //     console.log(res);
-                //   }
-                //3VycmVuY3lJc29Db2RlIjoiVVNEIn19
-                // });
               });
           });
       });
