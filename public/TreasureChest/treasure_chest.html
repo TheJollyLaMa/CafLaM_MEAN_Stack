@@ -1,24 +1,27 @@
-<div class="angelsroom" ng-controller="TreasureChestController" ng-init="loadTheBlock(); fetchAngelTokens();">
+<div class="angelsroom" ng-controller="TreasureChestController" ng-init="loadTheBlock();">
   <atnavbarstorefrontangelsroom></atnavbarstorefrontangelsroom>
-
   <!-- <div>
     <p align="center">Search: <input style="width: 50%;" type='text' class='form-control mb-1' placeholder='id of alm' ng-model="search.alm_id"/>
   </div> -->
+  <script>document.getElementById("toke_fro").style.backgroundImage = "url({{alm.img}})";</script>
+  <p>Block Number: {{blockNum}}</p>
+
   Token Library:
   <div class="scroller">
     <div class="flip-container" ng-repeat="alm in AngelTokens">
       <div class="flipper">
-        <div class="token_front">
+        <div class="token_front" id="toke_fro">
           <table>
-            <tfoot><h1 class="token-text">{{alm.mint_date}}</h1></tfoot>
+            <thead></thead>
+            <tfoot><h1 class="token_text_front">{{alm.mint_date}}</h1></tfoot>
           </table>
         </div>
         <div class="token_back shimmer">
             <table>
-                <thead class="tokenhead">{{alm.status}}<hr class="tokebreak"/></thead>
+                <thead class="tokenhead">{{alm.status}}<hr class="tokebreak"></thead>
                 <tbody>
                     <h1 class="token-text">{{alm.name}}</h1>
-                    <h1 class="token-text"><a ng-href="/public/#!/TreasureChest/{{alm.uri}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{alm.uri}}</a></h1>
+                    <h1 class="token-text"><a ng-href="#!/TreasureChest/{{alm.sym}}/{{alm.id}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{alm.sym}}{{alm.id}}</a></h1>
                     <h1 class="token-text">{{alm.id}} </h1>
                     <h1 class="token-text">{{alm.product}}</h1>
                     <h1 class="token-text">{{alm.cost}}</h1>

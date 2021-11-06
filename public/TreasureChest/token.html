@@ -1,11 +1,23 @@
-<div class="angelsroom" ng-init="loadTheBlock(); fetchSpecificAlm();">
+<div class="angelsroom" ng-controller="TreasureChestController" ng-init="loadTheBlock();">
+  <atnavbarstorefrontangelsroom></atnavbarstorefrontangelsroom>
+  <script>document.getElementById("toke_fro").style.backgroundImage = "url({{specific_alm.img}})";</script>
+  <br>
+  <div ng-if="specific_alm.Angels_Balance > 0" class="progress-wrapper">
+    <div class="progress">
+      <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70"
+          aria-valuemin="0" aria-valuemax="100">
+            {{cur_alm.tokens_sold}}
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
   <div class="scroller">
     <div class="flip-container">
-      {{file}}
       <div class="flipper">
-        <div class="token_front">
+        <div class="token_front" id="toke_fro">
           <table>
-            <tfoot><h1 class="token-text">{{specific_alm.mint_date}}</h1></tfoot>
+            <tfoot><h1 class="token_text_front">{{specific_alm.mint_date}}</h1></tfoot>
           </table>
         </div>
         <div class="token_back shimmer">
@@ -13,8 +25,7 @@
                 <thead class="tokenhead">{{specific_alm.status}}<hr class="tokebreak"/></thead>
                 <tbody>
                     <h1 class="token-text">{{specific_alm.name}}</h1>
-                    <h1 class="token-text"><a ng-href="/public/#!/TreasureChest/{{specific_alm.uri}}" style="text-decoration: underline; padding: 0px; margin: 0px;" target="_blank" rel="noopener noreferrer">{{specific_alm.uri}}</a></h1>
-                    <h1 class="token-text">{{specific_alm.id}} </h1>
+                    <h1 class="token-text"><a href="#!/TreasureChest/{{specific_alm.sym}}" style="text-decoration:none;" target="_blank" rel="noopener noreferrer">{{specific_alm.sym}}</a>{{specific_alm.id}} </h1>
                     <h1 class="token-text">{{specific_alm.product}}</h1>
                     <h1 class="token-text">{{specific_alm.cost}}</h1>
                     <h1 class="token-text">0.000{{specific_alm.angel_coefficient}}</h1>
@@ -26,5 +37,20 @@
         </div>
     </div>
   </div>
+<br><br><hr>
+<br><br>
+<div ng-if="specific_alm.Angels_Balance > 0">
+  <form ng-submit="buy_alms(amt_to_buy)">
+    <!-- checkoutUser(transactions, "DAI"); -->
+    <input type='number' class="buy_counter form_table" placeholder="10" ng-model="amt_to_buy"/>
+    <div id="newtokesbtndiv" align="center" class="form_table">
+      <input id="newtokesbutton" type='submit' class='btn btn-block btn-primary' value='Buy'/>
+    </div>
+  </form>
+</div>
+<br><br><hr>
 
+<br><br>
+  <a href="#!/TreasureChest"><img height="150px" width="150px" src="./img/angels/TreasureChest.png" alt="TreasureChest"></a>
+<br><br>
 </div>

@@ -22,8 +22,8 @@ app.config([
 
     /* --- Front End Treasure Chest Routes---*/
     .when("/TreasureChest", {controller: "TreasureChestController",templateUrl: "TreasureChest/treasure_chest.html"})
-    .when("/TreasureChest/:sym", {controller: "TreasureChestController",templateUrl: "TreasureChest/token.html"})
-    .when("/TreasureChest/:sym/:file", {controller: "TreasureChestController",templateUrl: "TreasureChest/token.html"})
+    .when("/TreasureChest/:sym", {controller: "TreasureChestController",templateUrl: "TreasureChest/angel_chest.html"})
+    .when("/TreasureChest/:sym/:file", {controller: "TreasureChestController",templateUrl: 'TreasureChest/token.html'})
 
     /* --- Login Routes---*/
     .when("/Login", {controller: "AuthController",templateUrl: "Login.html"})
@@ -41,21 +41,16 @@ app.config([
     .when("/BehindTheCounter/PurchaseOrders", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/PurchaseOrders.html"})
     .when("/BehindTheCounter/RoastList", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController", templateUrl : "BehindTheCounter/RoastList.html"})
 
-    /* --- Behind the Counter Treasure Chest---*/
+
+
+    /* --- Behind the Counter Angel Tokens---*/
+    .when("/BehindTheCounter/Manifest_Tokens", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "BehindTheCounterController",templateUrl: "BehindTheCounter/manifest_tokens.html"})
     .when("/BehindTheCounter/TreasureChest", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login'); } }}, controller: "TreasureChestController",templateUrl: "BehindTheCounter/treasure_chest.html"})
 
     /* --- SmartHome Routes---*/
     .when("/SmartHome", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},controller: "SmartHomeController",templateUrl: "SmartHome/home.html"})
-    .when("/SmartHome/about", {
-      resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
-      controller: "SmartHomeController",
-      templateUrl: "SmartHome/about.html"
-    })
-    .when("/SmartHome/home", {
-      resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
-      controller: "SmartHomeController",
-      templateUrl: "SmartHome/home.html"
-    })
+    .when("/SmartHome/about", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},controller: "SmartHomeController",templateUrl: "SmartHome/about.html"})
+    .when("/SmartHome/home", {resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},controller: "SmartHomeController",templateUrl: "SmartHome/home.html"})
     .when("/SmartHome/power", {
       resolve: {check: function ($location, AuthFactory) {if (!AuthFactory.isUserLoggedIn()) {$location.path('/Login');}}},
       controller: "SmartHomeController",

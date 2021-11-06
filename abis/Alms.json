@@ -1,0 +1,493 @@
+{
+  "contractName": "Alms",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Alm.sol\":\"Alms\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Alm.sol\":{\"keccak256\":\"0xe768175f22c224db5ce37620144d38305d50e7cacb27452a42475f85468ee93b\",\"urls\":[\"bzz-raw://0dcad96d20eed4ec75708d16fca4866fe7fa83d64cf23b48c34608e367e9ab30\",\"dweb:/ipfs/QmQAopizrAqKUaEjpB2jkFESFrYyjyG2dostqEHKukguBD\"]}},\"version\":1}",
+  "bytecode": "0x60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122079b380a4b7186f6fa86226058077e7da996374de769b073ad25076e3664443f964736f6c634300060c0033",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122079b380a4b7186f6fa86226058077e7da996374de769b073ad25076e3664443f964736f6c634300060c0033",
+  "immutableReferences": {},
+  "sourceMap": "34:203:11:-:0;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "34:203:11:-:0;;;;;;;;",
+  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nlibrary Alms {\n  struct Alm {\n    address payable owner;\n     bytes uri;\n      string name;\n       string sym;\n        uint256 id;  // the id of the token issuance\n         bytes mint_data;\n          }\n}\n",
+  "sourcePath": "/Volumes/TerryBytes2/2021_Kode_Tut/CafLaM_MEAN_Stack/contracts/Alm.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Alm.sol",
+    "exportedSymbols": {
+      "Alms": [
+        2425
+      ]
+    },
+    "id": 2426,
+    "license": null,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2411,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:11"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2425,
+        "linearizedBaseContracts": [
+          2425
+        ],
+        "name": "Alms",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Alms.Alm",
+            "id": 2424,
+            "members": [
+              {
+                "constant": false,
+                "id": 2413,
+                "mutability": "mutable",
+                "name": "owner",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "68:21:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address_payable",
+                  "typeString": "address payable"
+                },
+                "typeName": {
+                  "id": 2412,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "68:15:11",
+                  "stateMutability": "payable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2415,
+                "mutability": "mutable",
+                "name": "uri",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "96:9:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 2414,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "96:5:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2417,
+                "mutability": "mutable",
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "113:11:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2416,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "113:6:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2419,
+                "mutability": "mutable",
+                "name": "sym",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "133:10:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2418,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "133:6:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2421,
+                "mutability": "mutable",
+                "name": "id",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "153:10:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2420,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "153:7:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2423,
+                "mutability": "mutable",
+                "name": "mint_data",
+                "nodeType": "VariableDeclaration",
+                "overrides": null,
+                "scope": 2424,
+                "src": "207:15:11",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 2422,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "207:5:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Alm",
+            "nodeType": "StructDefinition",
+            "scope": 2425,
+            "src": "51:184:11",
+            "visibility": "public"
+          }
+        ],
+        "scope": 2426,
+        "src": "34:203:11"
+      }
+    ],
+    "src": "0:238:11"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/Alm.sol",
+      "exportedSymbols": {
+        "Alms": [
+          2425
+        ]
+      },
+      "license": null
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".21",
+            "<",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 2411,
+        "name": "PragmaDirective",
+        "src": "0:32:11"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "library",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            2425
+          ],
+          "name": "Alms",
+          "scope": 2426
+        },
+        "children": [
+          {
+            "attributes": {
+              "canonicalName": "Alms.Alm",
+              "name": "Alm",
+              "scope": 2425,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address payable",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "stateMutability": "payable",
+                      "type": "address payable"
+                    },
+                    "id": 2412,
+                    "name": "ElementaryTypeName",
+                    "src": "68:15:11"
+                  }
+                ],
+                "id": 2413,
+                "name": "VariableDeclaration",
+                "src": "68:21:11"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "uri",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bytes",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bytes",
+                      "type": "bytes"
+                    },
+                    "id": 2414,
+                    "name": "ElementaryTypeName",
+                    "src": "96:5:11"
+                  }
+                ],
+                "id": 2415,
+                "name": "VariableDeclaration",
+                "src": "96:9:11"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string"
+                    },
+                    "id": 2416,
+                    "name": "ElementaryTypeName",
+                    "src": "113:6:11"
+                  }
+                ],
+                "id": 2417,
+                "name": "VariableDeclaration",
+                "src": "113:11:11"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "sym",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "string",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "string",
+                      "type": "string"
+                    },
+                    "id": 2418,
+                    "name": "ElementaryTypeName",
+                    "src": "133:6:11"
+                  }
+                ],
+                "id": 2419,
+                "name": "VariableDeclaration",
+                "src": "133:10:11"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "id",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 2420,
+                    "name": "ElementaryTypeName",
+                    "src": "153:7:11"
+                  }
+                ],
+                "id": 2421,
+                "name": "VariableDeclaration",
+                "src": "153:10:11"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "mutability": "mutable",
+                  "name": "mint_data",
+                  "overrides": null,
+                  "scope": 2424,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "bytes",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "bytes",
+                      "type": "bytes"
+                    },
+                    "id": 2422,
+                    "name": "ElementaryTypeName",
+                    "src": "207:5:11"
+                  }
+                ],
+                "id": 2423,
+                "name": "VariableDeclaration",
+                "src": "207:15:11"
+              }
+            ],
+            "id": 2424,
+            "name": "StructDefinition",
+            "src": "51:184:11"
+          }
+        ],
+        "id": 2425,
+        "name": "ContractDefinition",
+        "src": "34:203:11"
+      }
+    ],
+    "id": 2426,
+    "name": "SourceUnit",
+    "src": "0:238:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-11-05T15:30:20.362Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

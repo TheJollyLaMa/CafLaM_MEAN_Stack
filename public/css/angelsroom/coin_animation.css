@@ -31,7 +31,7 @@
   height: 200px;
   width: 200px;
   margin: 0px;
-  padding: 0px;
+  padding: 8px;
   border-radius: 50%;
   display: inline-block;
   background-color: #c4bf84;
@@ -43,25 +43,28 @@
   left: 0;
 }
 .tokebreak {
-  width: 60%;
-  margin-top: 0;
-  margin-bottom: 8px;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 6px;
+
 }
 .tokenhead {
-  margin-top: 0;
+  top: 10px;
+  margin-top: 10px;
   margin-bottom: 8px;
-  color:#FAFAC8;
+  color: #c4bf84;
 }
 .token_front {
+  color: #c4bf84;
   height: 200px;
   width: 200px;
   margin: 0px;
   padding: 0px;
   border-radius: 50%;
   display: inline-block;
-  background-image: url("AT_Eth_ENS_Logo.gif");
+  background-image: url("../../img/angels/AT_Eth_ENS_Logo.gif");
   background-repeat: no-repeat;
-  background-size: 150px;
+  background-size: auto;
   background-position: center center;
   background-color: #FFFFFF;
   transform: rotateY(0deg);
@@ -71,7 +74,18 @@
   left: 0;
 
 }
+.token_text_front {
+  font-size: 10px;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 35%;
+  color: #b3fcf0;
+}
 .token-text {
+  top: 8px;
+  margin: 3px;
+  padding: 3px;
   font-size: 10px;
   align: center;
 }
@@ -87,7 +101,7 @@
   padding: 0px;
   height: 200px;
   width: 200px;
-  background-size: 350px;
-  background-position: center;
+  background-size: 200px;
+  background-position: center center;
   background-repeat: no-repeat;
 }

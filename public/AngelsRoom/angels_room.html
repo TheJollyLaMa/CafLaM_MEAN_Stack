@@ -5,7 +5,7 @@
 
     </div>
     <script>document.getElementById("toke_fro").style.backgroundImage = "url({{cur_alm.img}})";</script>
-    <br/>
+    <br>
     <div class="progress-wrapper">
       <div class="progress">
         <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70"
@@ -14,8 +14,8 @@
         </div>
       </div>
     </div>
-    <br/>
-    <br/>
+    <br>
+    <br>
 
     <p>This Round : </p>
     <div class="flip-container">
@@ -26,8 +26,8 @@
                 <thead class="tokenhead">{{cur_alm.status}}<hr class="tokebreak"/></thead>
                 <tbody>
                     <h1 class="token-text">{{cur_alm.name}}</h1>
-                    <a href="/public/#!/TreasureChest/{{cur_alm.uri}}" style="text-decoration:none;" target="_blank" rel="noopener noreferrer"><h1 class="token-text">{{cur_alm.uri}}</h1></a>
-                    <h1 class="token-text">{{cur_alm.id}} </h1>
+                    <a href="#!/TreasureChest/{{cur_alm.sym}}/{{cur_alm.id}}" style="text-decoration:none;" target="_blank" rel="noopener noreferrer"><h1 class="token-text">{{cur_alm.sym}}{{cur_alm.id}}</h1></a>
+                    <!-- <h1 class="token-text">{{cur_alm.id}} </h1> -->
                     <h1 class="token-text">{{cur_alm.product}}</h1>
                     <h1 class="token-text">{{cur_alm.cost}}</h1>
                     <h1 class="token-text">0.000{{cur_alm.angel_coefficient}}</h1>
@@ -48,31 +48,10 @@
       <input id="newtokesbutton" type='submit' class='btn btn-block btn-primary' value='Buy'/>
     </div>
   </form>
-  <div class="row" ng-if="result != null">
-         <div class="col-xs-12">
-            <table class="table">
-               <thead>
-                  <tr>
-                     <th>Name</th>
-                     <th>Age</th>
-                     <th>Profession</th>
-                     <th>Years of Experience</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>{{result.name}}</td>
-                     <td>{{result.age}}</td>
-                     <td>{{result.profession}}</td>
-                     <td>{{result.yearsOfExp}}</td>
-                  </tr>
-               </tbody>
-            </table>
-         </div>
-      </div>
+  
   <br/>
   <hr/>
-  <a href="#!/TreasureChest"><img height="100px" width="100px" src="../public/css/TreasureChest.png" alt="TreasureChest"></a>
+  <a href="#!/TreasureChest"><img height="100px" width="100px" src="./img/angels/TreasureChest.png" alt="TreasureChest"></a>
   <!-- <div>
     <p align="center">Search: <input style="width: 50%;" type='text' class='form-control mb-1' placeholder='id of alm' ng-model="search.alm_id"/>
   </div> -->

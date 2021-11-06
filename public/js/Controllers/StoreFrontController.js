@@ -24,9 +24,19 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
     $scope.customer.profile = {first_name: '', last_name: '', email: '', street: '', street2: '', city: '', state: '', zipcode: '', shiptobilling: true, savetovault: '', phone: ''};
     $scope.customer.billing = {first_name: '', last_name: '', email: '', street: '', street2: '', city: '', state: '', zipcode: ''};
     $scope.customer.shipping = {first_name: '', last_name: '', street: '', street2: '', city: '', state: '', zipcode: ''};
+    /*
+    If web3 won't load account(s) in MetaMask, you may need to manually connect CaffeineLamanna.com to meta mask ...
 
+    Step1: Visit the website from which you want to access MetaMask .
+    Step2: Click on the account option button(vertical ellipsis icon) of MetaMask extension.
+    Step3: Click on the Connected sites menu.
+    Step4: Click on "Manually connect to current site" and then grant all the permission that it asks for.
+
+    You will get a connected status at the top left corner.
+    */
     $scope.loadTheBlock = async function () {
        const web3 = window.web3;
+       // console.log(web3);
        $scope.AT_json = await BlockFactory.FetchTokenJSON();
        $scope.AT_X_json = await BlockFactory.FetchAT_X_JSON();
        $scope.account = await web3.eth.getAccounts().then(function(accounts){return accounts[0];});
@@ -122,9 +132,13 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
                       cur_alm.Angels_Balance = bal;
                       cur_alm.id = this_alm.id
                       cur_alm.mint_date = this_alms_mint_date;
-                      cur_alm.img = "./css/tokenfront.png";
+
                       var cur_alm_uri_str = await web3.eth.abi.decodeParameters(['string', 'string', 'uint256', 'string'], this_alm.uri);
                       cur_alm.uri = cur_alm_uri_str[0] + cur_alm_uri_str[1] + cur_alm_uri_str[2]  + cur_alm_uri_str[3];
+
+                      cur_alm.img = "./img/angels/" + cur_alm_uri_str[0] + "/" + cur_alm_uri_str[2] + "_tokenfront.gif";
+                      console.log(cur_alm.img);
+
                       cur_alm.num_issued = mint_str[0];
                       cur_alm.mint_data = this_alm.mint_data;
                       cur_alm.cost = mint_str[2];
@@ -141,7 +155,7 @@ app.controller("StoreFrontController", ["$scope", "$route", "$filter", "$routePa
                       cur_alm.owner_display = cur_alm.owner.toString().substring(0,4) + "   ....   " + cur_alm.owner.toString().substring(cur_alm.owner.toString().length - 4);
                     }else{
                         cur_alm = cur_alm;
-                        cur_alm.img = "./ATEth_Logo_white.png";
+                        cur_alm.img = "../public/img/angels/AT_Eth_ENS_Logo.gif";
                     }
               });
            }

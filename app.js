@@ -7,20 +7,22 @@ var logger = require('morgan');
 const passport = require('passport');
 require('dotenv').config();
 
-
+/* Router Trunk */
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const inventoryRouter = require('./routes/inventory');
 const promocodeRouter = require('./routes/promocode');
 const customerRouter = require('./routes/customer');
 const ordersRouter = require('./routes/orders');
+const treasurechestRouter = require('./routes/treasurechest');
+const manifesteventRouter = require('./routes/manifestevent');
 const greenhouseRouter = require('./routes/greenhouse');
 const smarthomeRouter = require('./routes/smarthome');
 const publicRouter = require('./routes/public');
 const checkoutRouter = require('./routes/checkout');
 const shipstationRouter = require('./routes/shipstation');
 
-// connections to separate SmartHome App
+/* connections to separate SmartHome App */
 // the app itself is run on the local microcontroller(arduino Yun)
 // these are the connections you want to display to the global internet
 // this connection is sensitive and requires proper protection as it may
@@ -34,10 +36,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Passport Middleware
+/* Passport Middleware */
 // https://www.npmjs.com/package/passport-jwt
 app.use(passport.initialize());
 app.use(passport.session());
+
+/* Smart Contract ABI on Ethereum or Matic or whatever suits your purposes */
+app.use('/abis/AngelToken.json', express.static('abis/AngelToken.json'));
+app.use('/abis/AT_X.json', express.static('abis/AT_X.json'));
+
 
 require('./db/passport')(passport);
 
@@ -45,7 +52,8 @@ require('./db/passport')(passport);
 app.set('views', path.join(__dirname, 'BackendViews'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-/* Backend Routes*/
+
+/* Store Front Backend Routes */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/inventory', inventoryRouter);
@@ -54,15 +62,22 @@ app.use('/customer', customerRouter);
 app.use('/orders', ordersRouter);
 app.use('/shipstation', shipstationRouter);
 
+/* Angel Token Backend Routes */
+app.use('/treasurechest', treasurechestRouter);
+app.use('/manifestevent', manifesteventRouter);
+
+/* Smarthome Backend Routes */
 app.use('/greenhouse', greenhouseRouter);
 app.use('/smarthome', smarthomeRouter);
 
+/* Locally available Node Modules */
 app.use('/node_modules/jquery/dist/jquery.min.js', express.static(__dirname + '/node_modules/jquery/dist/jquery.min.js'));
 app.use('/node_modules/angular/angular.js', express.static(__dirname + '/node_modules/angular/angular.js'));
 app.use('/node_modules/angular-route/angular-route.js', express.static(__dirname + '/node_modules/angular-route/angular-route.js'));
 app.use('/node_modules/angular-animate/angular-animate.js', express.static(__dirname + '/node_modules/angular-animate/angular-animate.js'));
 
 /* Frontend Routes*/
+app.use('/public/index.html', express.static('public/index.html'));
 app.use('/public', publicRouter);
 app.use('/checkout', checkoutRouter);
 
